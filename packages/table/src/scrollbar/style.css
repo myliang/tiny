@@ -1,0 +1,49 @@
+@import '../style.base.css';
+
+.tiny-table-scrollbar {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #f4f5f8;
+  opacity: 0.9;
+  z-index: 12;
+  opacity: 0;
+}
+.tiny-table-scrollbar:hover {
+  opacity: 0.8;
+}
+
+.tiny-table-scrollbar.horizontal {
+  height: 15px;
+  right: 0;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.tiny-table-scrollbar.horizontal .content {
+  height: 1px;
+  background: #ddd;
+}
+
+.tiny-table-scrollbar.vertical {
+  width: 15px;
+  bottom: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.tiny-table-scrollbar.vertical .content {
+  width: 1px;
+  background: #ddd;
+}
+/* 
+.tiny-table-scrollbar-corner {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 14px;
+  height: 14px;
+  border-left: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  background-color: #f4f5f8;
+} */

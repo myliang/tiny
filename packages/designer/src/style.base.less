@@ -1,0 +1,115 @@
+@css-prefix: tiny-designer;
+@primary-color: #4b89ff;
+@primary-hover-color: #1678c2;
+@bg-color: #ffffff;
+@bg-hover-color: #8fc4ec3b;
+@text-color: #333333;
+@font-size: 13px;
+@font:
+  400 @font-size 'Lato',
+  Arial,
+  'Source Sans Pro',
+  'Roboto',
+  Helvetica,
+  sans-serif;
+@border-color: #eee;
+@border-radius: 2px;
+@padding-horizontal: 1em;
+@padding-vertical: 0.5em;
+@loading-width: 1.2em;
+@loading-border-width: 0.2em;
+
+.box-shadow() {
+  box-shadow: 0px 2px 3px 0px @border-color;
+}
+.border() {
+  border: 1px solid @border-color;
+}
+
+.user-select(@v) {
+  -webkit-user-select: @v;
+  -moz-user-select: @v;
+  -ms-user-select: @v;
+  user-select: @v;
+}
+
+.flex(@v) {
+  -webkit-flex: @v;
+  -ms-flex: @v;
+  flex: @v;
+}
+
+.flex-direction(@v) {
+  -webkit-flex-direction: @v;
+  -ms-flex-direction: @v;
+  flex-direction: @v;
+}
+
+.transition(@v) {
+  -webkit-transition: @v;
+  -moz-transition: @v;
+  transition: @v;
+}
+
+.align-items(@v) {
+  -webkit-box-align: @v;
+  -webkit-align-items: @v;
+  -ms-flex-align: @v;
+  align-items: @v;
+}
+
+.justify-content(@v) {
+  -webkit-justify-content: @v;
+  -ms-flex-pack: @v;
+  justify-content: @v;
+}
+
+.disabled() {
+  &.disabled {
+    cursor: default;
+    opacity: 0.55 !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    pointer-events: none !important;
+  }
+}
+
+.loading(@width, @borderWidth, @borderColor) {
+  position: relative;
+  color: transparent !important;
+  &:before {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+    margin: -@width / 2 0em 0em -@width / 2;
+    width: @width;
+    height: @width;
+    border-radius: 500rem;
+    border: @borderWidth solid rgba(0, 0, 0, 0.1);
+  }
+  &:after {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+    margin: -@width / 2 0em 0em -@width / 2;
+    width: @width;
+    height: @width;
+    -webkit-animation: button-spin 0.8s linear;
+    animation: button-spin 0.8s linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    border-radius: 500rem;
+    border-color: @borderColor transparent transparent;
+    border-style: solid;
+    border-width: @borderWidth;
+    box-shadow: 0px 0px 0px 1px transparent;
+  }
+}
+
+.loading() {
+  &.loading {
+    .loading(1.2em, 0.2em, #ffffff);
+  }
+}

@@ -1,0 +1,13 @@
+@import './scrollbar/style.css';
+@import './resizer/style.css';
+@import './selector/style.css';
+@import './overlayer/style.css';
+@import './editor/style.css';
+
+.tiny-table-container {
+  position: relative;
+  overflow: hidden;
+}
+.tiny-table-container canvas {
+  outline: none;
+}

@@ -1,0 +1,47 @@
+@import '../style.base.less';
+
+.@{css-preifx}-menu-item {
+  margin: 0;
+  line-height: 1em;
+  padding: 0 @padding-horizontal;
+  text-align: left;
+  vertical-align: middle;
+  color: @text-color;
+  .transition(all 0.3s);
+
+  .disabled;
+
+  &.active,
+  &:hover {
+    background-color: @bg-hover-color;
+  }
+}
+
+.@{css-preifx}-menu {
+  padding: 0;
+  margin: 0;
+  font-size: @font-size;
+  background-color: @bg-color;
+  .user-select(none);
+  display: flex;
+
+  &.vertical {
+    .box-shadow;
+    .border;
+    > .@{css-preifx}-menu-item {
+      border-top: 1px solid @border-color;
+      &:first-child {
+        border-top: none;
+      }
+    }
+  }
+
+  &.inline {
+    > .@{css-preifx}-menu-item {
+      border-left: 1px solid @border-color;
+      &:first-child {
+        border-left: none;
+      }
+    }
+  }
+}

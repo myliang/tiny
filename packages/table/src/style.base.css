@@ -1,0 +1,13 @@
+:root {
+  --primary-color: #4b89ff;
+  --primary-hover-color: #1678c2;
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --font: 400 13px 'Lato', Arial, 'Source Sans Pro', 'Roboto', Helvetica, sans-serif;
+  --border-radius: 2px;
+}
+
+/* .dark {
+  --bg-color: #333333;
+  --text-color: #ffffff;
+} */

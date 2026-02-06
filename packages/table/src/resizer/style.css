@@ -1,0 +1,49 @@
+@import '../style.base.css';
+
+.tiny-table-resizer {
+  position: absolute;
+  z-index: 11;
+  background-color: transparent;
+  display: none;
+}
+.tiny-table-resizer .hover {
+  background-color: rgba(75, 137, 255, 0.25);
+}
+
+.tiny-table-resizer .line {
+  position: absolute;
+  pointer-events: none;
+  display: none;
+}
+
+.tiny-table-resizer.row {
+  cursor: row-resize;
+  left: 0;
+}
+
+.tiny-table-resizer.row .hover {
+  height: 5px;
+}
+
+.tiny-table-resizer.row .line {
+  border-bottom: 2px dashed var(--primary-color);
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.tiny-table-resizer.col {
+  cursor: col-resize;
+  top: 0;
+}
+
+.tiny-table-resizer.col .hover {
+  width: 5px;
+}
+
+.tiny-table-resizer.col .line {
+  border-right: 2px dashed var(--primary-color);
+  top: 0;
+  right: 0;
+  height: 100%;
+}

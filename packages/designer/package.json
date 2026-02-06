@@ -1,0 +1,36 @@
+{
+  "name": "@tiny/designer",
+  "version": "1.0.0",
+  "description": "a javascript data grid designer",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/tiny-designer.js",
+  "types": "./dist/tiny-designer.d.ts",
+  "scripts": {
+    "dev": "../../node_modules/vite/bin/vite.js",
+    "build": "../../node_modules/vite/bin/vite.js build",
+    "preview": "../../node_modules/vite/bin/vite.js preview",
+    "format": "../../node_modules/.bin/prettier --write src test",
+    "test": "../../node_modules/.bin/vitest src/**/*.test.ts"
+  },
+  "author": "myliang",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^25.0.8",
+    "@types/react": "^19.2.8",
+    "@types/react-dom": "^19.2.3",
+    "less": "^4.5.1",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^4.0.17"
+  },
+  "dependencies": {
+    "@uiw/react-color": "^2.9.4",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  }
+}

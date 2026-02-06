@@ -1,0 +1,27 @@
+{
+  "name": "@tiny/table-renderer",
+  "version": "1.0.0",
+  "description": "a javascript data grid renderer",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/tiny-table-renderer.js",
+  "types": "./dist/tiny-table-renderer.d.ts",
+  "scripts": {
+    "dev": "../../node_modules/vite/bin/vite.js",
+    "build": "../../node_modules/vite/bin/vite.js build",
+    "preview": "../../node_modules/vite/bin/vite.js preview",
+    "format": "../../node_modules/.bin/prettier --write src test",
+    "test": "../../node_modules/.bin/vitest test/*.test.ts"
+  },
+  "author": "myliang",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^4.0.17"
+  }
+}
