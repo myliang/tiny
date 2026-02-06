@@ -348,7 +348,7 @@ declare class Table {
 }
 export default Table;
 
-declare type TableData = {
+export declare type TableData = {
     rows: DataRows;
     cols: DataCols;
     rowHeight: number;

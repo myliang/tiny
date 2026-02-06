@@ -3,6 +3,7 @@ import { List, ListItemProps } from '../list';
 import { Overlay, OverlayMethods } from '../overlay';
 import { Icon, IconType } from '../icon';
 import { Align, VerticalAlign } from '@tiny/table-renderer';
+import { classNames } from '../helper';
 
 export interface TextAlignProps {
   value: Align | VerticalAlign;
@@ -41,6 +42,7 @@ export function TextAlign({
   onSelect,
 }: TextAlignProps) {
   const overlayRef = useRef<OverlayMethods>(null);
+  const [active, setActive] = useState(false);
   const [index, setIndex] = useState(value);
   const clicker = (evt: React.MouseEvent) => {
     overlayRef?.current?.setShow(true);
@@ -52,15 +54,17 @@ export function TextAlign({
   return (
     <Overlay
       ref={overlayRef}
+      onChange={(show) => setActive(show)}
       content={
         <List
           type="inline"
           height="auto"
+          value={index}
           items={vertical ? verticalAligns : aligns}
           onSelect={onSelector}
         />
       }>
-      <li onClick={clicker}>
+      <li className={classNames({ active })} onClick={clicker}>
         <Icon type={indexIconTypes[index]} />
       </li>
     </Overlay>

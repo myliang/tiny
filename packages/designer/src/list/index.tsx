@@ -9,15 +9,15 @@ export interface ListItemProps {
 export interface ListProps {
   height?: string;
   type?: 'vertical' | 'inline';
+  style?: React.CSSProperties;
   items: ListItemProps[];
-  showState?: boolean;
   value?: string;
   onSelect: (item: ListItemProps) => void;
 }
 
 export function List({
-  showState = false,
   type = 'vertical',
+  style = {},
   height = '26px',
   value = 'thin',
   items,
@@ -25,19 +25,15 @@ export function List({
 }: ListProps) {
   const [checked, setChecked] = useState(value);
   const clicker = (item: ListItemProps) => {
-    if (showState) setChecked(item.index);
     setChecked(item.index);
     onSelect(item);
   };
   return (
-    <ul className={classNames('list', `list-${type}`)}>
+    <ul className={classNames('list', `list-${type}`)} style={style}>
       {items.map((it) => (
         <li
           style={{ height, lineHeight: height }}
-          className={classNames({
-            state: showState,
-            checked: showState && it.index === checked,
-          })}
+          className={classNames({ active: checked === it.index })}
           key={it.index}
           onClick={() => clicker(it)}>
           {it.label}

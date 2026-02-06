@@ -96,6 +96,7 @@ export type OverlayProps = {
   trigger?: 'click' | 'hover' | 'contextMenu';
   content: ReactNode;
   children: ReactElement;
+  onChange?: (show: boolean) => void;
 };
 
 export function Overlay({
@@ -104,6 +105,7 @@ export function Overlay({
   trigger = 'click',
   content,
   children,
+  onChange,
 }: OverlayProps) {
   const [show, setShow] = useState(false);
   const [targetNode, setTargetNode] = useState<HTMLElement | null>(null);
@@ -117,6 +119,7 @@ export function Overlay({
     if (v) _zIndex++;
     else _zIndex--;
     setShow(v);
+    onChange?.(v);
   }, []);
 
   // target

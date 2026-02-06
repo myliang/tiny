@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 const types = {
   clearFormat: (
     <path
@@ -223,17 +224,21 @@ const types = {
       transform="translate(3 2)"
     />
   ),
+  arrowDown: (
+    <polygon fill="#000000" points="0 0 4 4 8 0" transform="translate(5 7)" />
+  ),
 };
 export type IconType = keyof typeof types;
 export interface IconProps {
   type: IconType;
   size?: string;
+  style?: CSSProperties | undefined;
 }
 
-export function Icon({ type, size = '1em' }: IconProps) {
+export function Icon({ type, style, size = '1em' }: IconProps) {
   return (
     <svg
-      style={{ display: 'block' }}
+      style={Object.assign({ display: 'block', fontSize: '16px' }, style || {})}
       width={size}
       height={size}
       viewBox="0 0 18 18"

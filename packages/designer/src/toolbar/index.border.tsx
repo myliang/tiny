@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { act, useRef, useState } from 'react';
 import { classNames } from '../helper';
 import { ColorPicker } from './index.color';
 import { Overlay, OverlayMethods } from '../overlay';
@@ -82,10 +82,11 @@ const borderLineStyles = [
 ];
 
 interface BorderLineStyleProps {
+  value: string;
   onSelect: (index: string) => void;
 }
 
-function BorderLineStyle({ onSelect }: BorderLineStyleProps) {
+function BorderLineStyle({ value, onSelect }: BorderLineStyleProps) {
   const overlayRef = useRef<OverlayMethods>(null);
   const clicker = (evt: React.MouseEvent) => {
     overlayRef?.current?.setShow(true);
@@ -98,7 +99,7 @@ function BorderLineStyle({ onSelect }: BorderLineStyleProps) {
     <Overlay
       ref={overlayRef}
       content={
-        <List showState items={borderLineStyles} onSelect={onSelector} />
+        <List value={value} items={borderLineStyles} onSelect={onSelector} />
       }>
       <li onClick={clicker}>
         <Icon type="borderLineStyle" />
@@ -159,20 +160,27 @@ export function Border() {
           value={color}
           onChange={(type, color) => setColor(color)}
         />
-        <BorderLineStyle onSelect={(index) => setLineType(index)} />
+        <BorderLineStyle
+          value={lineType}
+          onSelect={(index) => setLineType(index)}
+        />
       </ul>
     </div>
   );
 }
 
 export function BorderPicker() {
+  const [active, setActive] = useState(false);
   const overlayRef = useRef<OverlayMethods>(null);
   const clicker = (evt: React.MouseEvent) => {
     overlayRef?.current?.setShow(true);
   };
   return (
-    <Overlay ref={overlayRef} content={<Border />}>
-      <li onClick={clicker}>
+    <Overlay
+      ref={overlayRef}
+      onChange={(show) => setActive(show)}
+      content={<Border />}>
+      <li className={classNames({ active })} onClick={clicker}>
         <Icon type="borderTypeAll" />
       </li>
     </Overlay>

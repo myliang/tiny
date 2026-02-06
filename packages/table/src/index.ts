@@ -89,6 +89,7 @@ export type TableOptions = {
 export type MoveDirection = 'up' | 'down' | 'left' | 'right';
 
 export { HElement, h };
+export type { TableData };
 
 export default class Table {
   // renderer options

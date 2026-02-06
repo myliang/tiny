@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import { ColorResult, Sketch } from '@uiw/react-color';
 import { Overlay, OverlayMethods } from '../overlay';
 import { Icon } from '../icon';
+import { classNames } from '../helper';
 
 interface ColorPickerProps {
   type: 'color' | 'bgcolor' | 'borderColor';
@@ -10,6 +11,7 @@ interface ColorPickerProps {
 }
 
 export function ColorPicker({ type, value, onChange }: ColorPickerProps) {
+  const [active, setActive] = useState(false);
   const [color, setColor] = useState<string>(value || '#0084FF');
 
   const onChanger = (color: ColorResult) => {
@@ -24,6 +26,7 @@ export function ColorPicker({ type, value, onChange }: ColorPickerProps) {
   return (
     <Overlay
       ref={overlayRef}
+      onChange={(show) => setActive(show)}
       content={
         <Sketch
           style={{ boxShadow: 'none' }}
@@ -31,7 +34,7 @@ export function ColorPicker({ type, value, onChange }: ColorPickerProps) {
           onChange={onChanger}
         />
       }>
-      <li onClick={clicker}>
+      <li className={classNames({ active })} onClick={clicker}>
         <i
           style={{
             display: 'block',
