@@ -1,0 +1,21 @@
+@import '../style.base.less';
+
+.@{css-prefix}-divider {
+  &.horizontal {
+    margin: 12px 0;
+    line-height: 1;
+    height: 0;
+    border-top: 1px solid rgba(34, 36, 38, 0.15);
+    border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+  }
+  &.vertical {
+    display: inline-block;
+    min-width: 1px;
+    max-width: 1px;
+    height: 1em;
+    margin: 0 12px;
+    border-left: 1px solid rgba(34, 36, 38, 0.15);
+    border-right: 1px solid hsla(0, 0%, 100%, 0.1);
+    vertical-align: middle;
+  }
+}

@@ -1,0 +1,29 @@
+@import './button/style.less';
+@import './list/style.less';
+@import './overlay/style.less';
+@import './grid/style.less';
+@import './layout/style.less';
+@import './space/style.less';
+@import './divider/style.less';
+@import './splitter/style.less';
+
+*,
+::after,
+::before,
+::backdrop,
+::file-selector-button {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0 solid;
+}
+
+@keyframes loading {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

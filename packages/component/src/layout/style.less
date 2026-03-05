@@ -1,0 +1,29 @@
+@import '../style.base.less';
+
+.@{css-prefix}-layout {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+
+  &.has-sider {
+    flex-direction: row;
+  }
+}
+.@{css-prefix}-layout-header {
+  margin: 0;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+}
+.@{css-prefix}-layout-content {
+  flex: 1;
+}
+.@{css-prefix}-layout-footer {
+  flex: 0 0 auto;
+  margin: 0;
+}
+.@{css-prefix}-layout-slider {
+  margin: 0;
+  padding: 0;
+  flex: none;
+}
