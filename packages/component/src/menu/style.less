@@ -1,0 +1,91 @@
+@import '../style.base.less';
+
+.@{css-prefix}-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: var(--tiny-menu-font-size);
+  background-color: #ffffff;
+  user-select: none;
+  transition: width 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
+  box-sizing: border-box;
+  border-radius: var(--tiny-border-radius);
+
+  &.dark,
+  &.dark .@{css-prefix}-menu {
+    background-color: var(--tiny-dark-bgcolor);
+    .@{css-prefix}-menu-item {
+      border: none !important;
+      color: #ffffff;
+
+      &.active,
+      &.active:hover,
+      &:not(.active):hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      &.active {
+        color: var(--tiny-menu-active-color);
+      }
+    }
+  }
+
+  &.submenu {
+    .@{css-prefix}-menu-item {
+      padding-left: 1.8em;
+    }
+  }
+
+  &.vertical {
+    .box-shadow;
+    .border;
+
+    > .@{css-prefix}-menu-item {
+      border-top: 1px solid var(--tiny-menu-vertical-border-color);
+      &:first-child {
+        border-top: none;
+      }
+    }
+  }
+
+  &.horizontal {
+    display: flex;
+    border-bottom: 1px solid var(--tiny-menu-horizontal-border-bottom-color);
+
+    > .@{css-prefix}-menu-item {
+      position: relative;
+      float: left;
+      border: 0;
+      border-bottom: 3px solid transparent;
+      z-index: 10;
+
+      &.active {
+        border-bottom: 3px solid var(--tiny-menu-horizontal-active-border-color);
+      }
+    }
+  }
+}
+.@{css-prefix}-menu-item {
+  line-height: var(--tiny-menu-height);
+  height: var(--tiny-menu-height);
+  margin: 0;
+  padding: 0 0.925em;
+  vertical-align: middle;
+  text-align: left;
+  font-weight: 400;
+  color: var(--tiny-menu-color);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:not(.active):not(.submenu):hover {
+    background-color: var(--tiny-menu-hover-bgcolor);
+  }
+  &.active,
+  &.active:not(.submenu):hover {
+    color: var(--tiny-menu-active-color);
+    background-color: var(--tiny-menu-active-bgcolor);
+  }
+
+  .disabled;
+}

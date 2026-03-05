@@ -6,6 +6,28 @@
 @import './space/style.less';
 @import './divider/style.less';
 @import './splitter/style.less';
+@import './menu/style.less';
+
+:root {
+  --tiny-bgcolor: #ffffff;
+  --tiny-dark-bgcolor: #232323;
+  --tiny-font-size: 13px;
+  --tiny-color: rgba(0, 0, 0, 0.87);
+  --tiny-primary-color: #4b89ff;
+  --tiny-hover-bgcolor: #f8f8f8;
+  --tiny-active-bgcolor: #f8f8f8;
+  --tiny-border-radius: 3px;
+
+  --tiny-menu-height: 36px;
+  --tiny-menu-font-size: var(--tiny-font-size);
+  --tiny-menu-color: rgba(0, 0, 0, 0.87);
+  --tiny-menu-active-color: var(--tiny-primary-color);
+  --tiny-menu-hover-bgcolor: var(--tiny-hover-bgcolor);
+  --tiny-menu-active-bgcolor: var(--tiny-hover-bgcolor);
+  --tiny-menu-vertical-border-color: #fafafa;
+  --tiny-menu-horizontal-border-bottom-color: rgba(0, 0, 0, 0.08);
+  --tiny-menu-horizontal-active-border-color: var(--tiny-primary-color);
+}
 
 *,
 ::after,
@@ -16,6 +38,16 @@
   margin: 0;
   padding: 0;
   border: 0 solid;
+}
+
+body {
+  font-weight: 400;
+  font-family:
+    Lato,
+    Helvetica Neue,
+    Arial,
+    Helvetica,
+    sans-serif;
 }
 
 @keyframes loading {

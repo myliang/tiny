@@ -6,5 +6,6 @@ import Space from './space';
 import Divider from './divider';
 import Splitter from './splitter';
 import Dropdown from './dropdown';
+import Menu from './menu';
 
-export { Layout, Button, Row, Col, Space, Divider, Splitter, Dropdown };
+export { Layout, Button, Row, Col, Space, Divider, Splitter, Dropdown, Menu };
