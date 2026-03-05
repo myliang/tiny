@@ -37,11 +37,11 @@
   }
 
   &.vertical {
-    .box-shadow;
-    .border;
+    box-shadow: 0px 2px 3px 0px var(--tiny-menu-vertical-border-color);
+    border: 1px solid var(--tiny-menu-vertical-border-color);
 
     > .@{css-prefix}-menu-item {
-      border-top: 1px solid var(--tiny-menu-vertical-border-color);
+      border-top: 1px solid var(--tiny-menu-vertical-divider-color);
       &:first-child {
         border-top: none;
       }
