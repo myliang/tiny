@@ -6,18 +6,29 @@
 @import './divider/style.less';
 @import './splitter/style.less';
 @import './menu/style.less';
+@import './pagination/style.less';
+@import './spin/style.less';
 
 :root {
   --tiny-bgcolor: #ffffff;
   --tiny-dark-bgcolor: #232323;
-  --tiny-font-size: 13px;
-  --tiny-color: rgba(0, 0, 0, 0.87);
+  --tiny-font-size: 14px;
+  --tiny-color: #444;
   --tiny-primary-color: #4b89ff;
   --tiny-hover-bgcolor: #f8f8f8;
   --tiny-active-bgcolor: #f8f8f8;
+  --tiny-box-shadow-color: rgba(34, 36, 38, 0.15);
   --tiny-border-radius: 3px;
+  --tiny-line-height: 1.5em;
+  --tiny-input-border-color: #d9d9d9;
+  --tiny-font-family: Lato, Helvetica Neue, Arial, Helvetica, sans-serif;
+  --tiny-padding-vertical: 6px;
+  --tiny-padding-horizontal: 10px;
+
+  --tiny-spin-loading-border-color: #4b89ff;
 
   --tiny-button-height: 26px;
+  --tiny-button-padding-vertical: 0.465em;
   --tiny-button-padding-horizontal: 1em;
   --tiny-button-color: var(--tiny-color);
   --tiny-button-border-color: rgba(34, 36, 38, 0.15);
@@ -25,6 +36,8 @@
   --tiny-menu-height: 36px;
   --tiny-menu-font-size: var(--tiny-font-size);
   --tiny-menu-color: rgba(0, 0, 0, 0.87);
+  --tiny-menu-padding-vertical: 0.685em;
+  --tiny-menu-padding-horizontal: 0.925em;
   --tiny-menu-active-color: var(--tiny-primary-color);
   --tiny-menu-hover-bgcolor: var(--tiny-hover-bgcolor);
   --tiny-menu-active-bgcolor: var(--tiny-hover-bgcolor);
@@ -32,6 +45,15 @@
   --tiny-menu-vertical-border-color: rgba(34, 36, 38, 0.15);
   --tiny-menu-horizontal-border-bottom-color: rgba(0, 0, 0, 0.08);
   --tiny-menu-horizontal-active-border-color: var(--tiny-primary-color);
+
+  // --tiny-pagination-height: 32px;
+  // --tiny-pagination-minwidth: 32px;
+  --tiny-pagination-padding-vertical: 0.485em;
+  --tiny-pagination-padding-horizontal: 0.725em;
+  --tiny-pagination-active-color: var(--tiny-primary-color);
+  --tiny-pagination-active-bgcolor: var(--tiny-active-bgcolor);
+  --tiny-pagination-hover-bgcolor: var(--tiny-hover-bgcolor);
+  --tiny-pagination-total-bgcolor: rgba(255, 191, 0, 0.15);
 }
 
 *,
@@ -47,12 +69,11 @@
 
 body {
   font-weight: 400;
-  font-family:
-    Lato,
-    Helvetica Neue,
-    Arial,
-    Helvetica,
-    sans-serif;
+  font-size: var(--tiny-font-size);
+  font-family: var(--tiny-font-family);
+}
+input:focus {
+  outline: none;
 }
 
 @keyframes loading {

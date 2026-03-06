@@ -7,5 +7,19 @@ import Divider from './divider';
 import Splitter from './splitter';
 import Dropdown from './dropdown';
 import Menu from './menu';
+import Pagination from './pagination';
+import Spin from './spin';
 
-export { Layout, Button, Row, Col, Space, Divider, Splitter, Dropdown, Menu };
+export {
+  Layout,
+  Button,
+  Row,
+  Col,
+  Space,
+  Divider,
+  Splitter,
+  Dropdown,
+  Menu,
+  Pagination,
+  Spin,
+};

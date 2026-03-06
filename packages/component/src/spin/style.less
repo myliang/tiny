@@ -1,0 +1,26 @@
+@import '../style.base.less';
+
+.@{css-prefix}-spin {
+  position: relative;
+  user-select: none;
+  min-height: 1.2em;
+  min-width: 1.2em;
+
+  &.loading {
+    &.default {
+      .loading(1.2em, 0.2em, var(--tiny-spin-loading-border-color));
+    }
+
+    &.large {
+      .loading(2.4em, 0.32em, var(--tiny-spin-loading-border-color));
+    }
+
+    .@{css-prefix}-spin-container {
+      position: relative;
+      opacity: 0.5;
+      user-select: none;
+      pointer-events: none;
+      z-index: -1;
+    }
+  }
+}
