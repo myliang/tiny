@@ -43,37 +43,49 @@ root.render(
     </Dropdown>
     <Divider />
     <Space>
-      <Menu selectedKey="active" style={{ width: '200px' }}>
-        <Menu.Item key="jack">Jack</Menu.Item>
-        <Menu.Item key="lucy">Lucy</Menu.Item>
-        <Menu.Item key="active">Active</Menu.Item>
-        <Menu.Item key="disabled" disabled>
-          Disabled
-        </Menu.Item>
-      </Menu>
-      <Menu mode="horizontal" selectedKey="lucy" style={{ width: '300px' }}>
-        <Menu.Item key="jack">Jack</Menu.Item>
-        <Menu.Item key="lucy">Lucy</Menu.Item>
-        <Menu.Item key="disabled" disabled>
-          Disabled
-        </Menu.Item>
-      </Menu>
-      <Menu theme="dark" selectedKey="active" style={{ width: '200px' }}>
-        <Menu.Item key="jack">Jack</Menu.Item>
-        <Menu.Item key="lucy">Lucy</Menu.Item>
-        <Menu.Item key="active">Active</Menu.Item>
-        <Menu.Item key="disabled" disabled>
-          Disabled
-        </Menu.Item>
-        <Menu.SubMenu key="submenu" label="SubMenu">
-          <Menu.Item key="sub1">Sub1</Menu.Item>
-          <Menu.Item key="sub2">Sub2</Menu.Item>
-          <Menu.Item key="sub3">Sub3</Menu.Item>
-          <Menu.Item key="sub4">Sub4</Menu.Item>
-          <Menu.Item key="sub5">Sub5</Menu.Item>
-          <Menu.Item key="sub6">Sub6</Menu.Item>
-        </Menu.SubMenu>
-      </Menu>
+      <Menu
+        selectedKey="active"
+        style={{ width: '200px' }}
+        items={[
+          { key: 'jack', children: 'Jack' },
+          { key: 'luck', children: 'Lucy' },
+          { key: 'active', children: 'Active' },
+          { key: 'disabled', children: 'Disabled', disabled: true },
+        ]}></Menu>
+      <Menu
+        type="horizontal"
+        selectedKey="lucy"
+        style={{ width: '300px' }}
+        items={[
+          { key: 'jack', children: 'Jack' },
+          { key: 'lucy', children: 'Lucy' },
+          { key: 'active', children: 'Active' },
+          { key: 'disabled', children: 'Disabled', disabled: true },
+        ]}
+      />
+      <Menu
+        theme="dark"
+        selectedKey="active"
+        style={{ width: '200px' }}
+        items={[
+          { key: 'jack', children: 'Jack' },
+          { key: 'lucy', children: 'Lucy' },
+          { key: 'active', children: 'Active' },
+          { key: 'disabled', children: 'Disabled', disabled: true },
+          {
+            key: 'submenu-1',
+            type: 'submenu',
+            label: 'Submenu-1',
+            children: [
+              { key: 'sub1', children: 'Sub1' },
+              { key: 'sub2', children: 'Sub2' },
+              { key: 'sub3', children: 'Sub3' },
+              { key: 'sub4', children: 'Sub4' },
+              { key: 'sub5', children: 'Sub5' },
+            ],
+          },
+        ]}
+      />
     </Space>
     <Divider />
     <Space>

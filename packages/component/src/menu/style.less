@@ -15,7 +15,6 @@
   &.dark .@{css-prefix}-menu {
     background-color: var(--tiny-dark-bgcolor);
     .@{css-prefix}-menu-item {
-      border: none !important;
       color: #ffffff;
 
       &.active,
@@ -41,10 +40,11 @@
     border: 1px solid var(--tiny-menu-vertical-border-color);
 
     > .@{css-prefix}-menu-item {
-      border-top: 1px solid var(--tiny-menu-vertical-divider-color);
-      &:first-child {
-        border-top: none;
-      }
+      margin-bottom: 1px;
+      // border-top: 1px solid var(--tiny-menu-vertical-divider-color);
+      // &:first-child {
+      //   border-top: none;
+      // }
     }
   }
 

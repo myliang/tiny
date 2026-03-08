@@ -1,35 +1,60 @@
 import {
   createContext,
   CSSProperties,
-  ReactElement,
+  Fragment,
   ReactNode,
   useContext,
   useState,
 } from 'react';
 import { classNames, cssPrefix } from '../helper';
-import { processChildren } from './helper';
 
-interface MenuContextType {
+type MenuItemType = {
+  type?: 'item';
+  key: string;
+  children: ReactNode;
+  disabled?: boolean;
+};
+type MenuGroupType = {
+  type: 'group';
+  key: string;
+  children: ItemType[];
+  label: string | ReactNode;
+};
+type SubMenuType = {
+  type: 'submenu';
+  key: string;
+  children: ItemType[];
+  label: string | ReactNode;
+};
+type MenuDividerType = {
+  type: 'divider';
+  key?: string;
+};
+export type ItemType =
+  | MenuItemType
+  | MenuGroupType
+  | SubMenuType
+  | MenuDividerType;
+
+export type MenuProps = {
+  items: ItemType[];
+  className?: string | string[];
+  style?: CSSProperties;
+  theme?: 'dark' | 'light';
+  type?: 'vertical' | 'horizontal' | 'inline';
+  selectable?: boolean;
   openKeys?: string[];
   selectedKey?: string;
   onSelect?: (key: string, evt: React.MouseEvent) => void;
-}
-const MenuContext = createContext<MenuContextType>({});
+};
 
-export interface MenuProps extends MenuContextType {
-  className?: string | string[];
-  style?: CSSProperties;
-  children: ReactNode;
-  theme?: 'dark' | 'light';
-  mode?: 'vertical' | 'horizontal' | 'inline';
-  selectable?: boolean;
-}
+type ShowType = { [key: string]: boolean };
 
 export default function Menu({
   className,
   style,
-  children,
-  mode = 'vertical',
+  items,
+  type = 'vertical',
   openKeys = [],
   selectedKey,
   onSelect,
@@ -40,113 +65,68 @@ export default function Menu({
     setSelected(key);
     onSelect?.(key, evt);
   };
-  return (
-    <MenuContext.Provider
-      value={{ selectedKey: selected, openKeys, onSelect: selecter }}>
-      <ul
-        className={classNames(`${cssPrefix}menu`, mode, theme, className)}
-        style={style}>
-        {processChildren(children)}
-      </ul>
-    </MenuContext.Provider>
-  );
-}
 
-export interface SubmenuProps {
-  className?: string | string[];
-  style?: CSSProperties;
-  children: ReactNode;
-  _key?: string;
-  label: string | ReactNode;
-}
-export function SubMenu({
-  className,
-  style,
-  children,
-  _key,
-  label,
-}: SubmenuProps) {
-  const { openKeys, onSelect } = useContext(MenuContext);
-  const [show, setShow] = useState(openKeys?.includes(_key || ''));
-  const clicker = (evt: React.MouseEvent) => {
-    setShow(!show);
-    if (onSelect) onSelect(_key || '', evt);
+  const [shows, setShows] = useState<string[]>(openKeys);
+  const onSubmenuClicker = (key: string) => {
+    if (shows.includes(key)) {
+      setShows(shows.filter((it) => it !== key));
+    } else {
+      setShows([key, ...shows]);
+    }
   };
-  return (
-    <>
-      <li
-        key={_key}
-        className={classNames(`${cssPrefix}menu-item submenu`, className)}
-        style={style}
-        onClick={clicker}>
-        {label}
-      </li>
-      <ul
-        className={classNames(`${cssPrefix}menu submenu`)}
-        style={{ display: show ? 'block' : 'none' }}>
-        {processChildren(children)}
-      </ul>
-    </>
-  );
-}
-Menu.SubMenu = SubMenu;
 
-export interface MenuItemProps {
-  className?: string | string[];
-  style?: CSSProperties;
-  children: ReactNode;
-  disabled?: boolean;
-  _key?: string;
-}
-function MenuItem({
-  className,
-  style,
-  children,
-  disabled,
-  _key,
-}: MenuItemProps) {
-  const { selectedKey, onSelect } = useContext(MenuContext);
-  console.log('selectedKey:', selectedKey, _key);
-  const clicker = (evt: React.MouseEvent) => {
-    if (onSelect) onSelect(_key || '', evt);
+  const itemRender = (it: ItemType, index: number) => {
+    switch (it.type) {
+      case 'divider':
+        return <li className={classNames(`${cssPrefix}menu-item divider`)} />;
+      case 'group':
+        return (
+          <>
+            <li
+              key={it.key}
+              className={classNames(`${cssPrefix}menu-item group`)}>
+              {it.label}
+            </li>
+            <ul className={classNames(`${cssPrefix}menu`)}>
+              {it.children.map((it, i) => itemRender(it, i))}
+            </ul>
+          </>
+        );
+      case 'submenu':
+        return (
+          <>
+            <li
+              key={it.key}
+              className={classNames(`${cssPrefix}menu-item submenu`)}
+              onClick={() => onSubmenuClicker(it.key)}>
+              {it.label}
+            </li>
+            <ul
+              className={classNames(`${cssPrefix}menu submenu`)}
+              style={{ display: shows.includes(it.key) ? 'block' : 'none' }}>
+              {it.children.map((it, i) => itemRender(it, i))}
+            </ul>
+          </>
+        );
+      default:
+        return (
+          <li
+            onClick={(evt) => selecter(it.key, evt)}
+            className={classNames(`${cssPrefix}menu-item`, {
+              disabled: it.disabled,
+              active: it.key === selected,
+            })}>
+            {it.children}
+          </li>
+        );
+    }
   };
-  return (
-    <li
-      key={_key}
-      className={classNames(`${cssPrefix}menu-item`, className, {
-        disabled,
-        active: selectedKey === _key,
-      })}
-      style={style}
-      onClick={clicker}>
-      {children}
-    </li>
-  );
-}
-Menu.Item = MenuItem;
 
-export interface MenuItemGroupProps {
-  className?: string | string[];
-  style?: CSSProperties;
-  children: ReactElement<typeof Menu.Item>[];
-  key: string;
-  title: string | ReactNode;
-}
-function MenuItemGroup({
-  className,
-  style,
-  children,
-  key,
-  title,
-}: MenuItemGroupProps) {
   return (
-    <li
-      key={key}
-      className={classNames(`${cssPrefix}menu-item group`, className)}
+    <ul
+      className={classNames(`${cssPrefix}menu`, type, theme, className)}
       style={style}>
-      {title}
-      <Menu mode="inline">{processChildren(children)}</Menu>
-    </li>
+      {items.map((it, i) => itemRender(it, i))}
+    </ul>
   );
 }
-Menu.ItemGroup = MenuItemGroup;

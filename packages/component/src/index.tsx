@@ -6,7 +6,7 @@ import Space from './space';
 import Divider from './divider';
 import Splitter from './splitter';
 import Dropdown from './dropdown';
-import Menu from './menu';
+import Menu from './menu/index';
 import Pagination from './pagination';
 import Spin from './spin';
 import Tabs from './tabs';
