@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { classNames } from '../helper';
 
-export interface ButtonProps {
+export type ButtonProps = {
   disabled?: boolean;
   loadding?: boolean;
   htmlType?: 'button' | 'submit' | 'reset';
@@ -9,7 +9,7 @@ export interface ButtonProps {
   shape?: 'circle' | 'rect';
   size?: 'small' | 'middle' | 'large';
   onClick?: (evt: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-}
+};
 
 export function Button({
   disabled = false,
@@ -31,8 +31,7 @@ export function Button({
         shape,
         type,
         size,
-      })}
-    >
+      })}>
       {children}
     </button>
   );

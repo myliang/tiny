@@ -9,8 +9,9 @@ import {
   Menu,
   Pagination,
   Spin,
+  Tabs,
+  Test,
 } from './src';
-import { useState } from 'react';
 
 const container = document.getElementById('root');
 
@@ -21,6 +22,7 @@ const root = createRoot(container);
 
 root.render(
   <div style={{ padding: '20px' }}>
+    <Test />
     <Space>
       <Button type="primary" loading>
         Primary
@@ -82,13 +84,99 @@ root.render(
     <Space>
       <Spin loading />
       <Spin loading size="large">
-        <p style={{ width: '300px', color: '#333' }}>
+        <p
+          style={{
+            width: '300px',
+            color: '#333',
+            border: '1px solid #69b1ff',
+            padding: '5px',
+          }}>
           ByteDance's core product, Toutiao "Headlines", is a content platform
           in China and around the world. Toutiao started out as a news
           recommendation engine and gradually evolved into a platform delivering
           content in various formats.
         </p>
       </Spin>
+    </Space>
+    <Divider />
+    <Space>
+      <Tabs
+        style={{ width: '300px', height: '120px' }}
+        placement="left"
+        selectedKey="t1"
+        items={[
+          {
+            key: 't1',
+            label: 'Tab 1',
+            children: <div style={{ padding: '20px' }}>tab 1 content</div>,
+          },
+          {
+            key: 't2',
+            label: 'Tab 2',
+            children: <div style={{ padding: '20px' }}>tab 2 content</div>,
+          },
+          {
+            key: 't3',
+            label: 'Tab 3',
+            children: <div style={{ padding: '20px' }}>tab 1 content</div>,
+          },
+          {
+            key: 't4',
+            label: 'Tab 4',
+            children: <div style={{ padding: '20px' }}>tab 2 content</div>,
+          },
+          {
+            key: 't5',
+            label: 'Tab 5',
+            children: <div style={{ padding: '20px' }}>tab 1 content</div>,
+          },
+          {
+            key: 't6',
+            label: 'Tab 6',
+            children: <div style={{ padding: '20px' }}>tab 6 content</div>,
+          },
+        ]}
+      />
+      <Tabs
+        style={{ width: '300px', height: '160px' }}
+        selectedKey="t2"
+        type="card"
+        placement="top"
+        editable
+        items={[
+          {
+            key: 't1',
+            label: 'Tab 1',
+            closable: true,
+            children: <div style={{ padding: '20px' }}>tab 1 content</div>,
+          },
+          {
+            key: 't2',
+            label: 'Tab 2',
+            children: <div style={{ padding: '20px' }}>tab 2 content</div>,
+          },
+          {
+            key: 't3',
+            label: 'Tab 3',
+            children: <div style={{ padding: '20px' }}>tab 3 content</div>,
+          },
+          {
+            key: 't4',
+            label: 'Tab 4',
+            children: <div style={{ padding: '20px' }}>tab 4 content</div>,
+          },
+          {
+            key: 't5',
+            label: 'Tab 5',
+            children: <div style={{ padding: '20px' }}>tab 5 content</div>,
+          },
+          {
+            key: 't6',
+            label: 'Tab 6',
+            children: <div style={{ padding: '20px' }}>tab 6 content</div>,
+          },
+        ]}
+      />
     </Space>
     <Divider />
     <Layout>

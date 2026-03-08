@@ -1,5 +1,5 @@
 export function bind(target: any, name: string, callback: (evt: any) => void) {
-  target.addEventListener(name, callback);
+  target.addEventListener(name, callback, { passive: false });
 }
 
 export function unbind(

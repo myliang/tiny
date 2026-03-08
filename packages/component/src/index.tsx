@@ -9,8 +9,28 @@ import Dropdown from './dropdown';
 import Menu from './menu';
 import Pagination from './pagination';
 import Spin from './spin';
+import Tabs from './tabs';
+import { useEffect, useState } from 'react';
+
+function Test() {
+  const [count, setCount] = useState(0);
+  const clicker = () => {
+    console.log('>>>', count);
+    setCount(count + 1);
+  };
+  useEffect(() => {
+    console.log('count:', count);
+  }, []);
+  return (
+    <div>
+      <button onClick={clicker}>add {count}</button>
+      <div>{count}</div>
+    </div>
+  );
+}
 
 export {
+  Test,
   Layout,
   Button,
   Row,
@@ -22,4 +42,5 @@ export {
   Menu,
   Pagination,
   Spin,
+  Tabs,
 };

@@ -8,6 +8,7 @@
 @import './menu/style.less';
 @import './pagination/style.less';
 @import './spin/style.less';
+@import './tabs/style.less';
 
 :root {
   --tiny-bgcolor: #ffffff;
@@ -17,6 +18,7 @@
   --tiny-primary-color: #4b89ff;
   --tiny-hover-bgcolor: #f8f8f8;
   --tiny-active-bgcolor: #f8f8f8;
+  --tiny-border-color: rgba(34, 36, 38, 0.15);
   --tiny-box-shadow-color: rgba(34, 36, 38, 0.15);
   --tiny-border-radius: 3px;
   --tiny-line-height: 1.5em;
@@ -31,7 +33,7 @@
   --tiny-button-padding-vertical: 0.465em;
   --tiny-button-padding-horizontal: 1em;
   --tiny-button-color: var(--tiny-color);
-  --tiny-button-border-color: rgba(34, 36, 38, 0.15);
+  --tiny-button-border-color: var(--tiny-border-color);
 
   --tiny-menu-height: 36px;
   --tiny-menu-font-size: var(--tiny-font-size);
@@ -42,7 +44,7 @@
   --tiny-menu-hover-bgcolor: var(--tiny-hover-bgcolor);
   --tiny-menu-active-bgcolor: var(--tiny-hover-bgcolor);
   --tiny-menu-vertical-divider-color: #fafafa;
-  --tiny-menu-vertical-border-color: rgba(34, 36, 38, 0.15);
+  --tiny-menu-vertical-border-color: var(--tiny-border-color);
   --tiny-menu-horizontal-border-bottom-color: rgba(0, 0, 0, 0.08);
   --tiny-menu-horizontal-active-border-color: var(--tiny-primary-color);
 
@@ -54,6 +56,16 @@
   --tiny-pagination-active-bgcolor: var(--tiny-active-bgcolor);
   --tiny-pagination-hover-bgcolor: var(--tiny-hover-bgcolor);
   --tiny-pagination-total-bgcolor: rgba(255, 191, 0, 0.15);
+
+  --tiny-tabs-bgcolor: #ffffff;
+  --tiny-tabs-border-color: var(--tiny-border-color);
+  --tiny-tabs-border-width: 2px;
+  --tiny-tabs-margin: -2px;
+  --tiny-tabs-box-shadow-color: var(--tiny-box-shadow-color);
+  --tiny-tabs-active-border-color: var(--tiny-primary-color);
+  --tiny-tabs-card-nav-bgcolor: #f8f8f8;
+  --tiny-tabs-padding-vertical: 0.465em;
+  --tiny-tabs-padding-horizontal: 0.625em;
 }
 
 *,

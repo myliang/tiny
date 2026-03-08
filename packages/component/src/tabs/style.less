@@ -1,0 +1,270 @@
+@import '../style.base.less';
+
+.@{css-prefix}-tabs {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--tiny-tabs-bgcolor);
+
+  &.left {
+    flex-direction: row;
+  }
+  &.right {
+    flex-direction: row-reverse;
+  }
+  &.top {
+    flex-direction: column;
+  }
+  &.bottom {
+    flex-direction: column-reverse;
+  }
+
+  &.left,
+  &.right {
+    .@{css-prefix}-tabs-nav,
+    .@{css-prefix}-tabs-nav-container {
+      flex-direction: column;
+    }
+  }
+
+  &.top,
+  &.bottom {
+    .@{css-prefix}-tabs-nav,
+    .@{css-prefix}-tabs-nav-container {
+      flex-direction: row;
+    }
+  }
+
+  &.line,
+  &.card {
+    .@{css-prefix}-tabs-nav-container {
+      &:before {
+        background-color: var(--tiny-tabs-border-color);
+      }
+      li.active:after {
+        background-color: var(--tiny-tabs-active-border-color);
+      }
+    }
+  }
+
+  &.line {
+    &.left,
+    &.right {
+      .@{css-prefix}-tabs-nav-container {
+        &:before,
+        li.active:after {
+          height: 100%;
+          width: var(--tiny-tabs-border-width);
+        }
+        li {
+          margin: var(--tiny-tabs-padding-vertical) 0;
+          padding: 0 var(--tiny-tabs-padding-horizontal);
+        }
+      }
+    }
+    &.left {
+      .@{css-prefix}-tabs-nav-container {
+        &:before,
+        li.active:after {
+          top: 0;
+          right: 0;
+        }
+      }
+    }
+    &.right {
+      .@{css-prefix}-tabs-nav-container {
+        &:before,
+        li.active:after {
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+    &.top,
+    &.bottom {
+      .@{css-prefix}-tabs-nav-container {
+        &:before,
+        li.active:after {
+          width: 100%;
+          height: var(--tiny-tabs-border-width);
+        }
+        li {
+          margin: 0 var(--tiny-tabs-padding-horizontal);
+          padding: var(--tiny-tabs-padding-vertical) 0;
+        }
+      }
+    }
+    &.top {
+      .@{css-prefix}-tabs-nav-container {
+        &:before,
+        li.active:after {
+          left: 0;
+          bottom: 0;
+        }
+      }
+    }
+
+    &.bottom {
+      .@{css-prefix}-tabs-nav-container {
+        &:before,
+        li.active:after {
+          left: 0;
+          top: 0;
+        }
+      }
+    }
+  }
+
+  &.card {
+    border: 1px solid var(--tiny-tabs-border-color);
+    box-shadow: 0 2px 3px 0px var(--tiny-tabs-box-shadow-color);
+    .@{css-prefix}-tabs-nav-container {
+      background-color: var(--tiny-tabs-card-nav-bgcolor);
+      li {
+        border: 1px solid transparent;
+      }
+    }
+
+    &.left,
+    &.right {
+      .@{css-prefix}-tabs-nav-container {
+        &:before {
+          height: 100%;
+          width: 1px;
+        }
+        .@{css-prefix}-tabs-nav + .prev li.active:first-child {
+          border-top-color: transparent;
+        }
+        li {
+          &.active {
+            border-top-color: var(--tiny-tabs-border-color);
+            border-bottom-color: var(--tiny-tabs-border-color);
+            background-color: var(--tiny-tabs-bgcolor);
+          }
+        }
+      }
+    }
+
+    &.left {
+      .@{css-prefix}-tabs-nav-container {
+        &:before {
+          top: 0;
+          right: 0;
+        }
+      }
+    }
+    &.right {
+      .@{css-prefix}-tabs-nav-container {
+        &:before {
+          top: 0;
+          left: 0;
+        }
+      }
+    }
+    &.top,
+    &.bottom {
+      .@{css-prefix}-tabs-nav-container {
+        &:before {
+          height: 1px;
+          width: 100%;
+        }
+        .@{css-prefix}-tabs-nav + .prev li.active:first-child {
+          border-left-color: transparent;
+        }
+        li {
+          &.active {
+            border-left-color: var(--tiny-tabs-border-color);
+            border-right-color: var(--tiny-tabs-border-color);
+            background-color: var(--tiny-tabs-bgcolor);
+          }
+        }
+      }
+    }
+    &.top {
+      .@{css-prefix}-tabs-nav-container {
+        &:before {
+          left: 0;
+          bottom: 0;
+        }
+      }
+    }
+    &.bottom {
+      .@{css-prefix}-tabs-nav-container {
+        &:before {
+          left: 0;
+          top: 0;
+        }
+      }
+    }
+  }
+}
+
+.@{css-prefix}-tabs-nav-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  > .prev,
+  > .next {
+    padding: var(--tiny-tabs-padding-vertical) 5px;
+
+    .disabled;
+
+    &:hover svg {
+      border-radius: 10em;
+      background-color: rgba(0, 0, 0, 0.08);
+    }
+  }
+  > .content {
+    position: relative;
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+  }
+
+  &:before {
+    position: absolute;
+    content: '';
+  }
+}
+.@{css-prefix}-tabs-nav {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  white-space: nowrap;
+  transition: 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
+
+  > li {
+    position: relative;
+    padding: var(--tiny-tabs-padding-vertical)
+      var(--tiny-tabs-padding-horizontal);
+    line-height: 1.5;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+
+    &.active,
+    &:hover {
+      color: var(--tiny-tabs-active-border-color);
+    }
+
+    > .close {
+      border-radius: 10em;
+      margin-left: 6px;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.08);
+      }
+    }
+
+    &:after {
+      position: absolute;
+      z-index: 1;
+      content: '';
+    }
+  }
+}
+
+.@{css-prefix}-tabs-content {
+  overflow: hidden;
+}

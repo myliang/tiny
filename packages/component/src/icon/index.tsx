@@ -255,6 +255,20 @@ const types = {
       transform="translate(4 6)"
     />
   ),
+  add: (
+    <path
+      fill="#000000"
+      d="M6,4 L6,0 L4,0 L4,4 L0,4 L0,6 L4,6 L4,10 L6,10 L6,6 L10,6 L10,4 L6,4 Z"
+      transform="translate(4 4)"
+    />
+  ),
+  close: (
+    <polygon
+      fill="#000000"
+      points="7.53 1.53 6.47 .47 4 2.94 1.53 .47 .47 1.53 2.94 4 .47 6.47 1.53 7.53 4 5.06 6.47 7.53 7.53 6.47 5.06 4"
+      transform="translate(5 5)"
+    />
+  ),
 };
 export type IconType = keyof typeof types;
 export interface IconProps {
