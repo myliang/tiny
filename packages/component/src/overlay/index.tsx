@@ -9,15 +9,18 @@ import React, {
 } from 'react';
 import ReactDOM from 'react-dom';
 import { position, Placement, Trigger } from './helper';
+import { bind } from '../event';
 
-interface OverlayContentProps {
+type OverlayContentProps = {
   placement?: Placement;
   zIndex: number;
   target: HTMLElement | null;
   children: React.ReactNode;
   clearOther?: boolean;
   setShow: Function;
-}
+  onMouseEnter: (evt: React.MouseEvent) => void;
+  onMouseLeave: (evt: React.MouseEvent) => void;
+};
 
 const SPACE = 2;
 const SCROLL_WIDTH = 15;
@@ -30,18 +33,20 @@ function OverlayContent({
   children,
   zIndex,
   setShow,
+  onMouseEnter,
+  onMouseLeave,
 }: OverlayContentProps) {
-  const ref = useRef(null);
+  const _ref = useRef(null);
   const [style, setStyle] = useState<React.CSSProperties>({ zIndex });
 
   // calcute position
   useEffect(() => {
-    if (ref && ref.current && target != null) {
+    if (_ref && _ref.current && target != null) {
       const [left, top] = position(
         placement,
         document.documentElement,
         target.getBoundingClientRect(),
-        (ref.current as HTMLElement).getBoundingClientRect(),
+        (_ref.current as HTMLElement).getBoundingClientRect(),
         SCROLL_WIDTH,
         SPACE
       );
@@ -58,8 +63,8 @@ function OverlayContent({
     const handler = (evt: MouseEvent) => {
       if (
         isCurrent() &&
-        ref.current &&
-        !(ref.current as HTMLElement).contains(evt.target as Node) &&
+        _ref.current &&
+        !(_ref.current as HTMLElement).contains(evt.target as Node) &&
         !target?.contains(evt.target as Node)
       ) {
         setShow(false);
@@ -75,25 +80,31 @@ function OverlayContent({
   });
 
   return ReactDOM.createPortal(
-    <div className="tiny-overlay" ref={ref} style={style} onClick={() => false}>
+    <div
+      className="tiny-overlay"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      ref={_ref}
+      style={style}
+      onClick={() => false}>
       {children}
     </div>,
     document.body
   );
 }
 
-export interface OverlayMethods {
+export type OverlayMethods = {
   setShow: (v: boolean) => void;
-}
+};
 
-export interface OverlayProps {
+export type OverlayProps = {
   ref?: React.Ref<OverlayMethods>;
   placement?: Placement;
   trigger?: Trigger;
   content: ReactNode;
   children: ReactNode;
   onChange?: (show: boolean) => void;
-}
+};
 
 export function Overlay({
   ref,
@@ -105,6 +116,7 @@ export function Overlay({
 }: OverlayProps) {
   const [show, setShow] = useState(false);
   const [targetNode, setTargetNode] = useState<HTMLElement | null>(null);
+  const isEnterContent = useRef(false);
 
   // let targetNode: HTMLElement | null = null;
   const targetRef = (el: HTMLElement) => {
@@ -132,13 +144,28 @@ export function Overlay({
     if ('click' === trigger) setTimeout(() => updateShow(!show), 0);
   };
   const onMouseEnter = (evt: React.MouseEvent) => {
-    if ('hover' === trigger) setTimeout(() => updateShow(!show), 0);
+    if ('hover' === trigger) {
+      setTimeout(() => updateShow(!show), 0);
+    }
   };
   const onMouseLeave = (evt: React.MouseEvent) => {
-    if ('hover' === trigger) setTimeout(() => updateShow(!show), 0);
+    if ('hover' === trigger) {
+      setTimeout(() => {
+        if (!isEnterContent.current) {
+          updateShow(!show);
+        }
+      }, 200);
+    }
   };
   const onContextMenu = (evt: React.MouseEvent) => {
     if ('contextMenu' === trigger) setTimeout(() => updateShow(!show), 0);
+  };
+  const onContentMouseEnter = (evt: React.MouseEvent) => {
+    isEnterContent.current = true;
+  };
+  const onContentMouseLeave = (evt: React.MouseEvent) => {
+    isEnterContent.current = false;
+    updateShow(!show);
   };
 
   const targetClone = React.cloneElement(target, {
@@ -157,6 +184,8 @@ export function Overlay({
       {targetClone}
       {show && (
         <OverlayContent
+          onMouseEnter={onContentMouseEnter}
+          onMouseLeave={onContentMouseLeave}
           target={targetNode}
           zIndex={_zIndex}
           placement={placement}

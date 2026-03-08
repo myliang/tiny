@@ -1,11 +1,4 @@
-import {
-  createContext,
-  CSSProperties,
-  Fragment,
-  ReactNode,
-  useContext,
-  useState,
-} from 'react';
+import { CSSProperties, Fragment, ReactNode, useState } from 'react';
 import { classNames, cssPrefix } from '../helper';
 
 type MenuItemType = {
@@ -61,13 +54,13 @@ export default function Menu({
   theme,
 }: MenuProps) {
   const [selected, setSelected] = useState(selectedKey);
-  const selecter = (key: string, evt: React.MouseEvent) => {
+  const onClick = (key: string, evt: React.MouseEvent) => {
     setSelected(key);
     onSelect?.(key, evt);
   };
 
   const [shows, setShows] = useState<string[]>(openKeys);
-  const onSubmenuClicker = (key: string) => {
+  const onSubmenuClick = (key: string) => {
     if (shows.includes(key)) {
       setShows(shows.filter((it) => it !== key));
     } else {
@@ -84,21 +77,20 @@ export default function Menu({
           <>
             <li
               key={it.key}
-              className={classNames(`${cssPrefix}menu-item group`)}>
+              className={classNames(`${cssPrefix}menu-item disabled`)}>
               {it.label}
             </li>
-            <ul className={classNames(`${cssPrefix}menu`)}>
+            <ul className={classNames(`${cssPrefix}menu group`)}>
               {it.children.map((it, i) => itemRender(it, i))}
             </ul>
           </>
         );
       case 'submenu':
         return (
-          <>
+          <Fragment key={it.key}>
             <li
-              key={it.key}
               className={classNames(`${cssPrefix}menu-item submenu`)}
-              onClick={() => onSubmenuClicker(it.key)}>
+              onClick={() => onSubmenuClick(it.key)}>
               {it.label}
             </li>
             <ul
@@ -106,12 +98,13 @@ export default function Menu({
               style={{ display: shows.includes(it.key) ? 'block' : 'none' }}>
               {it.children.map((it, i) => itemRender(it, i))}
             </ul>
-          </>
+          </Fragment>
         );
       default:
         return (
           <li
-            onClick={(evt) => selecter(it.key, evt)}
+            key={it.key}
+            onClick={(evt) => onClick(it.key, evt)}
             className={classNames(`${cssPrefix}menu-item`, {
               disabled: it.disabled,
               active: it.key === selected,

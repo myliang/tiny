@@ -33,13 +33,15 @@ root.render(
     </Space>
     <Divider />
     <Dropdown
-      content={
-        <ul style={{ width: '100px' }}>
-          <li>l1</li>
-          <li>l2</li>
-        </ul>
-      }>
-      <div style={{ width: '80px' }}>Dropdown</div>
+      menu={{
+        items: [
+          { key: 'jack', children: 'Jack' },
+          { key: 'luck', children: 'Lucy' },
+          { key: 'active', children: 'Active' },
+          { key: 'disabled', children: 'Disabled', disabled: true },
+        ],
+      }}>
+      <a style={{ width: '80px' }}>Dropdown</a>
     </Dropdown>
     <Divider />
     <Space>
@@ -51,6 +53,15 @@ root.render(
           { key: 'luck', children: 'Lucy' },
           { key: 'active', children: 'Active' },
           { key: 'disabled', children: 'Disabled', disabled: true },
+          {
+            key: 'group',
+            type: 'group',
+            label: 'Manager',
+            children: [
+              { key: 'yuliang', children: 'yuLiang' },
+              { key: 'jonson', children: 'Joson' },
+            ],
+          },
         ]}></Menu>
       <Menu
         type="horizontal"

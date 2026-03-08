@@ -106,7 +106,7 @@ export default function Splitter({
   const ref = useRef(null);
   const childRefs = useRef<Map<number, HTMLElement>>(new Map());
 
-  const onResizeHandler = (index: number, a: number) => {
+  const onResize = (index: number, a: number) => {
     // console.log('pref:', index, a, childRefs);
     let maxWidth = 10;
     if (ref.current) {
@@ -160,7 +160,7 @@ export default function Splitter({
   const cloneChildren = Children.map(children, (_, i) => (
     <Fragment>
       {i > 0 && _.props.resizable !== false ? (
-        <Dragger vertical={vertical} onResize={(a) => onResizeHandler(i, a)} />
+        <Dragger vertical={vertical} onResize={(a) => onResize(i, a)} />
       ) : (
         ''
       )}

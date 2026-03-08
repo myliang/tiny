@@ -40,11 +40,11 @@ export default function Pagination({
     }
     return range;
   };
-  const changer = (index: number) => {
+  const _onChange = (index: number) => {
     setCurrent(index);
     if (onChange) onChange(index, _rows);
   };
-  const inputChanger = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const onInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const v = evt.target.value;
     if (/^\s*$/.test(v)) {
       return;
@@ -53,10 +53,10 @@ export default function Pagination({
       setCurrent(parseInt(v));
     }
   };
-  const keydownChanger = (evt: React.KeyboardEvent<HTMLInputElement>) => {
+  const onInputKeydown = (evt: React.KeyboardEvent<HTMLInputElement>) => {
     if (evt.key === 'Enter') {
       evt.preventDefault();
-      changer(parseInt(evt.currentTarget.value));
+      _onChange(parseInt(evt.currentTarget.value));
     }
   };
   return (
@@ -75,14 +75,14 @@ export default function Pagination({
       <li
         key="prev"
         className={classNames('prev', { disabled: _current <= 1 })}
-        onClick={() => changer(_current - 1)}>
+        onClick={() => _onChange(_current - 1)}>
         <Icon type="angleLeft" />
       </li>
       {!simple && (
         <li
           key="first"
           className={classNames({ active: _current === 1 })}
-          onClick={() => changer(1)}>
+          onClick={() => _onChange(1)}>
           {1}
         </li>
       )}
@@ -94,7 +94,7 @@ export default function Pagination({
           <li
             key={`page-${i}`}
             className={classNames({ active: _current === i })}
-            onClick={() => changer(i)}>
+            onClick={() => _onChange(i)}>
             {i}
           </li>
         ))}
@@ -105,7 +105,7 @@ export default function Pagination({
         <li
           key="last"
           className={classNames({ active: _current === pages })}
-          onClick={() => changer(pages)}>
+          onClick={() => _onChange(pages)}>
           {pages}
         </li>
       )}
@@ -113,8 +113,8 @@ export default function Pagination({
         <li className="pages" key="pages">
           <input
             value={_current + ''}
-            onChange={inputChanger}
-            onKeyDown={keydownChanger}
+            onChange={onInputChange}
+            onKeyDown={onInputKeydown}
           />
           /<span>{pages}</span>
         </li>
@@ -122,7 +122,7 @@ export default function Pagination({
       <li
         key="next"
         className={classNames('next', { disabled: _current >= pages })}
-        onClick={() => changer(_current + 1)}>
+        onClick={() => _onChange(_current + 1)}>
         <Icon type="angleRight" />
       </li>
     </ul>
