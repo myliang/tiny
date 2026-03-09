@@ -10,7 +10,8 @@ import {
   Pagination,
   Spin,
   Tabs,
-  Test,
+  Radio,
+  Checkbox,
 } from './src';
 
 const container = document.getElementById('root');
@@ -22,7 +23,6 @@ const root = createRoot(container);
 
 root.render(
   <div style={{ padding: '20px' }}>
-    <Test />
     <Space>
       <Button type="primary" loading>
         Primary
@@ -30,6 +30,57 @@ root.render(
       <Button type="dashed">Dashed</Button>
       <Button type="outline">Outline</Button>
       <Button type="text">Text</Button>
+    </Space>
+    <Divider />
+    <Space>
+      <Radio checked>Radio</Radio>
+      <Radio.Group
+        value="a"
+        options={[
+          { value: 'a', label: 'Apple' },
+          { value: 'b', label: 'Pear' },
+          { value: 'c', label: 'Orange' },
+        ]}
+      />
+      <Radio.Group
+        vertical
+        value="b"
+        options={[
+          { value: 'a', label: 'Apple' },
+          { value: 'b', label: 'Pear' },
+          { value: 'c', label: 'Orange' },
+        ]}
+      />
+      <Radio.Group
+        type="button"
+        value="b"
+        options={[
+          { value: 'a', label: 'Apple' },
+          { value: 'b', label: 'Pear' },
+          { value: 'c', label: 'Orange' },
+        ]}
+      />
+    </Space>
+    <Divider />
+    <Space>
+      <Checkbox checked>Checkbox</Checkbox>
+      <Checkbox.Group
+        value={['a']}
+        options={[
+          { value: 'a', label: 'Apple' },
+          { value: 'b', label: 'Pear' },
+          { value: 'c', label: 'Orange' },
+        ]}
+      />
+      <Checkbox.Group
+        vertical
+        value={['a']}
+        options={[
+          { value: 'a', label: 'Apple' },
+          { value: 'b', label: 'Pear', indeterminate: true },
+          { value: 'c', label: 'Orange' },
+        ]}
+      />
     </Space>
     <Divider />
     <Dropdown

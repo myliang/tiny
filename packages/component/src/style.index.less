@@ -9,12 +9,14 @@
 @import './pagination/style.less';
 @import './spin/style.less';
 @import './tabs/style.less';
+@import './radio/style.less';
+@import './checkbox/style.less';
 
 :root {
   --tiny-bgcolor: #ffffff;
   --tiny-dark-bgcolor: #232323;
   --tiny-font-size: 14px;
-  --tiny-color: #444;
+  --tiny-color: rgba(0, 0, 0, 0.87);
   --tiny-primary-color: #4b89ff;
   --tiny-hover-bgcolor: #f8f8f8;
   --tiny-active-bgcolor: #f8f8f8;
@@ -39,7 +41,7 @@
 
   --tiny-menu-height: 36px;
   --tiny-menu-font-size: var(--tiny-font-size);
-  --tiny-menu-color: rgba(0, 0, 0, 0.87);
+  --tiny-menu-color: var(--tiny-color);
   --tiny-menu-box-shadow: var(--tiny-box-shadow);
   --tiny-menu-padding-vertical: 0.685em;
   --tiny-menu-padding-horizontal: 0.925em;
@@ -69,6 +71,22 @@
   --tiny-tabs-card-nav-bgcolor: #f8f8f8;
   --tiny-tabs-padding-vertical: 0.465em;
   --tiny-tabs-padding-horizontal: 0.625em;
+
+  --tiny-radio-color: var(--tiny-color);
+  --tiny-radio-font-size: var(--tiny-font-size);
+  --tiny-radio-size: 14px;
+  --tiny-radio-border-color: var(--tiny-border-color);
+  --tiny-radio-checked-color: var(--tiny-primary-color);
+  --tiny-radio-button-bgcolor: var(--tiny-border-color);
+  --tiny-radio-button-padding: 0.325em 0.625em;
+  --tiny-radio-button-border-radius: var(--tiny-border-radius);
+  --tiny-radio-button-box-shadow: 0px 1px 2px 0px var(--tiny-border-color);
+
+  --tiny-checkbox-color: var(--tiny-color);
+  --tiny-checkbox-font-size: var(--tiny-font-size);
+  --tiny-checkbox-size: 14px;
+  --tiny-checkbox-border-color: var(--tiny-border-color);
+  --tiny-checkbox-checked-color: var(--tiny-primary-color);
 }
 
 *,

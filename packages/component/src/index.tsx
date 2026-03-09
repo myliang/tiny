@@ -10,27 +10,10 @@ import Menu from './menu/index';
 import Pagination from './pagination';
 import Spin from './spin';
 import Tabs from './tabs';
-import { useEffect, useState } from 'react';
-
-function Test() {
-  const [count, setCount] = useState(0);
-  const clicker = () => {
-    console.log('>>>', count);
-    setCount(count + 1);
-  };
-  useEffect(() => {
-    console.log('count:', count);
-  }, []);
-  return (
-    <div>
-      <button onClick={clicker}>add {count}</button>
-      <div>{count}</div>
-    </div>
-  );
-}
+import Radio from './radio';
+import Checkbox from './checkbox';
 
 export {
-  Test,
   Layout,
   Button,
   Row,
@@ -43,4 +26,6 @@ export {
   Pagination,
   Spin,
   Tabs,
+  Radio,
+  Checkbox,
 };

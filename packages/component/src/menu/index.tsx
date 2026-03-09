@@ -74,16 +74,14 @@ export default function Menu({
         return <li className={classNames(`${cssPrefix}menu-item divider`)} />;
       case 'group':
         return (
-          <>
-            <li
-              key={it.key}
-              className={classNames(`${cssPrefix}menu-item disabled`)}>
+          <Fragment key={it.key}>
+            <li className={classNames(`${cssPrefix}menu-item disabled`)}>
               {it.label}
             </li>
             <ul className={classNames(`${cssPrefix}menu group`)}>
               {it.children.map((it, i) => itemRender(it, i))}
             </ul>
-          </>
+          </Fragment>
         );
       case 'submenu':
         return (
