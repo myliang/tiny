@@ -1,7 +1,9 @@
 @import '../style.base.less';
 
 .@{css-prefix}-space {
-  display: inline-flex;
+  display: flex;
+  margin: 0;
+  padding: 0;
 
   &.small {
     row-gap: 4px;
@@ -14,5 +16,21 @@
   &.large {
     row-gap: 12px;
     column-gap: 12px;
+  }
+
+  &.horizontal {
+    flex-direction: row;
+  }
+  &.vertical {
+    flex-direction: column;
+  }
+
+  &.compact {
+    &.small,
+    &.middle,
+    &.large {
+      row-gap: 0;
+      column-gap: 0;
+    }
   }
 }

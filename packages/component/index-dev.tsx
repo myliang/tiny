@@ -30,6 +30,10 @@ root.render(
       <Button type="dashed">Dashed</Button>
       <Button type="outline">Outline</Button>
       <Button type="text">Text</Button>
+      <Space compact>
+        <Button>Add</Button>
+        <Button>delete</Button>
+      </Space>
     </Space>
     <Divider />
     <Space>

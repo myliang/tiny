@@ -6,8 +6,9 @@ export interface SpaceProps {
   style?: CSSProperties;
   children: ReactNode;
   wrap?: boolean;
+  compact?: boolean;
+  vertical?: boolean;
   align?: 'start' | 'end' | 'center' | 'baseline';
-  direction?: 'vertical' | 'horizontal';
   split?: ReactNode;
   size?: 'small' | 'middle' | 'large';
 }
@@ -17,19 +18,27 @@ export default function Space({
   style,
   children,
   wrap = true,
+  compact = false,
   align = 'center',
-  direction = 'horizontal',
+  vertical = false,
   split,
   size = 'middle',
 }: SpaceProps) {
   return (
     <div
-      className={classNames(`${cssPrefix}space`, size, className)}
+      className={classNames(
+        `${cssPrefix}space`,
+        size,
+        vertical ? 'vertical' : 'horizontal',
+        className,
+        {
+          compact,
+        }
+      )}
       style={Object.assign(
         {
           flexWrap: wrap ? 'wrap' : 'nowrap',
           alignItems: align,
-          flexDirection: direction === 'horizontal' ? 'row' : 'column',
         },
         style
       )}>
