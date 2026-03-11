@@ -1,7 +1,7 @@
 @import '../style.base.less';
 
 .@{css-prefix}-pagination {
-  display: inline-flex;
+  display: flex;
   flex-direction: row;
   align-items: center;
   margin: 0;
@@ -11,15 +11,14 @@
   user-select: none;
 
   > li {
-    display: inline-flex;
+    display: flex;
     border-radius: var(--tiny-border-radius);
     cursor: pointer;
-    text-align: center;
-    vertical-align: middle;
     outline: 0;
     padding: var(--tiny-pagination-padding-vertical)
       var(--tiny-pagination-padding-horizontal);
     align-items: center;
+    line-height: 1;
 
     .disabled;
 
@@ -37,23 +36,22 @@
     }
 
     &.pages {
-      padding-top: 0;
-      padding-bottom: 0;
+      padding: 0 calc(var(--tiny-pagination-padding-horizontal) / 2);
 
       > input {
+        line-height: 1.2;
         color: var(--tiny-color);
-        width: 50px;
-        margin: 0 var(--tiny-pagination-padding-horizontal) 0 0;
-        padding: var(--tiny-pagination-padding-vertical)
+        width: 3.2em;
+        margin: 0;
+        padding: calc(var(--tiny-pagination-padding-vertical) - 2px)
           var(--tiny-pagination-padding-horizontal);
         border-radius: var(--tiny-border-radius);
         text-align: center;
-        vertical-align: middle;
         border: none;
         box-shadow: 0 0 1px 1px var(--tiny-box-shadow-color);
       }
       > span {
-        padding-left: var(--tiny-pagination-padding-horizontal);
+        padding: 0 calc(var(--tiny-pagination-padding-horizontal) - 2px);
       }
     }
   }

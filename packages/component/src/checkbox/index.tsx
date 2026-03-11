@@ -68,7 +68,7 @@ function CheckboxGroup({
   onChange,
 }: CheckboxGroupProps) {
   const [checkedValues, setCheckedValues] = useState(value);
-  const onCheckboxChange = (
+  const onChanger = (
     checked: boolean,
     value: CheckboxValueType,
     evt: MouseEvent
@@ -91,7 +91,7 @@ function CheckboxGroup({
       {options.map(({ label, ...it }) => (
         <Checkbox
           key={it.value}
-          onChange={(checked, evt) => onCheckboxChange(checked, it.value, evt)}
+          onChange={(checked, evt) => onChanger(checked, it.value, evt)}
           checked={checkedValues.includes(it.value)}
           {...it}>
           {label}

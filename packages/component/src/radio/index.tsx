@@ -68,7 +68,7 @@ function RadioGroup({
   onChange,
 }: RadioGroupProps) {
   const [checkedValue, setCheckedValue] = useState(value);
-  const onRadioChange = (value: RadioValueType, evt: MouseEvent) => {
+  const onChanger = (value: RadioValueType, evt: MouseEvent) => {
     setCheckedValue(value);
     if (onChange) onChange(value, evt);
   };
@@ -85,7 +85,7 @@ function RadioGroup({
       {options.map(({ label, ...it }) => (
         <Radio
           key={it.value}
-          onChange={(value, evt) => onRadioChange(value, evt)}
+          onChange={(value, evt) => onChanger(value, evt)}
           checked={checkedValue === it.value}
           {...it}>
           {label}

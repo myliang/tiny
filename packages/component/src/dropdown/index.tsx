@@ -17,7 +17,7 @@ export default function Dropdown({
 }: DropdownProps) {
   const overlayRef = useRef<OverlayMethods>(null);
   const { onSelect, ...menuOther } = menu;
-  const selector = (key: string, evt: React.MouseEvent) => {
+  const onSelector = (key: string, evt: React.MouseEvent) => {
     overlayRef.current?.setShow(false);
     if (onSelect) onSelect(key, evt);
   };
@@ -26,7 +26,7 @@ export default function Dropdown({
       ref={overlayRef}
       trigger={trigger}
       placement={placement}
-      content={<Menu type="vertical" onSelect={selector} {...menuOther} />}>
+      content={<Menu type="vertical" onSelect={onSelector} {...menuOther} />}>
       {children}
     </Overlay>
   );

@@ -49,16 +49,15 @@ export default function Tabs({
   onEdit,
 }: TabsProps) {
   const isVertical = ['left', 'right'].includes(placement);
-
   const [_selectedKey, setSelectedKey] = useState(selectedKey);
 
-  const onTabClose = (index: number) => {
+  const onTabCloser = (index: number) => {
     if (onEdit) onEdit('delete', index);
   };
-  const onTabAdd = () => {
+  const onTabAdder = () => {
     if (onEdit) onEdit('add');
   };
-  const onTabClick = (index: number, it: TabPanelProps) => {
+  const onTabClicker = (index: number, it: TabPanelProps) => {
     setSelectedKey(it.key);
     if (onChange) onChange(index);
   };
@@ -135,7 +134,7 @@ export default function Tabs({
             {items.map((it, i) => (
               <li
                 key={`nav-item-${i}`}
-                onClick={() => onTabClick(i, it)}
+                onClick={() => onTabClicker(i, it)}
                 className={classNames({
                   active: it.key === _selectedKey,
                   disabled: it.disabled,
@@ -143,7 +142,7 @@ export default function Tabs({
                 {it.label}
                 {editable &&
                   (it.closable === undefined ? true : it.closable) && (
-                    <div className="close" onClick={() => onTabClose(i)}>
+                    <div className="close" onClick={() => onTabCloser(i)}>
                       <Icon type="close" />
                     </div>
                   )}

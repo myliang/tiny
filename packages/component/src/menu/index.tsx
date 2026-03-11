@@ -54,13 +54,13 @@ export default function Menu({
   theme,
 }: MenuProps) {
   const [selected, setSelected] = useState(selectedKey);
-  const onClick = (key: string, evt: React.MouseEvent) => {
+  const onClicker = (key: string, evt: React.MouseEvent) => {
     setSelected(key);
     onSelect?.(key, evt);
   };
 
   const [shows, setShows] = useState<string[]>(openKeys);
-  const onSubmenuClick = (key: string) => {
+  const onSubmenuClicker = (key: string) => {
     if (shows.includes(key)) {
       setShows(shows.filter((it) => it !== key));
     } else {
@@ -88,7 +88,7 @@ export default function Menu({
           <Fragment key={it.key}>
             <li
               className={classNames(`${cssPrefix}menu-item submenu`)}
-              onClick={() => onSubmenuClick(it.key)}>
+              onClick={() => onSubmenuClicker(it.key)}>
               {it.label}
             </li>
             <ul
@@ -102,7 +102,7 @@ export default function Menu({
         return (
           <li
             key={it.key}
-            onClick={(evt) => onClick(it.key, evt)}
+            onClick={(evt) => onClicker(it.key, evt)}
             className={classNames(`${cssPrefix}menu-item`, {
               disabled: it.disabled,
               active: it.key === selected,

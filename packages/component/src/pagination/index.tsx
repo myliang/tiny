@@ -62,14 +62,10 @@ export default function Pagination({
   return (
     <ul
       className={classNames(`${cssPrefix}pagination`, className, { simple })}
-      style={Object.assign({ alignItems: align }, style)}>
-      {!simple ? (
+      style={Object.assign({ justifyContent: align }, style)}>
+      {!simple && (
         <li className="total" key="total">
           {(_current - 1) * _rows + 1} - {_current * _rows} / {total}
-        </li>
-      ) : (
-        <li className="total" key="total">
-          {total}
         </li>
       )}
       <li
@@ -116,7 +112,8 @@ export default function Pagination({
             onChange={onInputChange}
             onKeyDown={onInputKeydown}
           />
-          /<span>{pages}</span>
+          <span>/</span>
+          {pages}
         </li>
       )}
       <li

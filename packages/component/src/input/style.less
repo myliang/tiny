@@ -57,6 +57,12 @@
   > input {
     background: transparent;
   }
+
+  &:hover {
+    .@{css-prefix}-input-actions {
+      opacity: 1;
+    }
+  }
 }
 
 .@{css-prefix}-input-prefix,
@@ -82,5 +88,29 @@
     polygon {
       fill: #ffffff;
     }
+  }
+}
+
+.@{css-prefix}-input-actions {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 0;
+  overflow: hidden;
+  height: 100%;
+}
+.@{css-prefix}-input-action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 0 0.25em;
+  background: rgba(0, 0, 0, 0.05);
+  &:hover {
+    background: rgba(0, 0, 0, 0.08);
   }
 }

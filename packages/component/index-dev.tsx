@@ -128,7 +128,13 @@ root.render(
         />
         <Input.Password />
       </Space>
-      <Input.Textarea />
+      <Space>
+        <Input.Textarea />
+        <Input.Number value="100000.25" step={1.1} />
+        <Input.Number variant="filled" value="100000.25" step={1.1} />
+        <Input.Number variant="underlined" value="100000.25" step={1.1} />
+        <Input.Number variant="borderless" value="100000.25" step={1.1} />
+      </Space>
     </Space>
     <Divider />
     <Dropdown
@@ -200,7 +206,13 @@ root.render(
     <Divider />
     <Space>
       <Pagination current={1} total={500} rows={20} />
-      <Pagination current={1} total={500} rows={20} simple />
+      <Pagination
+        current={1}
+        total={500}
+        rows={20}
+        simple
+        style={{ width: '100%' }}
+      />
     </Space>
     <Divider />
     <Space>
