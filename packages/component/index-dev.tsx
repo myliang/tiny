@@ -12,6 +12,7 @@ import {
   Tabs,
   Radio,
   Checkbox,
+  Input,
 } from './src';
 
 const container = document.getElementById('root');
@@ -23,16 +24,25 @@ const root = createRoot(container);
 
 root.render(
   <div style={{ padding: '20px' }}>
-    <Space>
-      <Button type="primary" loading>
-        Primary
-      </Button>
-      <Button type="dashed">Dashed</Button>
-      <Button type="outline">Outline</Button>
-      <Button type="text">Text</Button>
-      <Space compact>
-        <Button>Add</Button>
-        <Button>delete</Button>
+    <Space vertical>
+      <Space>
+        <Button>Default</Button>
+        <Button variant="dashed">Dashed</Button>
+        <Button variant="outlined">Outline</Button>
+        <Button variant="text">Text</Button>
+        <Space.Compact>
+          <Button>Add</Button>
+          <Button>delete</Button>
+        </Space.Compact>
+      </Space>
+      <Space>
+        <Button color="primary">Primary</Button>
+        <Button color="primary" variant="dashed">
+          Dashed
+        </Button>
+        <Button color="primary" variant="outlined">
+          Outlined
+        </Button>
       </Space>
     </Space>
     <Divider />
@@ -85,6 +95,40 @@ root.render(
           { value: 'c', label: 'Orange' },
         ]}
       />
+    </Space>
+    <Divider />
+    <Space vertical>
+      <Space>
+        <Input placeholder="...abc" style={{ width: '160px' }} />
+        <Input
+          variant="borderless"
+          style={{ width: '160px' }}
+          placeholder="...abc"
+        />
+        <Input
+          variant="underlined"
+          style={{ width: '160px' }}
+          placeholder="...abc"
+        />
+        <Input
+          variant="filled"
+          style={{ width: '160px' }}
+          placeholder="...abc"
+        />
+      </Space>
+      <Space>
+        <Input prefix="￥" clearable placeholder="ab" disabled />
+        <Input prefix="￥" suffix="RMB" placeholder="ab" />
+        <Input
+          variant="underlined"
+          prefix="￥"
+          suffix="RMB"
+          placeholder="ab"
+          status="error"
+        />
+        <Input.Password />
+      </Space>
+      <Input.Textarea />
     </Space>
     <Divider />
     <Dropdown

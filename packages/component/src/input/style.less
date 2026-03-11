@@ -1,0 +1,86 @@
+@import '../style.base.less';
+
+.@{css-prefix}-input {
+  position: relative;
+  display: inline-flex;
+  color: var(--tiny-input-color);
+  border: 1px solid transparent;
+  padding: var(--tiny-input-padding);
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+
+  &.outlined {
+    border-color: var(--tiny-input-border-color);
+    border-radius: var(--tiny-border-radius);
+    &:hover,
+    &.active {
+      border-color: var(--tiny-input-active-border-color);
+    }
+  }
+  &.filled {
+    background-color: var(--tiny-input-filled-bgcolor);
+    border-radius: var(--tiny-border-radius);
+    &:hover,
+    &.active {
+      border-color: var(--tiny-input-active-border-color);
+    }
+  }
+  &.underlined {
+    border-bottom-color: var(--tiny-input-border-color);
+    &:hover,
+    &.active {
+      border-bottom-color: var(--tiny-input-active-border-color);
+    }
+  }
+
+  &.error {
+    background-color: var(--tiny-error-bgcolor);
+  }
+  &.warning {
+    background-color: var(--tiny-warning-bgcolor);
+  }
+
+  .disabled;
+
+  > input,
+  &.textarea {
+    font-family: var(--tiny-font-family);
+    font-size: var(--tiny-input-font-size);
+    line-height: var(--tiny-line-height);
+    color: inherit;
+    outline: none;
+    margin: 0;
+    width: 100%;
+    min-width: 0;
+  }
+  > input {
+    background: transparent;
+  }
+}
+
+.@{css-prefix}-input-prefix,
+.@{css-prefix}-input-suffix {
+  display: flex;
+  align-items: center;
+  flex: none;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.@{css-prefix}-input-prefix {
+  padding-right: var(--tiny-input-inner-padding);
+}
+.@{css-prefix}-input-suffix {
+  padding-left: var(--tiny-input-inner-padding);
+}
+.@{css-prefix}-input-clear {
+  border-radius: 10em;
+  background-color: rgba(0, 0, 0, 0.25);
+  svg {
+    width: 12px;
+    height: 12px;
+    polygon {
+      fill: #ffffff;
+    }
+  }
+}

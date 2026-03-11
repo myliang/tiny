@@ -6,10 +6,9 @@ export interface SpaceProps {
   style?: CSSProperties;
   children: ReactNode;
   wrap?: boolean;
-  compact?: boolean;
   vertical?: boolean;
   align?: 'start' | 'end' | 'center' | 'baseline';
-  split?: ReactNode;
+  separator?: ReactNode;
   size?: 'small' | 'middle' | 'large';
 }
 
@@ -18,10 +17,9 @@ export default function Space({
   style,
   children,
   wrap = true,
-  compact = false,
-  align = 'center',
+  align = 'start',
   vertical = false,
-  split,
+  separator,
   size = 'middle',
 }: SpaceProps) {
   return (
@@ -30,10 +28,7 @@ export default function Space({
         `${cssPrefix}space`,
         size,
         vertical ? 'vertical' : 'horizontal',
-        className,
-        {
-          compact,
-        }
+        className
       )}
       style={Object.assign(
         {
@@ -42,14 +37,35 @@ export default function Space({
         },
         style
       )}>
-      {split
-        ? Children.map(children, (_, i) => (
-            <Fragment>
-              {i > 0 ? split : ''}
-              {_}
-            </Fragment>
-          ))
-        : children}
+      {Children.map(children, (_, i) => (
+        <div className={classNames(`${cssPrefix}space-item`)}>
+          {i > 0 ? separator : ''}
+          {_}
+        </div>
+      ))}
     </div>
   );
 }
+
+export type SpaceCompactProps = {
+  children: ReactNode;
+  vertical?: boolean;
+  size?: 'small' | 'middle' | 'large';
+};
+function SpaceCompact({
+  vertical = false,
+  size = 'middle',
+  children,
+}: SpaceCompactProps) {
+  return (
+    <div
+      className={classNames(
+        `${cssPrefix}space compact`,
+        vertical ? 'vertical' : 'horizontal',
+        size
+      )}>
+      {children}
+    </div>
+  );
+}
+Space.Compact = SpaceCompact;

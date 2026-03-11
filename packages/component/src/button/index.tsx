@@ -5,7 +5,8 @@ export interface ButtonProps {
   disabled?: boolean;
   loading?: boolean;
   htmlType?: 'button' | 'submit' | 'reset';
-  type?: 'primary' | 'outline' | 'dashed' | 'text';
+  variant?: 'filled' | 'outlined' | 'dashed' | 'text';
+  color?: 'default' | 'primary' | 'success' | 'error';
   shape?: 'circle' | 'rect';
   size?: 'small' | 'middle' | 'large';
   onClick?: (evt: React.MouseEvent<HTMLElement, MouseEvent>) => void;
@@ -15,7 +16,8 @@ export default function Button({
   disabled = false,
   loading = false,
   htmlType = 'button',
-  type = 'outline',
+  variant = 'filled',
+  color = 'default',
   shape = 'rect',
   size = 'middle',
   onClick,
@@ -25,7 +27,7 @@ export default function Button({
     <button
       onClick={onClick}
       type={htmlType}
-      className={classNames(`${cssPrefix}button`, type, shape, size, {
+      className={classNames(`${cssPrefix}button`, variant, color, shape, size, {
         disabled,
         loading,
       })}>

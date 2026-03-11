@@ -16,6 +16,7 @@
   color: var(--tiny-button-color);
   border-radius: var(--tiny-border-radius);
   background-color: #fff;
+  border: 1px solid transparent;
 
   .disabled;
 
@@ -23,26 +24,66 @@
     .loading(1em, 0.2em, #ffffff);
   }
 
-  &.primary {
-    background-color: var(--tiny-primary-color);
-    color: #fff;
-
+  &.filled {
+    background-color: rgba(0, 0, 0, 0.15);
+    box-shadow: none;
     &:hover {
-      background-color: hsl(from var(--tiny-primary-color) h s calc(l * 1.1));
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+    &.primary {
+      background-color: var(--tiny-primary-color);
+      color: #fff;
+      &:hover {
+        background-color: hsl(from var(--tiny-primary-color) h s calc(l * 1.1));
+      }
+    }
+    &.success {
+      background-color: var(--tiny-success-color);
+      color: #fff;
+      &:hover {
+        background-color: hsl(from var(--tiny-success-color) h s calc(l * 1.1));
+      }
+    }
+    &.error {
+      background-color: var(--tiny-error-color);
+      color: #fff;
+      &:hover {
+        background-color: hsl(from var(--tiny-error-color) h s calc(l * 1.1));
+      }
     }
   }
-  &.outline {
-    border: 1px solid var(--tiny-button-border-color);
+
+  &.outlined {
+    border-color: var(--tiny-button-border-color);
     box-shadow: var(--tiny-button-box-shadow);
   }
   &.dashed {
-    border: 1px dashed var(--tiny-button-border-color);
+    border-style: dashed;
+    border-color: var(--tiny-button-border-color);
   }
-  &.outline,
+  &.outlined,
   &.dashed {
     &:hover {
       color: var(--tiny-primary-color);
       border-color: var(--tiny-primary-color);
+    }
+    &.primary {
+      color: var(--tiny-primary-color);
+      &:hover {
+        border-color: hsl(from var(--tiny-primary-color) h s calc(l * 1.1));
+      }
+    }
+    &.success {
+      color: var(--tiny-success-color);
+      &:hover {
+        border-color: hsl(from var(--tiny-success-color) h s calc(l * 1.1));
+      }
+    }
+    &.error {
+      color: var(--tiny-error-color);
+      &:hover {
+        border-color: hsl(from var(--tiny-error-color) h s calc(l * 1.1));
+      }
     }
   }
   &.text:hover {
@@ -59,21 +100,15 @@
 
 .@{css-prefix}-space.compact {
   .@{css-prefix}-button {
-    &.outline {
-      border-radius: 0;
-      box-shadow: none;
-      margin-inline-end: -1px;
-      &:hover {
-        border-color: var(--tiny-button-border-color);
-      }
-      &:first-child {
-        border-top-left-radius: var(--tiny-border-radius);
-        border-bottom-left-radius: var(--tiny-border-radius);
-      }
-      &:last-child {
-        border-top-right-radius: var(--tiny-border-radius);
-        border-bottom-right-radius: var(--tiny-border-radius);
-      }
+    border-radius: 0;
+    box-shadow: none;
+    &:first-child {
+      border-top-left-radius: var(--tiny-border-radius);
+      border-bottom-left-radius: var(--tiny-border-radius);
+    }
+    &:last-child {
+      border-top-right-radius: var(--tiny-border-radius);
+      border-bottom-right-radius: var(--tiny-border-radius);
     }
   }
 }

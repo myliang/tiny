@@ -2,7 +2,6 @@ import { CSSProperties } from 'react';
 const types = {
   clearFormat: (
     <path
-      fill="#000000"
       opacity="0.8"
       d="M0.27,1.55 L5.43,6.7 L3,12 L5.5,12 L7.14,8.42 L11.73,13 L13,11.73 L1.55,0.27 L0.27,1.55 L0.27,1.55 Z M3.82,0 L5.82,2 L7.58,2 L7.03,3.21 L8.74,4.92 L10.08,2 L14,2 L14,0 L3.82,0 L3.82,0 Z"
       transform="translate(2 3)"
@@ -10,7 +9,6 @@ const types = {
   ),
   bold: (
     <path
-      fill="#000000"
       opacity="0.8"
       d="M9,3.5 C9,1.57 7.43,0 5.5,0 L1.77635684e-15,0 L1.77635684e-15,12 L6.25,12 C8.04,12 9.5,10.54 9.5,8.75 C9.5,7.45 8.73,6.34 7.63,5.82 C8.46,5.24 9,4.38 9,3.5 Z M5,2 C5.82999992,2 6.5,2.67 6.5,3.5 C6.5,4.33 5.82999992,5 5,5 L3,5 L3,2 L5,2 Z M3,10 L3,7 L5.5,7 C6.32999992,7 7,7.67 7,8.5 C7,9.33 6.32999992,10 5.5,10 L3,10 Z"
       transform="translate(4 3)"
@@ -18,7 +16,6 @@ const types = {
   ),
   italic: (
     <polygon
-      fill="#000000"
       opacity="0.8"
       points="4 0 4 2 6.58 2 2.92 10 0 10 0 12 8 12 8 10 5.42 10 9.08 2 12 2 12 0"
       transform="translate(3 3)"
@@ -26,7 +23,6 @@ const types = {
   ),
   underline: (
     <path
-      fill="#000000"
       opacity="0.8"
       d="M6,12 C8.76,12 11,9.76 11,7 L11,0 L9,0 L9,7 C9,8.75029916 7.49912807,10 6,10 C4.50087193,10 3,8.75837486 3,7 L3,0 L1,0 L1,7 C1,9.76 3.24,12 6,12 Z M0,13 L0,15 L12,15 L12,13 L0,13 Z"
       transform="translate(3 3)"
@@ -42,7 +38,6 @@ const types = {
   ),
   textwrap: (
     <path
-      fill="#000000"
       opacity="0.8"
       d="M14,0 L0,0 L0,2 L14,2 L14,0 Z M0,12 L4,12 L4,10 L0,10 L0,12 Z M11.5,5 L0,5 L0,7 L11.75,7 C12.58,7 13.25,7.67 13.25,8.5 C13.25,9.33 12.58,10 11.75,10 L9,10 L9,8 L6,11 L9,14 L9,12 L11.5,12 C13.43,12 15,10.43 15,8.5 C15,6.57 13.43,5 11.5,5 Z"
       transform="translate(2 3)"
@@ -51,36 +46,30 @@ const types = {
   freeze: (
     <g fill="none" opacity="0.8">
       <path stroke="#000000" d="M1.5 3.5H16.5V15.5H1.5z" />
-      <path fill="#000000" d="M6 8H7V15H6z" />
+      <path d="M6 8H7V15H6z" />
       <path fill="#D8D8D8" d="M2 4H16V7H2z" />
-      <path fill="#000000" d="M2 7H16V8H2zM2 11H16V12H2z" />
+      <path d="M2 7H16V8H2zM2 11H16V12H2z" />
     </g>
   ),
   merge: (
     <path
-      fill="#000000"
       opacity={0.8}
       d="M3,6 L1,6 L1,2 L8,2 L8,4 L3,4 L3,6 Z M10,4 L10,2 L17,2 L17,6 L15,6 L15,4 L10,4 Z M10,14 L15,14 L15,12 L17,12 L17,16 L10,16 L10,14 Z M1,12 L3,12 L3,14 L8,14 L8,16 L1,16 L1,12 Z M1,8 L5,8 L5,6 L8,9 L5,12 L5,10 L1,10 L1,8 Z M10,9 L13,6 L13,8 L17,8 L17,10 L13,10 L13,12 L10,9 Z"
     />
   ),
   color: (
     <path
-      fill="#000000"
       d="M7,0 L5,0 L0.5,12 L2.5,12 L3.62,9 L8.37,9 L9.49,12 L11.49,12 L7,0 L7,0 Z M4.38,7 L6,2.67 L7.62,7 L4.38,7 L4.38,7 Z"
       transform="translate(3 1)"
     />
   ),
   bgcolor: (
     <g fill="none">
-      <path
-        fill="#000000"
-        d="M14.5,8.87 C14.5,8.87 13,10.49 13,11.49 C13,12.32 13.67,12.99 14.5,12.99 C15.33,12.99 16,12.32 16,11.49 C16,10.5 14.5,8.87 14.5,8.87 L14.5,8.87 Z M12.71,6.79 L5.91,0 L4.85,1.06 L6.44,2.65 L2.29,6.79 C1.9,7.18 1.9,7.81 2.29,8.2 L6.79,12.7 C6.99,12.9 7.24,13 7.5,13 C7.76,13 8.01,12.9 8.21,12.71 L12.71,8.21 C13.1,7.82 13.1,7.18 12.71,6.79 L12.71,6.79 Z M4.21,7 L7.5,3.71 L10.79,7 L4.21,7 L4.21,7 Z"
-      />
+      <path d="M14.5,8.87 C14.5,8.87 13,10.49 13,11.49 C13,12.32 13.67,12.99 14.5,12.99 C15.33,12.99 16,12.32 16,11.49 C16,10.5 14.5,8.87 14.5,8.87 L14.5,8.87 Z M12.71,6.79 L5.91,0 L4.85,1.06 L6.44,2.65 L2.29,6.79 C1.9,7.18 1.9,7.81 2.29,8.2 L6.79,12.7 C6.99,12.9 7.24,13 7.5,13 C7.76,13 8.01,12.9 8.21,12.71 L12.71,8.21 C13.1,7.82 13.1,7.18 12.71,6.79 L12.71,6.79 Z M4.21,7 L7.5,3.71 L10.79,7 L4.21,7 L4.21,7 Z" />
     </g>
   ),
   borderColor: (
     <path
-      fill="#000000"
       opacity="0.8"
       d="M6.5,3.62 L0,10.12 L0,13 L2.88,13 L9.38,6.5 L6.5,3.62 Z M11.85,4.02 C12.05,3.82 12.05,3.51 11.85,3.31 L9.68,1.14 C9.48,0.94 9.17,0.94 8.97,1.14 L7.62,2.5 L10.5,5.38 L11.85,4.02 L11.85,4.02 Z"
       transform="translate(4)"
@@ -88,7 +77,6 @@ const types = {
   ),
   borderLineStyle: (
     <path
-      fill="#000000"
       opacity="0.8"
       d="M0,0 L14,0 L14,2 L0,2 L0,0 Z M0,4 L6,4 L6,6 L0,6 L0,4 Z M0,8 L2,8 L2,10 L0,10 L0,8 Z M8,4 L14,4 L14,6 L8,6 L8,4 Z M4,8 L6,8 L6,10 L4,10 L4,8 Z M8,8 L10,8 L10,10 L8,10 L8,8 Z M12,8 L14,8 L14,10 L12,10 L12,8 Z"
       transform="translate(2 4)"
@@ -96,14 +84,13 @@ const types = {
   ),
   borderTypeAll: (
     <path
-      fill="#000000"
       opacity="0.8"
       d="M0,0 L0,14 L14,14 L14,0 L0,0 L0,0 Z M6,12 L2,12 L2,8 L6,8 L6,12 L6,12 Z M6,6 L2,6 L2,2 L6,2 L6,6 L6,6 Z M12,12 L8,12 L8,8 L12,8 L12,12 L12,12 Z M12,6 L8,6 L8,2 L12,2 L12,6 L12,6 Z"
       transform="translate(2 2)"
     />
   ),
   borderTypeInside: (
-    <g fill="#000000" transform="translate(2 2)">
+    <g transform="translate(2 2)">
       <path
         d="M0,14 L2,14 L2,12 L0,12 L0,14 L0,14 Z M2,3 L0,3 L0,5 L2,5 L2,3 L2,3 Z M3,14 L5,14 L5,12 L3,12 L3,14 L3,14 Z M11,0 L9,0 L9,2 L11,2 L11,0 L11,0 Z M2,0 L0,0 L0,2 L2,2 L2,0 L2,0 Z M5,0 L3,0 L3,2 L5,2 L5,0 L5,0 Z M0,11 L2,11 L2,9 L0,9 L0,11 L0,11 Z M9,14 L11,14 L11,12 L9,12 L9,14 L9,14 Z M12,0 L12,2 L14,2 L14,0 L12,0 L12,0 Z M12,5 L14,5 L14,3 L12,3 L12,5 L12,5 Z M12,14 L14,14 L14,12 L12,12 L12,14 L12,14 Z M12,11 L14,11 L14,9 L12,9 L12,11 L12,11 Z"
         opacity=".6"
@@ -112,7 +99,7 @@ const types = {
     </g>
   ),
   borderTypeHorizontal: (
-    <g fill="#000000" transform="translate(2 2)">
+    <g transform="translate(2 2)">
       <path
         d="M6,14 L8,14 L8,12 L6,12 L6,14 L6,14 Z M3,2 L5,2 L5,0 L3,0 L3,2 L3,2 Z M6,11 L8,11 L8,9 L6,9 L6,11 L6,11 Z M3,14 L5,14 L5,12 L3,12 L3,14 L3,14 Z M0,5 L2,5 L2,3 L0,3 L0,5 L0,5 Z M0,14 L2,14 L2,12 L0,12 L0,14 L0,14 Z M0,2 L2,2 L2,0 L0,0 L0,2 L0,2 Z M0,11 L2,11 L2,9 L0,9 L0,11 L0,11 Z M12,11 L14,11 L14,9 L12,9 L12,11 L12,11 Z M12,14 L14,14 L14,12 L12,12 L12,14 L12,14 Z M12,5 L14,5 L14,3 L12,3 L12,5 L12,5 Z M12,0 L12,2 L14,2 L14,0 L12,0 L12,0 Z M6,2 L8,2 L8,0 L6,0 L6,2 L6,2 Z M9,2 L11,2 L11,0 L9,0 L9,2 L9,2 Z M6,5 L8,5 L8,3 L6,3 L6,5 L6,5 Z M9,14 L11,14 L11,12 L9,12 L9,14 L9,14 Z"
         opacity=".6"
@@ -121,7 +108,7 @@ const types = {
     </g>
   ),
   borderTypeVertical: (
-    <g fill="#000000" transform="translate(2 2)">
+    <g transform="translate(2 2)">
       <path
         d="M3,14 L5,14 L5,12 L3,12 L3,14 L3,14 Z M0,5 L2,5 L2,3 L0,3 L0,5 L0,5 Z M0,2 L2,2 L2,0 L0,0 L0,2 L0,2 Z M3,8 L5,8 L5,6 L3,6 L3,8 L3,8 Z M3,2 L5,2 L5,0 L3,0 L3,2 L3,2 Z M0,14 L2,14 L2,12 L0,12 L0,14 L0,14 Z M0,8 L2,8 L2,6 L0,6 L0,8 L0,8 Z M0,11 L2,11 L2,9 L0,9 L0,11 L0,11 Z M12,0 L12,2 L14,2 L14,0 L12,0 L12,0 Z M12,8 L14,8 L14,6 L12,6 L12,8 L12,8 Z M12,14 L14,14 L14,12 L12,12 L12,14 L12,14 Z M12,5 L14,5 L14,3 L12,3 L12,5 L12,5 Z M12,11 L14,11 L14,9 L12,9 L12,11 L12,11 Z M9,14 L11,14 L11,12 L9,12 L9,14 L9,14 Z M9,8 L11,8 L11,6 L9,6 L9,8 L9,8 Z M9,2 L11,2 L11,0 L9,0 L9,2 L9,2 Z"
         opacity=".6"
@@ -130,7 +117,7 @@ const types = {
     </g>
   ),
   borderTypeOutside: (
-    <g fill="#000000" transform="translate(2 2)">
+    <g transform="translate(2 2)">
       <path
         d="M8,3 L6,3 L6,5 L8,5 L8,3 L8,3 Z M11,6 L9,6 L9,8 L11,8 L11,6 L11,6 Z M8,6 L6,6 L6,8 L8,8 L8,6 L8,6 Z M8,9 L6,9 L6,11 L8,11 L8,9 L8,9 Z M5,6 L3,6 L3,8 L5,8 L5,6 L5,6 Z"
         opacity=".6"
@@ -139,7 +126,7 @@ const types = {
     </g>
   ),
   borderTypeLeft: (
-    <g fill="#000000" transform="translate(2 2)">
+    <g transform="translate(2 2)">
       <path
         d="M6,8 L8,8 L8,6 L6,6 L6,8 L6,8 Z M6,5 L8,5 L8,3 L6,3 L6,5 L6,5 Z M6,11 L8,11 L8,9 L6,9 L6,11 L6,11 Z M6,14 L8,14 L8,12 L6,12 L6,14 L6,14 Z M3,14 L5,14 L5,12 L3,12 L3,14 L3,14 Z M3,2 L5,2 L5,0 L3,0 L3,2 L3,2 Z M3,8 L5,8 L5,6 L3,6 L3,8 L3,8 Z M12,14 L14,14 L14,12 L12,12 L12,14 L12,14 Z M12,8 L14,8 L14,6 L12,6 L12,8 L12,8 Z M12,11 L14,11 L14,9 L12,9 L12,11 L12,11 Z M12,5 L14,5 L14,3 L12,3 L12,5 L12,5 Z M6,2 L8,2 L8,0 L6,0 L6,2 L6,2 Z M12,0 L12,2 L14,2 L14,0 L12,0 L12,0 Z M9,14 L11,14 L11,12 L9,12 L9,14 L9,14 Z M9,8 L11,8 L11,6 L9,6 L9,8 L9,8 Z M9,2 L11,2 L11,0 L9,0 L9,2 L9,2 Z"
         opacity=".6"
@@ -148,7 +135,7 @@ const types = {
     </g>
   ),
   borderTypeTop: (
-    <g fill="#000000" transform="translate(2 2)">
+    <g transform="translate(2 2)">
       <path
         d="M3,8 L5,8 L5,6 L3,6 L3,8 L3,8 Z M0,14 L2,14 L2,12 L0,12 L0,14 L0,14 Z M6,14 L8,14 L8,12 L6,12 L6,14 L6,14 Z M6,11 L8,11 L8,9 L6,9 L6,11 L6,11 Z M3,14 L5,14 L5,12 L3,12 L3,14 L3,14 Z M0,11 L2,11 L2,9 L0,9 L0,11 L0,11 Z M6,8 L8,8 L8,6 L6,6 L6,8 L6,8 Z M0,5 L2,5 L2,3 L0,3 L0,5 L0,5 Z M0,8 L2,8 L2,6 L0,6 L0,8 L0,8 Z M12,8 L14,8 L14,6 L12,6 L12,8 L12,8 Z M12,11 L14,11 L14,9 L12,9 L12,11 L12,11 Z M12,5 L14,5 L14,3 L12,3 L12,5 L12,5 Z M6,5 L8,5 L8,3 L6,3 L6,5 L6,5 Z M9,14 L11,14 L11,12 L9,12 L9,14 L9,14 Z M9,8 L11,8 L11,6 L9,6 L9,8 L9,8 Z M12,14 L14,14 L14,12 L12,12 L12,14 L12,14 Z"
         opacity=".6"
@@ -157,7 +144,7 @@ const types = {
     </g>
   ),
   borderTypeRight: (
-    <g fill="#000000" transform="translate(2 2)">
+    <g transform="translate(2 2)">
       <path
         d="M0,2 L2,2 L2,0 L0,0 L0,2 L0,2 Z M3,2 L5,2 L5,0 L3,0 L3,2 L3,2 Z M3,8 L5,8 L5,6 L3,6 L3,8 L3,8 Z M3,14 L5,14 L5,12 L3,12 L3,14 L3,14 Z M0,5 L2,5 L2,3 L0,3 L0,5 L0,5 Z M0,8 L2,8 L2,6 L0,6 L0,8 L0,8 Z M0,14 L2,14 L2,12 L0,12 L0,14 L0,14 Z M0,11 L2,11 L2,9 L0,9 L0,11 L0,11 Z M9,8 L11,8 L11,6 L9,6 L9,8 L9,8 Z M6,14 L8,14 L8,12 L6,12 L6,14 L6,14 Z M9,14 L11,14 L11,12 L9,12 L9,14 L9,14 Z M6,2 L8,2 L8,0 L6,0 L6,2 L6,2 Z M9,2 L11,2 L11,0 L9,0 L9,2 L9,2 Z M6,11 L8,11 L8,9 L6,9 L6,11 L6,11 Z M6,5 L8,5 L8,3 L6,3 L6,5 L6,5 Z M6,8 L8,8 L8,6 L6,6 L6,8 L6,8 Z"
         opacity=".6"
@@ -166,7 +153,7 @@ const types = {
     </g>
   ),
   borderTypeBottom: (
-    <g fill="#000000" transform="translate(2 2)">
+    <g transform="translate(2 2)">
       <path
         d="M5,0 L3,0 L3,2 L5,2 L5,0 L5,0 Z M8,6 L6,6 L6,8 L8,8 L8,6 L8,6 Z M8,9 L6,9 L6,11 L8,11 L8,9 L8,9 Z M11,6 L9,6 L9,8 L11,8 L11,6 L11,6 Z M5,6 L3,6 L3,8 L5,8 L5,6 L5,6 Z M11,0 L9,0 L9,2 L11,2 L11,0 L11,0 Z M8,3 L6,3 L6,5 L8,5 L8,3 L8,3 Z M8,0 L6,0 L6,2 L8,2 L8,0 L8,0 Z M2,9 L0,9 L0,11 L2,11 L2,9 L2,9 Z M12,11 L14,11 L14,9 L12,9 L12,11 L12,11 Z M12,5 L14,5 L14,3 L12,3 L12,5 L12,5 Z M12,8 L14,8 L14,6 L12,6 L12,8 L12,8 Z M12,0 L12,2 L14,2 L14,0 L12,0 L12,0 Z M2,0 L0,0 L0,2 L2,2 L2,0 L2,0 Z M2,3 L0,3 L0,5 L2,5 L2,3 L2,3 Z M2,6 L0,6 L0,8 L2,8 L2,6 L2,6 Z"
         opacity=".6"
@@ -176,7 +163,6 @@ const types = {
   ),
   borderTypeNone: (
     <path
-      fill="#000000"
       d="M6,14 L8,14 L8,12 L6,12 L6,14 L6,14 Z M3,8 L5,8 L5,6 L3,6 L3,8 L3,8 Z M3,2 L5,2 L5,0 L3,0 L3,2 L3,2 Z M6,11 L8,11 L8,9 L6,9 L6,11 L6,11 Z M3,14 L5,14 L5,12 L3,12 L3,14 L3,14 Z M0,5 L2,5 L2,3 L0,3 L0,5 L0,5 Z M0,14 L2,14 L2,12 L0,12 L0,14 L0,14 Z M0,2 L2,2 L2,0 L0,0 L0,2 L0,2 Z M0,8 L2,8 L2,6 L0,6 L0,8 L0,8 Z M6,8 L8,8 L8,6 L6,6 L6,8 L6,8 Z M0,11 L2,11 L2,9 L0,9 L0,11 L0,11 Z M12,11 L14,11 L14,9 L12,9 L12,11 L12,11 Z M12,14 L14,14 L14,12 L12,12 L12,14 L12,14 Z M12,8 L14,8 L14,6 L12,6 L12,8 L12,8 Z M12,5 L14,5 L14,3 L12,3 L12,5 L12,5 Z M12,0 L12,2 L14,2 L14,0 L12,0 L12,0 Z M6,2 L8,2 L8,0 L6,0 L6,2 L6,2 Z M9,2 L11,2 L11,0 L9,0 L9,2 L9,2 Z M6,5 L8,5 L8,3 L6,3 L6,5 L6,5 Z M9,14 L11,14 L11,12 L9,12 L9,14 L9,14 Z M9,8 L11,8 L11,6 L9,6 L9,8 L9,8 Z"
       transform="translate(2 2)"
       opacity=".6"
@@ -184,107 +170,120 @@ const types = {
   ),
   alignLeft: (
     <path
-      fill="#000000"
       d="M0,14 L10,14 L10,12 L0,12 L0,14 Z M10,4 L0,4 L0,6 L10,6 L10,4 Z M0,0 L0,2 L14,2 L14,0 L0,0 Z M0,10 L14,10 L14,8 L0,8 L0,10 Z"
       transform="translate(2 2)"
     />
   ),
   alignCenter: (
     <path
-      fill="#000000"
       d="M2,12 L2,14 L12,14 L12,12 L2,12 Z M2,4 L2,6 L12,6 L12,4 L2,4 Z M0,10 L14,10 L14,8 L0,8 L0,10 Z M0,0 L0,2 L14,2 L14,0 L0,0 Z"
       transform="translate(2 2)"
     />
   ),
   alignRight: (
     <path
-      fill="#000000"
       d="M4,14 L14,14 L14,12 L4,12 L4,14 Z M0,10 L14,10 L14,8 L0,8 L0,10 Z M0,0 L0,2 L14,2 L14,0 L0,0 Z M4,6 L14,6 L14,4 L4,4 L4,6 Z"
       transform="translate(2 2)"
     />
   ),
   alignTop: (
     <path
-      fill="#000000"
       d="M0,0 L0,2 L12,2 L12,0 L0,0 L0,0 Z M2.5,7 L5,7 L5,14 L7,14 L7,7 L9.5,7 L6,3.5 L2.5,7 L2.5,7 Z"
       transform="translate(3 2)"
     />
   ),
   alignMiddle: (
     <path
-      fill="#000000"
       d="M9.5,3 L7,3 L7,0 L5,0 L5,3 L2.5,3 L6,6.5 L9.5,3 L9.5,3 Z M0,8 L0,10 L12,10 L12,8 L0,8 L0,8 Z M2.5,15 L5,15 L5,18 L7,18 L7,15 L9.5,15 L6,11.5 L2.5,15 L2.5,15 Z"
       transform="translate(3)"
     />
   ),
   alignBottom: (
     <path
-      fill="#000000"
       d="M9.5,7 L7,7 L7,0 L5,0 L5,7 L2.5,7 L6,10.5 L9.5,7 L9.5,7 Z M0,12 L0,14 L12,14 L12,12 L0,12 L0,12 Z"
       transform="translate(3 2)"
     />
   ),
-  arrowDown: (
-    <polygon fill="#000000" points="0 0 4 4 8 0" transform="translate(5 7)" />
-  ),
+  arrowDown: <polygon points="0 0 4 4 8 0" transform="translate(5 7)" />,
   angleRight: (
     <polygon
-      fill="#000000"
       points="5 0 .5 4.5 1.56 5.56 5 2.12 8.44 5.56 9.5 4.5"
       transform="rotate(90 4 8)"
     />
   ),
   angleLeft: (
     <polygon
-      fill="#000000"
       points="8.44 .44 5 3.88 1.56 .44 .5 1.5 5 6 9.5 1.5"
       transform="rotate(90 4 8)"
     />
   ),
   angleUp: (
     <polygon
-      fill="#000000"
       points="5 0 .5 4.5 1.56 5.56 5 2.12 8.44 5.56 9.5 4.5"
       transform="translate(4 6)"
     />
   ),
   angleDown: (
     <polygon
-      fill="#000000"
       points="8.44 .44 5 3.88 1.56 .44 .5 1.5 5 6 9.5 1.5"
       transform="translate(4 6)"
     />
   ),
   add: (
     <path
-      fill="#000000"
       d="M6,4 L6,0 L4,0 L4,4 L0,4 L0,6 L4,6 L4,10 L6,10 L6,6 L10,6 L10,4 L6,4 Z"
       transform="translate(4 4)"
     />
   ),
   close: (
     <polygon
-      fill="#000000"
       points="7.53 1.53 6.47 .47 4 2.94 1.53 .47 .47 1.53 2.94 4 .47 6.47 1.53 7.53 4 5.06 6.47 7.53 7.53 6.47 5.06 4"
       transform="translate(5 5)"
     />
   ),
+  lock: (
+    <path d="M832 464h-68V240c0-70.7-57.3-128-128-128H388c-70.7 0-128 57.3-128 128v224h-68c-17.7 0-32 14.3-32 32v384c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V496c0-17.7-14.3-32-32-32zM332 240c0-30.9 25.1-56 56-56h248c30.9 0 56 25.1 56 56v224H332V240zm460 600H232V536h560v304zM484 701v53c0 4.4 3.6 8 8 8h40c4.4 0 8-3.6 8-8v-53a48.01 48.01 0 10-56 0z"></path>
+  ),
+  eye: (
+    <path d="M942.2 486.2C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 000 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM512 766c-161.3 0-279.4-81.8-362.7-254C232.6 339.8 350.7 258 512 258c161.3 0 279.4 81.8 362.7 254C791.5 684.2 673.4 766 512 766zm-4-430c-97.2 0-176 78.8-176 176s78.8 176 176 176 176-78.8 176-176-78.8-176-176-176zm0 288c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z"></path>
+  ),
+  eyeInvisible: (
+    <>
+      <path d="M942.2 486.2Q889.47 375.11 816.7 305l-50.88 50.88C807.31 395.53 843.45 447.4 874.7 512 791.5 684.2 673.4 766 512 766q-72.67 0-133.87-22.38L323 798.75Q408 838 512 838q288.3 0 430.2-300.3a60.29 60.29 0 000-51.5zm-63.57-320.64L836 122.88a8 8 0 00-11.32 0L715.31 232.2Q624.86 186 512 186q-288.3 0-430.2 300.3a60.3 60.3 0 000 51.5q56.69 119.4 136.5 191.41L112.48 835a8 8 0 000 11.31L155.17 889a8 8 0 0011.31 0l712.15-712.12a8 8 0 000-11.32zM149.3 512C232.6 339.8 350.7 258 512 258c54.54 0 104.13 9.36 149.12 28.39l-70.3 70.3a176 176 0 00-238.13 238.13l-83.42 83.42C223.1 637.49 183.3 582.28 149.3 512zm246.7 0a112.11 112.11 0 01146.2-106.69L401.31 546.2A112 112 0 01396 512z"></path>
+      <path d="M508 624c-3.46 0-6.87-.16-10.25-.47l-52.82 52.82a176.09 176.09 0 00227.42-227.42l-52.82 52.82c.31 3.38.47 6.79.47 10.25a111.94 111.94 0 01-112 112z"></path>
+    </>
+  ),
+};
+// 64 64 896 896
+const viewBoxes: { [key: string]: string } = {
+  lock: '64 64 896 896',
+  eye: '64 64 896 896',
+  eyeInvisible: '64 64 896 896',
 };
 export type IconType = keyof typeof types;
 export interface IconProps {
   type: IconType;
   size?: string;
+  color?: string;
   style?: CSSProperties | undefined;
+  onClick?: (evt: React.MouseEvent) => void;
 }
 
-export default function Icon({ type, style, size = '1em' }: IconProps) {
+export default function Icon({
+  type,
+  style,
+  size = '1em',
+  color = 'currentColor',
+  onClick,
+}: IconProps) {
   return (
     <svg
-      style={Object.assign({ display: 'block', fontSize: '16px' }, style || {})}
+      onClick={onClick}
+      fill={color}
+      style={Object.assign({ display: 'block' }, style || {})}
       width={size}
       height={size}
-      viewBox="0 0 18 18"
-      fill="none"
+      viewBox={viewBoxes[type] || '0 0 18 18'}
       xmlns="http://www.w3.org/2000/svg">
       {types[type]}
     </svg>

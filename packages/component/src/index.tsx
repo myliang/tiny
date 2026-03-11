@@ -12,6 +12,7 @@ import Spin from './spin';
 import Tabs from './tabs';
 import Radio from './radio';
 import Checkbox from './checkbox';
+import Input from './input';
 
 export {
   Layout,
@@ -28,4 +29,5 @@ export {
   Tabs,
   Radio,
   Checkbox,
+  Input,
 };

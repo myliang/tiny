@@ -11,13 +11,19 @@
 @import './tabs/style.less';
 @import './radio/style.less';
 @import './checkbox/style.less';
+@import './input/style.less';
 
 :root {
   --tiny-bgcolor: #ffffff;
   --tiny-dark-bgcolor: #232323;
   --tiny-font-size: 14px;
   --tiny-color: rgba(0, 0, 0, 0.87);
+  --tiny-warning-bgcolor: rgba(255, 191, 0, 0.15);
+  --tiny-error-bgcolor: rgba(240, 65, 52, 0.05);
   --tiny-primary-color: #4b89ff;
+  --tiny-warning-color: #794b02;
+  --tiny-error-color: #db2828; // db2828
+  --tiny-success-color: #21ba45;
   --tiny-hover-bgcolor: #f8f8f8;
   --tiny-active-bgcolor: #f8f8f8;
   --tiny-border-color: rgba(34, 36, 38, 0.15);
@@ -25,21 +31,22 @@
   --tiny-border-radius: 3px;
   --tiny-line-height: 1.5em;
   --tiny-input-border-color: #d9d9d9;
-  --tiny-font-family: Lato, Helvetica Neue, Arial, Helvetica, sans-serif;
+  --tiny-font-family:
+    AlibabaSans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --tiny-padding-vertical: 6px;
   --tiny-padding-horizontal: 10px;
   --tiny-box-shadow: 0px 2px 3px 0px var(--tiny-border-color);
 
   --tiny-spin-loading-border-color: #4b89ff;
 
-  --tiny-button-height: 26px;
   --tiny-button-padding-vertical: 0.465em;
   --tiny-button-padding-horizontal: 1em;
   --tiny-button-color: var(--tiny-color);
   --tiny-button-border-color: var(--tiny-border-color);
   --tiny-button-box-shadow: var(--tiny-box-shadow);
 
-  --tiny-menu-height: 36px;
   --tiny-menu-font-size: var(--tiny-font-size);
   --tiny-menu-color: var(--tiny-color);
   --tiny-menu-box-shadow: var(--tiny-box-shadow);
@@ -87,6 +94,14 @@
   --tiny-checkbox-size: 14px;
   --tiny-checkbox-border-color: var(--tiny-border-color);
   --tiny-checkbox-checked-color: var(--tiny-primary-color);
+
+  --tiny-input-font-size: var(--tiny-font-size);
+  --tiny-input-color: var(--tiny-color);
+  --tiny-input-border-color: var(--tiny-border-color);
+  --tiny-input-filled-bgcolor: #f8f8f8;
+  --tiny-input-inner-padding: 0.25em;
+  --tiny-input-padding: 0.3215em 0.75em;
+  --tiny-input-active-border-color: var(--tiny-primary-color);
 }
 
 *,
@@ -105,8 +120,15 @@ body {
   font-size: var(--tiny-font-size);
   font-family: var(--tiny-font-family);
 }
+
 input:focus {
   outline: none;
+}
+input[type='password']::-ms-reveal,
+input[type='password']::-clear-reveal,
+input[type='password']::-webkit-reveal,
+input[type='password']::-moz-reveal {
+  display: none;
 }
 
 @keyframes loading {
