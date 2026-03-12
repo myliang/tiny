@@ -54,18 +54,16 @@ export default function Input({
         onBlur={() => setActive(false)}
         onFocus={() => setActive(true)}
       />
-      {(suffix || clearable) && (
-        <div className={classNames(`${cssPrefix}input-suffix`)}>
-          {clearable && (
-            <span
-              onClick={() => setValue('')}
-              className={classNames(`${cssPrefix}input-clear`)}
-              style={{ visibility: _value ? 'visible' : 'hidden' }}>
-              <Icon type="close" />
-            </span>
-          )}
-          {suffix}
-        </div>
+      {suffix && (
+        <div className={classNames(`${cssPrefix}input-suffix`)}>{suffix}</div>
+      )}
+      {clearable && (
+        <span
+          onClick={() => setValue('')}
+          className={classNames(`${cssPrefix}input-clear`)}
+          style={{ display: _value ? 'block' : 'none' }}>
+          <Icon type="close" />
+        </span>
       )}
     </div>
   );

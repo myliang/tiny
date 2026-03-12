@@ -13,6 +13,7 @@ import Tabs from './tabs';
 import Radio from './radio';
 import Checkbox from './checkbox';
 import Input from './input';
+import Tag from './tag';
 
 export {
   Layout,
@@ -30,4 +31,5 @@ export {
   Radio,
   Checkbox,
   Input,
+  Tag,
 };

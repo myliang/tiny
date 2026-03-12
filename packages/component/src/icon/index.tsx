@@ -238,7 +238,7 @@ const types = {
   close: (
     <polygon
       points="7.53 1.53 6.47 .47 4 2.94 1.53 .47 .47 1.53 2.94 4 .47 6.47 1.53 7.53 4 5.06 6.47 7.53 7.53 6.47 5.06 4"
-      transform="translate(5 5)"
+      transform="translate(2 2)"
     />
   ),
   lock: (
@@ -256,6 +256,7 @@ const types = {
 };
 // 64 64 896 896
 const viewBoxes: { [key: string]: string } = {
+  close: '0 0 12 12',
   lock: '64 64 896 896',
   eye: '64 64 896 896',
   eyeInvisible: '64 64 896 896',

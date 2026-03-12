@@ -13,6 +13,7 @@ import {
   Radio,
   Checkbox,
   Input,
+  Tag,
 } from './src';
 
 const container = document.getElementById('root');
@@ -44,6 +45,26 @@ root.render(
           Outlined
         </Button>
       </Space>
+    </Space>
+    <Divider />
+    <Space>
+      <Tag>tag</Tag>
+      <Tag closable>tag-close</Tag>
+      <Tag variant="outlined" closable>
+        tag-close
+      </Tag>
+      <Tag color="success">tag</Tag>
+      <Tag color="warning">tag</Tag>
+      <Tag color="error">tag</Tag>
+      <Tag color="success" variant="outlined">
+        tag
+      </Tag>
+      <Tag color="warning" variant="outlined">
+        tag
+      </Tag>
+      <Tag color="error" variant="outlined">
+        tag
+      </Tag>
     </Space>
     <Divider />
     <Space>
@@ -99,7 +120,7 @@ root.render(
     <Divider />
     <Space vertical>
       <Space>
-        <Input placeholder="...abc" style={{ width: '160px' }} />
+        <Input placeholder="...abc" style={{ width: '160px' }} clearable />
         <Input
           variant="borderless"
           style={{ width: '160px' }}
@@ -241,7 +262,7 @@ root.render(
         items={[
           {
             key: 't1',
-            label: 'Tab 1',
+            label: '全部',
             children: <div style={{ padding: '20px' }}>tab 1 content</div>,
           },
           {
@@ -286,7 +307,7 @@ root.render(
           },
           {
             key: 't2',
-            label: 'Tab 2',
+            label: '处理中',
             children: <div style={{ padding: '20px' }}>tab 2 content</div>,
           },
           {

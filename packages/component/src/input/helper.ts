@@ -4,7 +4,7 @@ export function numberFormatter(value: string | number) {
   return `$ ${end ? `${v}.${end}` : `${v}`}`;
 }
 export function numberParser(txt: string) {
-  return txt?.replace(/\s?|(,*)/g, '') as unknown as number;
+  return parseFloat(txt?.replace(/\s?|(,*)/g, ''));
 }
 
 function numberToInt(a: number, scale: number) {

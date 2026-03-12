@@ -47,7 +47,6 @@
   &.textarea {
     font-family: var(--tiny-font-family);
     font-size: var(--tiny-input-font-size);
-    line-height: var(--tiny-line-height);
     color: inherit;
     outline: none;
     margin: 0;
@@ -55,7 +54,11 @@
     min-width: 0;
   }
   > input {
+    line-height: 1;
     background: transparent;
+  }
+  &.textarea {
+    line-height: 1.5;
   }
 
   &:hover {
@@ -80,11 +83,18 @@
   padding-left: var(--tiny-input-inner-padding);
 }
 .@{css-prefix}-input-clear {
+  position: absolute;
+  z-index: 1;
+  top: calc(50% - var(--tiny-icon-font-size) / 2);
+  right: 0;
+  width: var(--tiny-icon-font-size);
+  height: var(--tiny-icon-font-size);
   border-radius: 10em;
   background-color: rgba(0, 0, 0, 0.25);
+  margin-right: var(--tiny-input-padding-horizontal);
   svg {
-    width: 12px;
-    height: 12px;
+    width: var(--tiny-icon-font-size);
+    height: var(--tiny-icon-font-size);
     polygon {
       fill: #ffffff;
     }

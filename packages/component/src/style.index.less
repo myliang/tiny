@@ -12,6 +12,7 @@
 @import './radio/style.less';
 @import './checkbox/style.less';
 @import './input/style.less';
+@import './tag/style.less';
 
 :root {
   --tiny-bgcolor: #ffffff;
@@ -20,9 +21,10 @@
   --tiny-color: rgba(0, 0, 0, 0.87);
   --tiny-warning-bgcolor: rgba(255, 191, 0, 0.15);
   --tiny-error-bgcolor: rgba(240, 65, 52, 0.08);
+  --tiny-success-bgcolor: rgba(33, 186, 69, 0.15);
   --tiny-primary-color: #4b89ff;
-  --tiny-warning-color: #794b02;
-  --tiny-error-color: #db2828; // db2828
+  --tiny-warning-color: #faad14;
+  --tiny-error-color: #db2828;
   --tiny-success-color: #21ba45;
   --tiny-hover-bgcolor: #f8f8f8;
   --tiny-active-bgcolor: #f8f8f8;
@@ -35,9 +37,11 @@
     AlibabaSans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --tiny-padding-vertical: 6px;
-  --tiny-padding-horizontal: 10px;
+  --tiny-padding-vertical: 0.465em;
+  --tiny-padding-horizontal: 0.75em;
   --tiny-box-shadow: 0px 2px 3px 0px var(--tiny-border-color);
+
+  --tiny-icon-font-size: 12px;
 
   --tiny-spin-loading-border-color: #4b89ff;
 
@@ -62,8 +66,8 @@
 
   // --tiny-pagination-height: 32px;
   // --tiny-pagination-minwidth: 32px;
-  --tiny-pagination-padding-vertical: 0.485em;
-  --tiny-pagination-padding-horizontal: 0.725em;
+  --tiny-pagination-padding-vertical: var(--tiny-padding-vertical);
+  --tiny-pagination-padding-horizontal: var(--tiny-padding-horizontal);
   --tiny-pagination-active-color: var(--tiny-primary-color);
   --tiny-pagination-active-bgcolor: var(--tiny-active-bgcolor);
   --tiny-pagination-hover-bgcolor: var(--tiny-hover-bgcolor);
@@ -76,8 +80,8 @@
   --tiny-tabs-box-shadow: var(--tiny-box-shadow);
   --tiny-tabs-active-border-color: var(--tiny-primary-color);
   --tiny-tabs-card-nav-bgcolor: #f8f8f8;
-  --tiny-tabs-padding-vertical: 0.465em;
-  --tiny-tabs-padding-horizontal: 0.625em;
+  --tiny-tabs-padding-vertical: var(--tiny-padding-vertical);
+  --tiny-tabs-padding-horizontal: var(--tiny-padding-horizontal);
 
   --tiny-radio-color: var(--tiny-color);
   --tiny-radio-font-size: var(--tiny-font-size);
@@ -85,7 +89,8 @@
   --tiny-radio-border-color: var(--tiny-border-color);
   --tiny-radio-checked-color: var(--tiny-primary-color);
   --tiny-radio-button-bgcolor: var(--tiny-border-color);
-  --tiny-radio-button-padding: 0.325em 0.625em;
+  --tiny-radio-button-padding: calc(var(--tiny-padding-vertical) - 1px)
+    calc(var(--tiny-padding-horizontal) - 1px);
   --tiny-radio-button-border-radius: var(--tiny-border-radius);
   --tiny-radio-button-box-shadow: 0px 1px 2px 0px var(--tiny-border-color);
 
@@ -100,8 +105,12 @@
   --tiny-input-border-color: var(--tiny-border-color);
   --tiny-input-filled-bgcolor: #f8f8f8;
   --tiny-input-inner-padding: 0.25em;
-  --tiny-input-padding: 0.3215em 0.75em;
+  --tiny-input-padding-horizontal: var(--tiny-padding-horizontal);
+  --tiny-input-padding: var(--tiny-padding-vertical)
+    var(--tiny-padding-horizontal);
   --tiny-input-active-border-color: var(--tiny-primary-color);
+
+  --tiny-tag-bgcolor: #f5f5f5;
 }
 
 *,
