@@ -6,14 +6,17 @@ import React, {
   ReactElement,
   ReactNode,
   useCallback,
+  useEffectEvent,
 } from 'react';
 import ReactDOM from 'react-dom';
 import { position, Placement, Trigger } from './helper';
-import { bind } from '../event';
+import { classNames } from '../helper';
 
 type OverlayContentProps = {
   placement?: Placement;
   zIndex: number;
+  maxHeight: number;
+  width?: number | 'auto' | 'with';
   target: HTMLElement | null;
   children: React.ReactNode;
   clearOther?: boolean;
@@ -32,16 +35,22 @@ function OverlayContent({
   target,
   children,
   zIndex,
+  maxHeight,
+  width = 'auto',
   setShow,
   onMouseEnter,
   onMouseLeave,
 }: OverlayContentProps) {
   const _ref = useRef(null);
-  const [style, setStyle] = useState<React.CSSProperties>({ zIndex });
+  const [style, setStyle] = useState<React.CSSProperties>({
+    zIndex,
+    maxHeight,
+  });
 
   // calcute position
   useEffect(() => {
     if (_ref && _ref.current && target != null) {
+      console.log('rect:', target.getBoundingClientRect());
       const [left, top] = position(
         placement,
         document.documentElement,
@@ -50,7 +59,15 @@ function OverlayContent({
         SCROLL_WIDTH,
         SPACE
       );
-      setStyle({ zIndex, left: `${left}px`, top: `${top}px` });
+      setStyle(
+        Object.assign({
+          maxHeight,
+          zIndex,
+          width: width === 'with' ? target.offsetWidth : width,
+          left: `${left}px`,
+          top: `${top}px`,
+        })
+      );
     }
   }, [target]);
 
@@ -95,24 +112,31 @@ function OverlayContent({
 
 export type OverlayMethods = {
   setShow: (v: boolean) => void;
+  toggle: () => void;
 };
 
 export type OverlayProps = {
   ref?: React.Ref<OverlayMethods>;
+  maxHeight?: number;
+  width?: 'auto' | 'with' | number;
   placement?: Placement;
   trigger?: Trigger;
   content: ReactNode;
-  children: ReactNode;
+  children: ReactElement;
   onChange?: (show: boolean) => void;
+  onMounted?: (targetNode: HTMLElement) => void;
 };
 
 export function Overlay({
   ref,
+  maxHeight = 200,
+  width = 'auto',
   placement = 'auto',
   trigger = 'click',
   content,
   children,
   onChange,
+  onMounted,
 }: OverlayProps) {
   const [show, setShow] = useState(false);
   const [targetNode, setTargetNode] = useState<HTMLElement | null>(null);
@@ -136,6 +160,7 @@ export function Overlay({
     onMouseLeave: React.MouseEventHandler<HTMLElement>;
     onMouseEnter: React.MouseEventHandler<HTMLElement>;
     onContextMenu: React.MouseEventHandler<HTMLElement>;
+    className: string;
     ref?: React.Ref<HTMLElement>;
   }>;
 
@@ -161,15 +186,20 @@ export function Overlay({
     if ('contextMenu' === trigger) setTimeout(() => updateShow(!show), 0);
   };
   const onContentMouseEnter = (evt: React.MouseEvent) => {
-    isEnterContent.current = true;
+    if ('hover' === trigger) {
+      isEnterContent.current = true;
+    }
   };
   const onContentMouseLeave = (evt: React.MouseEvent) => {
-    isEnterContent.current = false;
-    updateShow(!show);
+    if ('hover' === trigger) {
+      isEnterContent.current = false;
+      updateShow(!show);
+    }
   };
 
   const targetClone = React.cloneElement(target, {
     ref: targetRef,
+    className: `${classNames(target.props.className, { active: show })}`,
     onClick,
     onMouseEnter,
     onMouseLeave,
@@ -177,7 +207,17 @@ export function Overlay({
   });
 
   // parent-component call methods
-  useImperativeHandle(ref, () => ({ setShow: updateShow }));
+  useImperativeHandle(ref, () => ({
+    setShow: updateShow,
+    toggle: () => updateShow(!show),
+  }));
+
+  if (onMounted) {
+    const onMountedEvent = useEffectEvent(onMounted);
+    useEffect(() => {
+      targetNode && onMountedEvent(targetNode);
+    }, [targetNode]);
+  }
 
   return (
     <React.Fragment>
@@ -187,6 +227,8 @@ export function Overlay({
           onMouseEnter={onContentMouseEnter}
           onMouseLeave={onContentMouseLeave}
           target={targetNode}
+          maxHeight={maxHeight}
+          width={width}
           zIndex={_zIndex}
           placement={placement}
           setShow={updateShow}>

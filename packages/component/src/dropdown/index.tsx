@@ -1,4 +1,4 @@
-import { ReactNode, useRef } from 'react';
+import { ReactElement, useRef } from 'react';
 import Menu, { MenuProps } from '../menu';
 import { Overlay, OverlayMethods } from '../overlay';
 import { Placement, Trigger } from '../overlay/helper';
@@ -7,12 +7,14 @@ export type DropdownProps = {
   placement?: Placement;
   trigger?: Trigger;
   menu: MenuProps;
-  children: ReactNode;
+  popupMaxHeight?: number;
+  children: ReactElement;
 };
 export default function Dropdown({
-  placement = 'bottom',
+  placement = 'auto',
   trigger = 'hover',
   menu,
+  popupMaxHeight,
   children,
 }: DropdownProps) {
   const overlayRef = useRef<OverlayMethods>(null);
@@ -26,7 +28,15 @@ export default function Dropdown({
       ref={overlayRef}
       trigger={trigger}
       placement={placement}
-      content={<Menu type="vertical" onSelect={onSelector} {...menuOther} />}>
+      maxHeight={popupMaxHeight}
+      content={
+        <Menu
+          type="vertical"
+          style={{ border: 'none', boxShadow: 'none' }}
+          onSelect={onSelector}
+          {...menuOther}
+        />
+      }>
       {children}
     </Overlay>
   );

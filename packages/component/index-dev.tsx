@@ -14,6 +14,7 @@ import {
   Checkbox,
   Input,
   Tag,
+  Select,
 } from './src';
 
 const container = document.getElementById('root');
@@ -66,6 +67,22 @@ root.render(
         tag
       </Tag>
     </Space>
+    <Divider />
+    <Select
+      style={{ width: '200px' }}
+      options={[
+        { value: 'jack', label: 'Jack' },
+        { value: 'luck', label: 'Luck' },
+        {
+          label: 'Group',
+          options: [
+            { value: 'luck', label: 'Luck' },
+            { value: 'luck', label: 'Luck' },
+            { value: 'luck', label: 'Luck' },
+          ],
+        },
+      ]}
+    />
     <Divider />
     <Space>
       <Radio checked>Radio</Radio>

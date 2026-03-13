@@ -75,12 +75,10 @@ export default function Menu({
       case 'group':
         return (
           <Fragment key={it.key}>
-            <li className={classNames(`${cssPrefix}menu-item disabled`)}>
+            <li className={classNames(`${cssPrefix}menu-item group`)}>
               {it.label}
             </li>
-            <ul className={classNames(`${cssPrefix}menu group`)}>
-              {it.children.map((it, i) => itemRender(it, i))}
-            </ul>
+            {it.children.map((it, i) => itemRender(it, i))}
           </Fragment>
         );
       case 'submenu':

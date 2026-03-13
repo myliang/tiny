@@ -31,7 +31,7 @@ export default function Input({
   onChange,
 }: InputProps) {
   const [active, setActive] = useState(false);
-  const [_value, setValue] = useState(value);
+  const [_value, setValue] = useState(value || '');
   const onInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setValue(evt.target.value);
     if (onChange) onChange(evt.target.value);

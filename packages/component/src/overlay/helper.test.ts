@@ -17,8 +17,8 @@ describe('overlay-helper', () => {
         15,
         2
       );
-      assert.equal(200, left);
-      assert.equal(100 + 30 + 2, top);
+      assert.equal(100 + 200, left);
+      assert.equal(100 + 100 + 30 + 2, top);
     });
     it('should return [0, 132] when bottomRight, client, { width: 100, height: 30, left: 200, top: 100 }, { width: 300, height: 200 }', () => {
       const [left, top] = position(
@@ -29,8 +29,8 @@ describe('overlay-helper', () => {
         15,
         2
       );
-      assert.equal(200 + 100 - 300, left);
-      assert.equal(100 + 30 + 2, top);
+      assert.equal(100 + 200 + 100 - 300, left);
+      assert.equal(100 + 100 + 30 + 2, top);
     });
     it('should return [100, 132] when bottom, client, { width: 100, height: 30, left: 200, top: 100 }, { width: 300, height: 200 }', () => {
       const [left, top] = position(
@@ -54,8 +54,8 @@ describe('overlay-helper', () => {
         15,
         2
       );
-      assert.equal(200 + 50 - 300 / 2, left);
-      assert.equal(100 - 200 - 2, top);
+      assert.equal(100 + 200 + 50 - 300 / 2, left);
+      assert.equal(100 + 100 - 200 - 2, top);
     });
     it('should return [200, -102] when topLeft, client, { width: 100, height: 30, left: 200, top: 100 }, { width: 300, height: 200 }', () => {
       const [left, top] = position(
@@ -66,8 +66,8 @@ describe('overlay-helper', () => {
         15,
         2
       );
-      assert.equal(200, left);
-      assert.equal(100 - 200 - 2, top);
+      assert.equal(100 + 200, left);
+      assert.equal(100 + 100 - 200 - 2, top);
     });
     it('should return [0, -102] when topRight, client, { width: 100, height: 30, left: 200, top: 100 }, { width: 300, height: 200 }', () => {
       const [left, top] = position(
@@ -78,8 +78,8 @@ describe('overlay-helper', () => {
         15,
         2
       );
-      assert.equal(200 + 100 - 300, left);
-      assert.equal(100 - 200 - 2, top);
+      assert.equal(100 + 200 + 100 - 300, left);
+      assert.equal(100 + 100 - 200 - 2, top);
     });
     // left
     it('should return [-102, 15] when left, client, { width: 100, height: 30, left: 200, top: 100 }, { width: 300, height: 200 }', () => {
@@ -106,7 +106,7 @@ describe('overlay-helper', () => {
       assert.equal(200 - 300 - 2, left);
       assert.equal(100 + 30 - 200, top);
     });
-    it('should return [-102, 15] when leftBottom, client, { width: 100, height: 30, left: 200, top: 100 }, { width: 300, height: 200 }', () => {
+    it('should return [-2, 200] when leftBottom, client, { width: 100, height: 30, left: 200, top: 100 }, { width: 300, height: 200 }', () => {
       const [left, top] = position(
         'leftBottom',
         client,
@@ -115,11 +115,11 @@ describe('overlay-helper', () => {
         15,
         2
       );
-      assert.equal(200 - 300 - 2, left);
-      assert.equal(100, top);
+      assert.equal(100 + 200 - 300 - 2, left);
+      assert.equal(100 + 100, top);
     });
     // right
-    it('should return [302, 15] when right, client, { width: 100, height: 30, left: 200, top: 100 }, { width: 300, height: 200 }', () => {
+    it('should return [402, 115] when right, client, { width: 100, height: 30, left: 200, top: 100 }, { width: 300, height: 200 }', () => {
       const [left, top] = position(
         'right',
         client,
@@ -128,10 +128,10 @@ describe('overlay-helper', () => {
         15,
         2
       );
-      assert.equal(200 + 100 + 2, left);
-      assert.equal(100 + 30 / 2 - 200 / 2, top);
+      assert.equal(100 + 200 + 100 + 2, left);
+      assert.equal(100 + 100 + 30 / 2 - 200 / 2, top);
     });
-    it('should return [302, -70] when rightTop, client, { width: 100, height: 30, left: 200, top: 100 }, { width: 300, height: 200 }', () => {
+    it('should return [402, 30] when rightTop, client, { width: 100, height: 30, left: 200, top: 100 }, { width: 300, height: 200 }', () => {
       const [left, top] = position(
         'rightTop',
         client,
@@ -140,10 +140,10 @@ describe('overlay-helper', () => {
         15,
         2
       );
-      assert.equal(200 + 100 + 2, left);
-      assert.equal(100 + 30 - 200, top);
+      assert.equal(100 + 200 + 100 + 2, left);
+      assert.equal(100 + 100 + 30 - 200, top);
     });
-    it('should return [302, 15] when rightBottom, client, { width: 100, height: 30, left: 200, top: 100 }, { width: 300, height: 200 }', () => {
+    it('should return [402, 200] when rightBottom, client, { width: 100, height: 30, left: 200, top: 100 }, { width: 300, height: 200 }', () => {
       const [left, top] = position(
         'rightBottom',
         client,
@@ -152,8 +152,8 @@ describe('overlay-helper', () => {
         15,
         2
       );
-      assert.equal(200 + 100 + 2, left);
-      assert.equal(100, top);
+      assert.equal(100 + 200 + 100 + 2, left);
+      assert.equal(100 + 100, top);
     });
   });
 });

@@ -14,6 +14,7 @@ import Radio from './radio';
 import Checkbox from './checkbox';
 import Input from './input';
 import Tag from './tag';
+import Select from './select';
 
 export {
   Layout,
@@ -32,4 +33,5 @@ export {
   Checkbox,
   Input,
   Tag,
+  Select,
 };

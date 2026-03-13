@@ -13,6 +13,7 @@
 @import './checkbox/style.less';
 @import './input/style.less';
 @import './tag/style.less';
+@import './select/style.less';
 
 :root {
   --tiny-bgcolor: #ffffff;
@@ -27,7 +28,7 @@
   --tiny-error-color: #db2828;
   --tiny-success-color: #21ba45;
   --tiny-hover-bgcolor: #f8f8f8;
-  --tiny-active-bgcolor: #f8f8f8;
+  --tiny-active-bgcolor: #e6f4ff;
   --tiny-border-color: rgba(34, 36, 38, 0.15);
   --tiny-box-shadow-color: rgba(34, 36, 38, 0.15);
   --tiny-border-radius: 3px;
@@ -55,10 +56,10 @@
   --tiny-menu-color: var(--tiny-color);
   --tiny-menu-box-shadow: var(--tiny-box-shadow);
   --tiny-menu-padding-vertical: 0.685em;
-  --tiny-menu-padding-horizontal: 0.925em;
+  --tiny-menu-padding-horizontal: 1.125em;
   --tiny-menu-active-color: var(--tiny-primary-color);
   --tiny-menu-hover-bgcolor: var(--tiny-hover-bgcolor);
-  --tiny-menu-active-bgcolor: var(--tiny-hover-bgcolor);
+  --tiny-menu-active-bgcolor: var(--tiny-active-bgcolor);
   --tiny-menu-vertical-divider-color: #fafafa;
   --tiny-menu-vertical-border-color: var(--tiny-border-color);
   --tiny-menu-horizontal-border-bottom-color: rgba(0, 0, 0, 0.08);
@@ -105,8 +106,10 @@
   --tiny-input-border-color: var(--tiny-border-color);
   --tiny-input-filled-bgcolor: #f8f8f8;
   --tiny-input-inner-padding: 0.25em;
+  --tiny-input-height: 32px;
+  --tiny-input-padding-vertical: 3px;
   --tiny-input-padding-horizontal: var(--tiny-padding-horizontal);
-  --tiny-input-padding: var(--tiny-padding-vertical)
+  --tiny-input-padding: var(--tiny-input-padding-vertical)
     var(--tiny-padding-horizontal);
   --tiny-input-active-border-color: var(--tiny-primary-color);
 

@@ -22,7 +22,7 @@
 
     .disabled;
 
-    &:not(.active, .pages):hover {
+    &:not(.active, .pages, .total):hover {
       background-color: var(--tiny-pagination-hover-bgcolor);
     }
 
@@ -49,6 +49,7 @@
         text-align: center;
         border: none;
         box-shadow: 0 0 1px 1px var(--tiny-box-shadow-color);
+        vertical-align: middle;
       }
       > span {
         padding: 0 calc(var(--tiny-pagination-padding-horizontal) - 2px);

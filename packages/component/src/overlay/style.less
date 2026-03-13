@@ -1,14 +1,14 @@
 @import '../style.base.less';
 
 .@{css-prefix}-overlay {
-  display: inline-flex;
+  display: block;
   position: absolute;
   left: -2000px;
   top: -2000px;
   background-color: var(--tiny-bgcolor);
   margin: 0;
   padding: 0;
-  border: none;
-  overflow: hidden;
+  overflow: auto;
   box-shadow: var(--tiny-box-shadow);
+  border: 2px solid var(--tiny-border-color);
 }

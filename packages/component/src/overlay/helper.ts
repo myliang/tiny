@@ -50,12 +50,12 @@ export function position(
   if (placement === 'auto') {
     placement = `${th > ch ? 'top' : 'bottom'}${tw > cw ? 'Right' : 'Left'}`;
   }
+  console.log('placement:', placement, scrollTop);
   if (placement.startsWith('bottom') || placement.startsWith('top')) {
     nTop = target.top + target.height + space;
     if (placement.startsWith('top')) {
       nTop = target.top - content.height - space;
     }
-
     nLeft = target.left + target.width / 2 - content.width / 2;
     if (placement.endsWith('Right')) {
       nLeft = target.left + target.width - content.width;
@@ -74,5 +74,5 @@ export function position(
       nTop = target.top + target.height - content.height;
     }
   }
-  return [nLeft, nTop];
+  return [nLeft + scrollLeft, nTop + scrollTop];
 }

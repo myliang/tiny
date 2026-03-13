@@ -9,6 +9,7 @@
   align-items: center;
   width: 100%;
   min-width: 0;
+  height: var(--tiny-input-height);
 
   &.outlined {
     border-color: var(--tiny-input-border-color);
@@ -52,13 +53,17 @@
     margin: 0;
     width: 100%;
     min-width: 0;
+    vertical-align: middle;
   }
   > input {
     line-height: 1;
     background: transparent;
   }
   &.textarea {
-    line-height: 1.5;
+    line-height: calc(
+      var(--tiny-input-height) - var(--tiny-input-padding-vertical) * 2
+    );
+    height: auto;
   }
 
   &:hover {
@@ -91,8 +96,9 @@
   height: var(--tiny-icon-font-size);
   border-radius: 10em;
   background-color: rgba(0, 0, 0, 0.25);
-  margin-right: var(--tiny-input-padding-horizontal);
+  margin-right: calc(var(--tiny-input-padding-horizontal) - 1px);
   svg {
+    padding: 1px;
     width: var(--tiny-icon-font-size);
     height: var(--tiny-icon-font-size);
     polygon {
