@@ -9,7 +9,9 @@ export interface ButtonProps {
   color?: 'default' | 'primary' | 'success' | 'error';
   shape?: 'circle' | 'rect';
   size?: 'small' | 'middle' | 'large';
-  onClick?: (evt: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  onClick?: (
+    evt: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLElement>
+  ) => void;
 }
 
 export default function Button({
@@ -23,8 +25,13 @@ export default function Button({
   onClick,
   children,
 }: PropsWithChildren<ButtonProps>) {
+  const onKeyDown = (evt: React.KeyboardEvent<HTMLElement>) => {
+    if (onClick && evt.key === 'Enter') onClick(evt);
+  };
   return (
     <button
+      onKeyDown={onKeyDown}
+      tabIndex={1}
       onClick={onClick}
       type={htmlType}
       className={classNames(`${cssPrefix}button`, variant, color, shape, size, {

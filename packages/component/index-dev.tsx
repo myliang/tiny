@@ -68,22 +68,7 @@ root.render(
       </Tag>
     </Space>
     <Divider />
-    <Select
-      style={{ width: '200px' }}
-      options={[
-        { value: 'jack', label: 'Jack' },
-        { value: 'luck', label: 'Luck' },
-        {
-          label: 'Group',
-          options: [
-            { value: 'luck', label: 'Luck' },
-            { value: 'luck', label: 'Luck' },
-            { value: 'luck', label: 'Luck' },
-          ],
-        },
-      ]}
-    />
-    <Divider />
+
     <Space>
       <Radio checked>Radio</Radio>
       <Radio.Group
@@ -138,6 +123,7 @@ root.render(
     <Space vertical>
       <Space>
         <Input placeholder="...abc" style={{ width: '160px' }} clearable />
+        <Input placeholder="...abc" style={{ width: '160px' }} loading />
         <Input
           variant="borderless"
           style={{ width: '160px' }}
@@ -174,6 +160,23 @@ root.render(
         <Input.Number variant="borderless" value="100000.25" step={1.1} />
       </Space>
     </Space>
+    <Divider />
+    <Select
+      style={{ width: '200px' }}
+      multiple
+      options={[
+        { value: 'jack', label: 'Jack' },
+        { value: 'luck', label: 'Luck' },
+        {
+          label: 'Group',
+          options: [
+            { value: 'luck1', label: 'Luck-1' },
+            { value: 'luck2', label: 'Luck-2' },
+            { value: 'luck3', label: 'Luck-3' },
+          ],
+        },
+      ]}
+    />
     <Divider />
     <Dropdown
       menu={{

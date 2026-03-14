@@ -1,4 +1,4 @@
-import { CSSProperties, MouseEvent, ReactNode, useState } from 'react';
+import { CSSProperties, ReactNode, useState } from 'react';
 import { classNames, cssPrefix } from '../helper';
 
 export type CheckboxValueType = string | number;
@@ -10,7 +10,10 @@ export type CheckboxProps = {
   indeterminate?: boolean;
   children: ReactNode;
   value?: CheckboxValueType;
-  onChange?: (checked: boolean, evt: React.MouseEvent) => void;
+  onChange?: (
+    checked: boolean,
+    evt: React.MouseEvent | React.KeyboardEvent
+  ) => void;
 };
 export default function Checkbox({
   className,
@@ -22,11 +25,13 @@ export default function Checkbox({
   children,
   onChange,
 }: CheckboxProps) {
-  const onClick = (evt: React.MouseEvent) => {
+  const onClick = (evt: React.MouseEvent | React.KeyboardEvent) => {
     if (onChange) onChange(!checked, evt);
   };
   return (
     <div
+      tabIndex={1}
+      onKeyDown={(evt) => evt.key === 'Enter' && onClick(evt)}
       onClick={onClick}
       className={classNames(
         `${cssPrefix}checkbox`,
@@ -56,7 +61,10 @@ export type CheckboxGroupProps = {
   disabled?: boolean;
   options: CheckboxOptionType[];
   value?: CheckboxValueType[];
-  onChange?: (value: CheckboxValueType[], evt: React.MouseEvent) => void;
+  onChange?: (
+    value: CheckboxValueType[],
+    evt: React.MouseEvent | React.KeyboardEvent
+  ) => void;
 };
 function CheckboxGroup({
   className,
@@ -67,15 +75,17 @@ function CheckboxGroup({
   value = [],
   onChange,
 }: CheckboxGroupProps) {
-  const [checkedValues, setCheckedValues] = useState(value);
+  const [checkedValues, setCheckedValues] =
+    useState<CheckboxValueType[]>(value);
+
   const onChanger = (
     checked: boolean,
-    value: CheckboxValueType,
-    evt: MouseEvent
+    v: CheckboxValueType,
+    evt: React.MouseEvent | React.KeyboardEvent
   ) => {
     const values = checked
-      ? [value, ...checkedValues]
-      : checkedValues.filter((it) => it !== value);
+      ? [v, ...checkedValues]
+      : checkedValues.filter((it) => it !== v);
     setCheckedValues(values);
     if (onChange) onChange(values, evt);
   };

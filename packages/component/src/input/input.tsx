@@ -12,6 +12,7 @@ export type InputProps = {
   suffix?: ReactNode;
   disabled?: boolean;
   clearable?: boolean;
+  loading?: boolean;
   value?: string;
   status?: 'error' | 'warning';
   onChange?: (value: string) => void;
@@ -26,6 +27,7 @@ export default function Input({
   suffix,
   disabled = false,
   clearable = false,
+  loading = false,
   value,
   status,
   onChange,
@@ -54,7 +56,10 @@ export default function Input({
         onBlur={() => setActive(false)}
         onFocus={() => setActive(true)}
       />
-      {suffix && (
+      {loading && (
+        <div className={classNames(`${cssPrefix}input-suffix loading`)} />
+      )}
+      {!loading && suffix && (
         <div className={classNames(`${cssPrefix}input-suffix`)}>{suffix}</div>
       )}
       {clearable && (

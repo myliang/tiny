@@ -65,6 +65,15 @@
       transform: rotate(45deg) scale(1) translate(-50%, -50%);
     }
   }
+  &:focus,
+  &:hover:not(.checked) {
+    > label:before {
+      border-color: hsla(
+        from var(--tiny-checkbox-checked-color) h s calc(l * 1.2)
+      );
+      outline: none;
+    }
+  }
 }
 
 .@{css-prefix}-checkbox-group {

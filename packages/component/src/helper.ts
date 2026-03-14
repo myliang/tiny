@@ -40,22 +40,3 @@ export function percentageToPixels(
   const percentValue = parseFloat(percentage + '') / 100;
   return parentSize * percentValue;
 }
-
-export function textWidth(
-  text: string,
-  fontSize: string,
-  fontFamily: string = 'inherit'
-) {
-  const el = document.createElement('span');
-  el.style.display = 'inline-block';
-  el.style.position = 'absolute';
-  el.style.zIndex = '-900';
-  el.style.whiteSpace = 'nowrap';
-  el.style.fontSize = fontSize;
-  el.style.fontFamily = fontFamily;
-  el.textContent = text;
-  document.body.appendChild(el);
-  const width = el.clientWidth;
-  document.body.removeChild(el);
-  return width;
-}

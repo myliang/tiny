@@ -38,10 +38,8 @@ export type MenuProps = {
   selectable?: boolean;
   openKeys?: string[];
   selectedKey?: string;
-  onSelect?: (key: string, evt: React.MouseEvent) => void;
+  onSelect?: (key: string, evt: React.MouseEvent | React.KeyboardEvent) => void;
 };
-
-type ShowType = { [key: string]: boolean };
 
 export default function Menu({
   className,
@@ -54,7 +52,10 @@ export default function Menu({
   theme,
 }: MenuProps) {
   const [selected, setSelected] = useState(selectedKey);
-  const onClicker = (key: string, evt: React.MouseEvent) => {
+  const onClicker = (
+    key: string,
+    evt: React.MouseEvent | React.KeyboardEvent
+  ) => {
     setSelected(key);
     onSelect?.(key, evt);
   };
@@ -85,7 +86,11 @@ export default function Menu({
         return (
           <Fragment key={it.key}>
             <li
+              tabIndex={1}
               className={classNames(`${cssPrefix}menu-item submenu`)}
+              onKeyDown={(evt) =>
+                evt.key === 'Enter' && onSubmenuClicker(it.key)
+              }
               onClick={() => onSubmenuClicker(it.key)}>
               {it.label}
             </li>
@@ -99,8 +104,10 @@ export default function Menu({
       default:
         return (
           <li
+            tabIndex={it.disabled ? 0 : 1}
             key={it.key}
             onClick={(evt) => onClicker(it.key, evt)}
+            onKeyDown={(evt) => evt.key === 'Enter' && onClicker(it.key, evt)}
             className={classNames(`${cssPrefix}menu-item`, {
               disabled: it.disabled,
               active: it.key === selected,

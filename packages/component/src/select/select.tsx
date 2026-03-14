@@ -1,12 +1,11 @@
-import { ReactNode, CSSProperties, useState, useEffect, Fragment } from 'react';
+import { ReactNode, CSSProperties, useState, useEffect } from 'react';
 import { cssPrefix, classNames } from '../helper';
 import { Overlay, Placement } from '../overlay';
 import Icon from '../icon';
 import Tag from '../tag';
 
-type RawValue = string | number;
+export type RawValue = string | number;
 export type LabeledValue = {
-  key?: string;
   value: RawValue;
   label: ReactNode;
   [key: string]: any;
@@ -21,6 +20,8 @@ export type InternalSelectProps = {
   disabled?: boolean;
   seachable?: boolean;
   clearable?: boolean;
+  loading?: boolean;
+  multiple?: boolean;
   placement?: Placement;
   prefix?: ReactNode;
   maxCount?: number;
@@ -29,6 +30,7 @@ export type InternalSelectProps = {
   popupContent?: ReactNode;
   value?: LabeledValue | LabeledValue[];
   onClear?: (evt: React.MouseEvent) => void;
+  onTagClear?: (evt: LabeledValue) => void;
   onSearch?: (value: string) => void;
   onMounted?: (targetNode: HTMLElement) => void;
 };
@@ -40,6 +42,8 @@ export function InternalSelect({
   disabled = false,
   seachable = false,
   clearable = true,
+  loading = false,
+  multiple = false,
   placement = 'auto',
   prefix,
   maxTags = 2,
@@ -47,18 +51,24 @@ export function InternalSelect({
   popupContent,
   value,
   onClear,
+  onTagClear,
 }: InternalSelectProps) {
   const [showValues, setShowValues] = useState<LabeledValue[]>([]);
   useEffect(() => {
     if (Array.isArray(value)) {
+      let nValue = value;
       if (value.length > maxTags) {
-        const nValue = value.slice(0, maxTags);
-        nValue.push({ value: 'more', label: `+${value.length - maxTags}` });
-      } else {
-        setShowValues(value);
+        nValue = value.slice(0, maxTags);
+        nValue.push({ value: 'more', label: `+${value.length - maxTags}...` });
       }
+      setShowValues(nValue);
     }
   }, [value, maxTags]);
+
+  const onTagClose = (it: LabeledValue, evt: React.MouseEvent) => {
+    evt.stopPropagation();
+    if (onTagClear) onTagClear(it);
+  };
 
   return (
     <Overlay
@@ -68,11 +78,12 @@ export function InternalSelect({
       placement={placement}
       content={popupContent}>
       <div
+        tabIndex={1}
         className={classNames(
           `${cssPrefix}input ${cssPrefix}select`,
           variant,
           status,
-          { disabled },
+          { disabled, multiple },
           className
         )}
         style={style}>
@@ -80,15 +91,25 @@ export function InternalSelect({
           <div className={classNames(`${cssPrefix}input-prefix`)}>{prefix}</div>
         )}
         <div className={classNames(`${cssPrefix}select-content`)}>
-          {Array.isArray(value)
-            ? showValues.map((it, i) => <Tag>{it.label}</Tag>)
-            : value?.label}
+          {multiple &&
+            showValues.map((it) => (
+              <Tag
+                onClose={(evt) => onTagClose(it, evt)}
+                closable={it.value !== 'more' ? clearable : false}
+                key={it.value}>
+                {it.label}
+              </Tag>
+            ))}
         </div>
         {seachable && <input />}
-        <div className={classNames(`${cssPrefix}input-suffix`)}>
-          <Icon type="angleDown" />
-        </div>
-        {clearable && (
+        {loading ? (
+          <div className={classNames(`${cssPrefix}input-suffix loading`)} />
+        ) : (
+          <div className={classNames(`${cssPrefix}input-suffix`)}>
+            <Icon type="angleDown" />
+          </div>
+        )}
+        {clearable && !multiple && (
           <div
             onClick={onClear}
             className={classNames(`${cssPrefix}input-clear`)}
@@ -103,68 +124,5 @@ export function InternalSelect({
         )}
       </div>
     </Overlay>
-  );
-}
-
-export type SelectOptGroupType = {
-  key?: string;
-  label: ReactNode;
-  options: LabeledValue[];
-};
-export type SelectOptionType = SelectOptGroupType | LabeledValue;
-export type SelectValue = RawValue | RawValue[];
-
-export type SelectProps = {
-  maxHeight?: number;
-  autoWidth?: boolean;
-  multiple?: boolean;
-  value?: SelectValue;
-  options: SelectOptionType[];
-  filterOption?: (value: LabeledValue) => boolean;
-  onChange?: (value: string | string[] | number | number[]) => void;
-  onDeselect?: (value: LabeledValue) => void;
-  onSelect?: (value: LabeledValue) => void;
-} & Omit<InternalSelectProps, 'value'>;
-
-export default function Select({
-  maxHeight = 200,
-  autoWidth = true,
-  multiple = false,
-  value,
-  options,
-  onChange,
-  onDeselect,
-  onSelect,
-  ...restProps
-}: SelectProps) {
-  const itemRender = (it: SelectOptionType, key: string) => {
-    return (
-      <Fragment key={key}>
-        <li
-          className={classNames(
-            `${cssPrefix}menu-item`,
-            it.options && 'group'
-          )}>
-          {it.label}
-        </li>
-        {it.options &&
-          (it.options as LabeledValue[]).map((_, i) =>
-            itemRender(_, `${key}-${i}`)
-          )}
-      </Fragment>
-    );
-  };
-
-  return (
-    <InternalSelect
-      popupContent={
-        <ul
-          className={classNames(`${cssPrefix}menu vertical`)}
-          style={{ border: 'none', boxShadow: 'none' }}>
-          {options.map((it, i) => itemRender(it, `select-option-${i}`))}
-        </ul>
-      }
-      {...restProps}
-    />
   );
 }

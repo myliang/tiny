@@ -1,10 +1,15 @@
 @import '../style.base.less';
 
 .@{css-prefix}-select-content {
-  flex: 1;
+  flex: 1 1 auto;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   line-height: 1;
-  column-gap: 2px;
-  row-gap: 2px;
+  column-gap: 4px;
+  row-gap: 4px;
+}
+
+.@{css-prefix}-select.multiple {
+  padding-left: calc(var(--tiny-input-padding-vertical) + 1px);
 }

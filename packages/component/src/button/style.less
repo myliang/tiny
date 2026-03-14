@@ -27,27 +27,31 @@
   &.filled {
     background-color: rgba(0, 0, 0, 0.15);
     box-shadow: none;
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: rgba(0, 0, 0, 0.2);
     }
     &.primary {
       background-color: var(--tiny-primary-color);
       color: #fff;
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: hsl(from var(--tiny-primary-color) h s calc(l * 1.1));
       }
     }
     &.success {
       background-color: var(--tiny-success-color);
       color: #fff;
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: hsl(from var(--tiny-success-color) h s calc(l * 1.1));
       }
     }
     &.error {
       background-color: var(--tiny-error-color);
       color: #fff;
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: hsl(from var(--tiny-error-color) h s calc(l * 1.1));
       }
     }
@@ -63,30 +67,35 @@
   }
   &.outlined,
   &.dashed {
-    &:hover {
+    &:hover,
+    &:focus {
       color: var(--tiny-primary-color);
       border-color: var(--tiny-primary-color);
     }
     &.primary {
       color: var(--tiny-primary-color);
-      &:hover {
+      &:hover,
+      &:focus {
         border-color: hsl(from var(--tiny-primary-color) h s calc(l * 1.1));
       }
     }
     &.success {
       color: var(--tiny-success-color);
-      &:hover {
+      &:hover,
+      &:focus {
         border-color: hsl(from var(--tiny-success-color) h s calc(l * 1.1));
       }
     }
     &.error {
       color: var(--tiny-error-color);
-      &:hover {
+      &:hover,
+      &:focus {
         border-color: hsl(from var(--tiny-error-color) h s calc(l * 1.1));
       }
     }
   }
-  &.text:hover {
+  &.text:hover,
+  &.text:focus {
     background-color: rgba(0, 0, 0, 0.06);
   }
 

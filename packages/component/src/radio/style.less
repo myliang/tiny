@@ -47,6 +47,15 @@
       background-color: var(--tiny-radio-checked-color);
     }
   }
+  &:focus,
+  &:hover {
+    > label:before {
+      border-color: hsla(
+        from var(--tiny-radio-checked-color) h s calc(l * 1.2)
+      );
+      outline: none;
+    }
+  }
 }
 
 .@{css-prefix}-radio-group {
@@ -75,6 +84,7 @@
       margin: 0;
       padding: var(--tiny-radio-button-padding);
       border-radius: var(--tiny-radio-button-border-radius);
+      margin-right: 2px;
 
       &.checked {
         color: var(--tiny-radio-color);
@@ -88,6 +98,11 @@
         &:after {
           display: none;
         }
+      }
+
+      &:focus,
+      &:hover {
+        outline: none;
       }
     }
   }

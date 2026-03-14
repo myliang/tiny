@@ -9,12 +9,14 @@
   align-items: center;
   width: 100%;
   min-width: 0;
-  height: var(--tiny-input-height);
+  min-height: var(--tiny-input-height);
+  column-gap: 4px;
 
   &.outlined {
     border-color: var(--tiny-input-border-color);
     border-radius: var(--tiny-border-radius);
     &:hover,
+    &:focus,
     &.active {
       border-color: var(--tiny-input-active-border-color);
     }
@@ -23,6 +25,7 @@
     background-color: var(--tiny-input-filled-bgcolor);
     border-radius: var(--tiny-border-radius);
     &:hover,
+    &:focus,
     &.active {
       border-color: var(--tiny-input-active-border-color);
     }
@@ -30,6 +33,7 @@
   &.underlined {
     border-bottom-color: var(--tiny-input-border-color);
     &:hover,
+    &:focus,
     &.active {
       border-bottom-color: var(--tiny-input-active-border-color);
     }
@@ -66,7 +70,9 @@
     height: auto;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
+    outline: none;
     .@{css-prefix}-input-actions {
       opacity: 1;
     }
@@ -81,11 +87,11 @@
   color: rgba(0, 0, 0, 0.6);
 }
 
-.@{css-prefix}-input-prefix {
-  padding-right: var(--tiny-input-inner-padding);
-}
 .@{css-prefix}-input-suffix {
-  padding-left: var(--tiny-input-inner-padding);
+  &.loading {
+    width: 1em;
+    .loading(1em, 0.15em, #ffffff);
+  }
 }
 .@{css-prefix}-input-clear {
   position: absolute;
@@ -95,7 +101,7 @@
   width: var(--tiny-icon-font-size);
   height: var(--tiny-icon-font-size);
   border-radius: 10em;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.35);
   margin-right: calc(var(--tiny-input-padding-horizontal) - 1px);
   svg {
     padding: 1px;
@@ -124,8 +130,9 @@
   align-items: center;
   justify-content: center;
   flex: 1;
-  padding: 0 0.25em;
+  padding: 0 0.4em;
   background: rgba(0, 0, 0, 0.05);
+  color: rgba(0, 0, 0, 0.65);
   &:hover {
     background: rgba(0, 0, 0, 0.08);
   }

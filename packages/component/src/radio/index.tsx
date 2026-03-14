@@ -9,7 +9,10 @@ export type RadioProps = {
   checked?: boolean;
   children: ReactNode;
   value?: RadioValueType;
-  onChange?: (value: RadioValueType, evt: React.MouseEvent) => void;
+  onChange?: (
+    value: RadioValueType,
+    evt: React.MouseEvent | React.KeyboardEvent
+  ) => void;
 };
 export default function Radio({
   className,
@@ -20,11 +23,13 @@ export default function Radio({
   children,
   onChange,
 }: RadioProps) {
-  const onClick = (evt: React.MouseEvent) => {
+  const onClick = (evt: React.MouseEvent | React.KeyboardEvent) => {
     if (onChange) onChange(value || '', evt);
   };
   return (
     <div
+      tabIndex={1}
+      onKeyDown={(evt) => evt.key === 'Enter' && onClick(evt)}
       onClick={onClick}
       className={classNames(
         `${cssPrefix}radio`,
@@ -55,7 +60,10 @@ export type RadioGroupProps = {
   disabled?: boolean;
   options: RadioOptionType[];
   value: RadioValueType;
-  onChange?: (value: RadioValueType, evt: React.MouseEvent) => void;
+  onChange?: (
+    value: RadioValueType,
+    evt: React.MouseEvent | React.KeyboardEvent
+  ) => void;
 };
 function RadioGroup({
   className,
@@ -68,7 +76,10 @@ function RadioGroup({
   onChange,
 }: RadioGroupProps) {
   const [checkedValue, setCheckedValue] = useState(value);
-  const onChanger = (value: RadioValueType, evt: MouseEvent) => {
+  const onChanger = (
+    value: RadioValueType,
+    evt: React.MouseEvent | React.KeyboardEvent
+  ) => {
     setCheckedValue(value);
     if (onChange) onChange(value, evt);
   };
