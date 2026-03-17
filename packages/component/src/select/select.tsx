@@ -1,6 +1,13 @@
-import { ReactNode, CSSProperties, useState, useEffect } from 'react';
-import { cssPrefix, classNames } from '../helper';
-import { Overlay, Placement } from '../overlay';
+import {
+  ReactNode,
+  CSSProperties,
+  useState,
+  useEffect,
+  useRef,
+  useImperativeHandle,
+} from 'react';
+import { cssPrefix, classNames, textWidth, debounce } from '../helper';
+import { Overlay, OverlayMethods, Placement } from '../overlay';
 import Icon from '../icon';
 import Tag from '../tag';
 
@@ -11,14 +18,20 @@ export type LabeledValue = {
   [key: string]: any;
 };
 
+export type InternalSelectMethods = {
+  focus: () => void;
+  hide: () => void;
+};
+
 export type InternalSelectProps = {
+  ref?: React.Ref<InternalSelectMethods>;
   className?: string | string[];
   style?: CSSProperties;
   variant?: 'outlined' | 'borderless' | 'filled' | 'underlined';
   status?: 'error' | 'warning';
   placeholder?: string;
   disabled?: boolean;
-  seachable?: boolean;
+  searchable?: boolean;
   clearable?: boolean;
   loading?: boolean;
   multiple?: boolean;
@@ -30,17 +43,20 @@ export type InternalSelectProps = {
   popupContent?: ReactNode;
   value?: LabeledValue | LabeledValue[];
   onClear?: (evt: React.MouseEvent) => void;
-  onTagClear?: (evt: LabeledValue) => void;
+  onTagClear?: (evt: React.MouseEvent, v: LabeledValue) => void;
   onSearch?: (value: string) => void;
-  onMounted?: (targetNode: HTMLElement) => void;
+  onKeyDown?: (evt: React.KeyboardEvent<HTMLInputElement>) => void;
+  onMounted?: (show: boolean) => void;
 };
 export function InternalSelect({
+  ref,
   className,
   style,
   variant = 'outlined',
   status,
+  placeholder,
   disabled = false,
-  seachable = false,
+  searchable = false,
   clearable = true,
   loading = false,
   multiple = false,
@@ -52,8 +68,13 @@ export function InternalSelect({
   value,
   onClear,
   onTagClear,
+  onKeyDown,
+  onSearch,
+  onMounted,
 }: InternalSelectProps) {
+  const overlayRef = useRef<OverlayMethods>(null);
   const [showValues, setShowValues] = useState<LabeledValue[]>([]);
+
   useEffect(() => {
     if (Array.isArray(value)) {
       let nValue = value;
@@ -67,11 +88,54 @@ export function InternalSelect({
 
   const onTagClose = (it: LabeledValue, evt: React.MouseEvent) => {
     evt.stopPropagation();
-    if (onTagClear) onTagClear(it);
+    if (onTagClear) onTagClear(evt, it);
   };
+
+  const [active, setActive] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const onInputFocus = () => {
+    setActive(true);
+    overlayRef.current?.setShow(true);
+  };
+  const onInputBlur = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    setActive(false);
+    evt.target.value = '';
+    // overlayRef.current?.setShow(false);
+  };
+
+  let timer: any = null;
+  const onInputChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const width = textWidth(evt.target);
+    evt.target.style.width = `${width + 2}px`;
+    const { value } = evt.target;
+    if (timer != null) clearTimeout(timer);
+    timer = setTimeout(() => {
+      overlayRef.current?.setShow(true);
+      if (onSearch) onSearch(value);
+    }, 200);
+  };
+
+  const onClick = () => {
+    if (searchable) inputRef.current?.focus();
+  };
+
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      if (inputRef.current) {
+        inputRef.current.value = '';
+        if (searchable) inputRef.current?.focus();
+        inputRef.current.style.width = `2px`;
+      }
+    },
+    hide: () => {
+      overlayRef.current?.setShow(false);
+    },
+  }));
 
   return (
     <Overlay
+      ref={overlayRef}
+      onMounted={onMounted}
       maxHeight={popupMaxHeight}
       width="with"
       trigger="click"
@@ -79,11 +143,12 @@ export function InternalSelect({
       content={popupContent}>
       <div
         tabIndex={1}
+        onClick={onClick}
         className={classNames(
           `${cssPrefix}input ${cssPrefix}select`,
           variant,
           status,
-          { disabled, multiple },
+          { disabled, multiple, active },
           className
         )}
         style={style}>
@@ -91,7 +156,7 @@ export function InternalSelect({
           <div className={classNames(`${cssPrefix}input-prefix`)}>{prefix}</div>
         )}
         <div className={classNames(`${cssPrefix}select-content`)}>
-          {multiple &&
+          {multiple ? (
             showValues.map((it) => (
               <Tag
                 onClose={(evt) => onTagClose(it, evt)}
@@ -99,9 +164,33 @@ export function InternalSelect({
                 key={it.value}>
                 {it.label}
               </Tag>
-            ))}
+            ))
+          ) : (
+            <div
+              className="value-text"
+              style={{ opacity: inputRef.current?.value !== '' ? 0 : 1 }}>
+              {Array.isArray(value)
+                ? value.length > 0 && value[0].label
+                : value !== undefined && value.label != undefined
+                  ? value.label
+                  : null}
+            </div>
+          )}
+          {placeholder &&
+            showValues.length === 0 &&
+            inputRef.current?.value === '' && (
+              <div className={classNames(`placeholder`)}>{placeholder}</div>
+            )}
+          {searchable && (
+            <input
+              ref={inputRef}
+              onKeyDown={onKeyDown}
+              onChange={onInputChange}
+              onFocus={onInputFocus}
+              onBlur={onInputBlur}
+            />
+          )}
         </div>
-        {seachable && <input />}
         {loading ? (
           <div className={classNames(`${cssPrefix}input-suffix loading`)} />
         ) : (
@@ -109,15 +198,18 @@ export function InternalSelect({
             <Icon type="angleDown" />
           </div>
         )}
-        {clearable && !multiple && (
+        {clearable && (
           <div
             onClick={onClear}
             className={classNames(`${cssPrefix}input-clear`)}
             style={{
-              display:
-                (Array.isArray(value) && value.length > 0) || value
-                  ? 'block'
-                  : 'none',
+              display: (
+                Array.isArray(value)
+                  ? value.length > 0
+                  : value !== undefined && value.value !== undefined
+              )
+                ? 'block'
+                : 'none',
             }}>
             <Icon type="close" />
           </div>

@@ -161,22 +161,45 @@ root.render(
       </Space>
     </Space>
     <Divider />
-    <Select
-      style={{ width: '200px' }}
-      multiple
-      options={[
-        { value: 'jack', label: 'Jack' },
-        { value: 'luck', label: 'Luck' },
-        {
-          label: 'Group',
-          options: [
-            { value: 'luck1', label: 'Luck-1' },
-            { value: 'luck2', label: 'Luck-2' },
-            { value: 'luck3', label: 'Luck-3' },
-          ],
-        },
-      ]}
-    />
+    <Space>
+      <Select
+        style={{ width: '300px' }}
+        placeholder="select user"
+        clearable
+        searchable
+        options={[
+          { value: 'jack', label: 'Jack' },
+          { value: 'luck', label: 'Luck' },
+          {
+            label: 'Group',
+            options: [
+              { value: 'jon', label: 'Jon' },
+              { value: 'abcd', label: 'Abcd' },
+              { value: 'yuliang', label: 'yuliang' },
+            ],
+          },
+        ]}
+      />
+      <Select
+        style={{ width: '300px' }}
+        placeholder="select user"
+        multiple
+        clearable
+        searchable
+        options={[
+          { value: 'jack', label: 'Jack' },
+          { value: 'luck', label: 'Luck' },
+          {
+            label: 'Group',
+            options: [
+              { value: 'luck1', label: 'Luck-1' },
+              { value: 'luck2', label: 'Luck-2' },
+              { value: 'luck3', label: 'Luck-3' },
+            ],
+          },
+        ]}
+      />
+    </Space>
     <Divider />
     <Dropdown
       menu={{

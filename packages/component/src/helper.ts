@@ -40,3 +40,31 @@ export function percentageToPixels(
   const percentValue = parseFloat(percentage + '') / 100;
   return parentSize * percentValue;
 }
+
+export function textWidth(input: HTMLInputElement) {
+  const span = document.createElement('span');
+  span.style.visibility = 'hidden';
+  span.style.position = 'absolute';
+  span.style.whiteSpace = 'nowrap';
+  span.style.top = '-1000px';
+  span.style.font = window.getComputedStyle(input).font;
+  span.textContent = input.value;
+  document.body.appendChild(span);
+  const width = span.offsetWidth;
+  document.body.removeChild(span);
+  return width;
+}
+
+export function debounce(func: Function, delay: number) {
+  let timer: any = null;
+
+  return (...args: any) => {
+    // 清除之前的定时器
+    if (timer) clearTimeout(timer);
+
+    // 设置新的定时器
+    timer = setTimeout(() => {
+      func(args);
+    }, delay);
+  };
+}

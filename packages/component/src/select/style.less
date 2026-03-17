@@ -6,8 +6,24 @@
   align-items: center;
   flex-wrap: wrap;
   line-height: 1;
-  column-gap: 4px;
   row-gap: 4px;
+
+  input {
+    width: 4px;
+    min-width: 4px;
+    margin: 4px 2px;
+  }
+
+  .@{css-prefix}-tag {
+    margin-right: 4px;
+  }
+
+  .placeholder,
+  .value-text {
+    position: absolute;
+    padding-left: calc(var(--tiny-input-padding-vertical) + 1px);
+    opacity: 0.6;
+  }
 }
 
 .@{css-prefix}-select.multiple {

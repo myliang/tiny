@@ -47,10 +47,8 @@ function OverlayContent({
     maxHeight,
   });
 
-  // calcute position
-  useEffect(() => {
+  const currentPosition = () => {
     if (_ref && _ref.current && target != null) {
-      console.log('rect:', target.getBoundingClientRect());
       const [left, top] = position(
         placement,
         document.documentElement,
@@ -69,6 +67,19 @@ function OverlayContent({
         })
       );
     }
+  };
+
+  // calcute position
+  useEffect(currentPosition, [target]);
+
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {
+      currentPosition();
+    });
+    target && resizeObserver.observe(target);
+    return () => {
+      resizeObserver.disconnect();
+    };
   }, [target]);
 
   // click outside and Escape
@@ -124,7 +135,7 @@ export type OverlayProps = {
   content: ReactNode;
   children: ReactElement;
   onChange?: (show: boolean) => void;
-  onMounted?: (targetNode: HTMLElement) => void;
+  onMounted?: (show: boolean) => void;
 };
 
 export function Overlay({
@@ -165,8 +176,11 @@ export function Overlay({
   }>;
 
   // setTimeout: Waiting for the completion of the other closing process
-  const onClick = (evt: React.MouseEvent) => {
+  const onClick = (evt: React.MouseEvent<HTMLElement>) => {
     if ('click' === trigger) setTimeout(() => updateShow(!show), 0);
+    if (target.props.onClick) {
+      target.props.onClick(evt);
+    }
   };
   const onMouseEnter = (evt: React.MouseEvent) => {
     if ('hover' === trigger) {
@@ -215,8 +229,8 @@ export function Overlay({
   if (onMounted) {
     const onMountedEvent = useEffectEvent(onMounted);
     useEffect(() => {
-      targetNode && onMountedEvent(targetNode);
-    }, [targetNode]);
+      onMountedEvent(show);
+    }, [show]);
   }
 
   return (

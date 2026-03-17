@@ -50,7 +50,7 @@ export function position(
   if (placement === 'auto') {
     placement = `${th > ch ? 'top' : 'bottom'}${tw > cw ? 'Right' : 'Left'}`;
   }
-  console.log('placement:', placement, scrollTop);
+  // console.log('placement:', placement, scrollTop);
   if (placement.startsWith('bottom') || placement.startsWith('top')) {
     nTop = target.top + target.height + space;
     if (placement.startsWith('top')) {

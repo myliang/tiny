@@ -15,10 +15,12 @@
   &.outlined {
     border-color: var(--tiny-input-border-color);
     border-radius: var(--tiny-border-radius);
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
     &:hover,
     &:focus,
     &.active {
       border-color: var(--tiny-input-active-border-color);
+      // box-shadow: 0 0 2px var(--tiny-input-active-box-shadow-color);
     }
   }
   &.filled {
@@ -48,7 +50,7 @@
 
   .disabled;
 
-  > input,
+  input,
   &.textarea {
     font-family: var(--tiny-font-family);
     font-size: var(--tiny-input-font-size);
@@ -59,7 +61,7 @@
     min-width: 0;
     vertical-align: middle;
   }
-  > input {
+  input {
     line-height: 1;
     background: transparent;
   }
@@ -74,6 +76,11 @@
   &:focus {
     outline: none;
     .@{css-prefix}-input-actions {
+      opacity: 1;
+    }
+  }
+  &:hover {
+    .@{css-prefix}-input-clear {
       opacity: 1;
     }
   }
@@ -101,8 +108,9 @@
   width: var(--tiny-icon-font-size);
   height: var(--tiny-icon-font-size);
   border-radius: 10em;
-  background-color: rgba(0, 0, 0, 0.35);
+  background-color: #ccc;
   margin-right: calc(var(--tiny-input-padding-horizontal) - 1px);
+  opacity: 0;
   svg {
     padding: 1px;
     width: var(--tiny-icon-font-size);
