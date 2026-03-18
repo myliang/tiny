@@ -29,7 +29,7 @@
     "vitest": "^4.0.17"
   },
   "dependencies": {
-    "@uiw/react-color": "^2.9.4",
+    "dayjs": "^1.11.20",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
   }

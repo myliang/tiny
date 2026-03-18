@@ -41,6 +41,7 @@ export type InternalSelectProps = {
   maxTags?: number;
   popupMaxHeight?: number;
   popupContent?: ReactNode;
+  icon?: ReactNode;
   value?: LabeledValue | LabeledValue[];
   onClear?: (evt: React.MouseEvent) => void;
   onTagClear?: (evt: React.MouseEvent, v: LabeledValue) => void;
@@ -65,6 +66,7 @@ export function InternalSelect({
   maxTags = 2,
   popupMaxHeight = 200,
   popupContent,
+  icon,
   value,
   onClear,
   onTagClear,
@@ -132,6 +134,8 @@ export function InternalSelect({
     },
   }));
 
+  console.log('select-value:', value);
+
   return (
     <Overlay
       ref={overlayRef}
@@ -168,7 +172,9 @@ export function InternalSelect({
           ) : (
             <div
               className="value-text"
-              style={{ opacity: inputRef.current?.value !== '' ? 0 : 1 }}>
+              style={{
+                opacity: searchable && inputRef.current?.value !== '' ? 0 : 1,
+              }}>
               {Array.isArray(value)
                 ? value.length > 0 && value[0].label
                 : value !== undefined && value.label != undefined
@@ -195,7 +201,7 @@ export function InternalSelect({
           <div className={classNames(`${cssPrefix}input-suffix loading`)} />
         ) : (
           <div className={classNames(`${cssPrefix}input-suffix`)}>
-            <Icon type="angleDown" />
+            {icon || <Icon type="angleDown" />}
           </div>
         )}
         {clearable && (

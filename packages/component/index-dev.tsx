@@ -15,6 +15,7 @@ import {
   Input,
   Tag,
   Select,
+  Calendar,
 } from './src';
 
 const container = document.getElementById('root');
@@ -296,6 +297,8 @@ root.render(
         </p>
       </Spin>
     </Space>
+    <Divider />
+    <Calendar />
     <Divider />
     <Space>
       <Tabs

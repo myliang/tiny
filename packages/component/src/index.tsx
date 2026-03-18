@@ -15,6 +15,7 @@ import Checkbox from './checkbox';
 import Input from './input';
 import Tag from './tag';
 import Select from './select';
+import Calendar from './calendar';
 
 export {
   Layout,
@@ -34,4 +35,5 @@ export {
   Input,
   Tag,
   Select,
+  Calendar,
 };
