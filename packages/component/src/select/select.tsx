@@ -6,7 +6,7 @@ import {
   useRef,
   useImperativeHandle,
 } from 'react';
-import { cssPrefix, classNames, textWidth, debounce } from '../helper';
+import { cssPrefix, classNames, textWidth } from '../helper';
 import { Overlay, OverlayMethods, Placement } from '../overlay';
 import Icon from '../icon';
 import Tag from '../tag';
@@ -134,7 +134,7 @@ export function InternalSelect({
     },
   }));
 
-  console.log('select-value:', value);
+  // console.log('select-value:', value);
 
   return (
     <Overlay
@@ -149,7 +149,7 @@ export function InternalSelect({
         tabIndex={1}
         onClick={onClick}
         className={classNames(
-          `${cssPrefix}input ${cssPrefix}select`,
+          `${cssPrefix}select`,
           variant,
           status,
           { disabled, multiple, active },
@@ -157,7 +157,9 @@ export function InternalSelect({
         )}
         style={style}>
         {prefix && (
-          <div className={classNames(`${cssPrefix}input-prefix`)}>{prefix}</div>
+          <div className={classNames(`${cssPrefix}select-prefix`)}>
+            {prefix}
+          </div>
         )}
         <div className={classNames(`${cssPrefix}select-content`)}>
           {multiple ? (
@@ -198,16 +200,16 @@ export function InternalSelect({
           )}
         </div>
         {loading ? (
-          <div className={classNames(`${cssPrefix}input-suffix loading`)} />
+          <div className={classNames(`${cssPrefix}select-suffix loading`)} />
         ) : (
-          <div className={classNames(`${cssPrefix}input-suffix`)}>
+          <div className={classNames(`${cssPrefix}select-suffix`)}>
             {icon || <Icon type="angleDown" />}
           </div>
         )}
         {clearable && (
           <div
             onClick={onClear}
-            className={classNames(`${cssPrefix}input-clear`)}
+            className={classNames(`${cssPrefix}select-clear`)}
             style={{
               display: (
                 Array.isArray(value)

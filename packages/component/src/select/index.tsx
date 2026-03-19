@@ -15,37 +15,6 @@ export type SelectOptGroupType = {
 export type SelectOptionType = SelectOptGroupType | LabeledValue;
 export type SelectValue = RawValue | RawValue[];
 
-// type SelectOptionProps = {
-//   value: LabeledValue;
-//   active?: boolean;
-//   onClick: (value: LabeledValue) => void;
-// };
-// function SelectOption({ value, active, onClick }: SelectOptionProps) {
-//   return (
-//     <li
-//       onClick={() => onClick(value)}
-//       className={classNames(`${cssPrefix}menu-item`, {
-//         active,
-//       })}>
-//       {value.label}
-//     </li>
-//   );
-// }
-// type SelectOptGroupProps = {
-//   value: SelectOptGroupType;
-//   onItemClick: (value: LabeledValue) => void;
-// };
-// function SelectOptGroup({ value, onItemClick }: SelectOptGroupProps) {
-//   return (
-//     <Fragment>
-//       <li className={classNames(`${cssPrefix}menu-item group`)}>
-//         {value.label}
-//       </li>
-//       {value.options && value.options.map(it => <SelectOption value={it} />)}
-//     </Fragment>
-//   );
-// }
-
 export type SelectProps = {
   notFoundContent?: ReactNode;
   value?: SelectValue;
@@ -54,7 +23,7 @@ export type SelectProps = {
   onChange?: (value: SelectValue) => void;
   onDeselect?: (value: LabeledValue) => void;
   onSelect?: (value: LabeledValue) => void;
-} & Omit<InternalSelectProps, 'value' | 'onTagClear'>;
+} & Omit<InternalSelectProps, 'value' | 'onTagClear' | 'popupContent'>;
 
 export default function Select({
   multiple = false,

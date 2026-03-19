@@ -15,6 +15,7 @@
 @import './tag/style.less';
 @import './select/style.less';
 @import './calendar/style.less';
+@import './date-picker/style.less';
 
 :root {
   --tiny-color: rgba(0, 0, 0, 0.87);
@@ -24,7 +25,7 @@
   --tiny-dark-bgcolor: #232323;
   --tiny-dark-color: #ffffff;
 
-  --tiny-primary-color: rgb(33, 133, 208);
+  --tiny-primary-color: #4b89ff;
   --tiny-primary-bgcolor: #4b89ff;
   --tiny-primary-box-shadow-color: rgba(33, 133, 208 0.1);
 
@@ -138,6 +139,9 @@
   --tiny-tag-bgcolor: #ededed;
 
   --tiny-calendar-padding: 4px;
+
+  --tiny-picker-padding: var(--tiny-padding-horizontal);
+  --tiny-picker-cell-padding: 6px;
 }
 
 *,

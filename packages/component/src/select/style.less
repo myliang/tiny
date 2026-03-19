@@ -1,5 +1,13 @@
 @import '../style.base.less';
 
+.@{css-prefix}-select {
+  .input(select);
+
+  &.multiple {
+    padding-left: calc(var(--tiny-input-padding-vertical) + 1px);
+  }
+}
+
 .@{css-prefix}-select-content {
   flex: 1 1 auto;
   display: flex;
@@ -24,8 +32,4 @@
     padding-left: calc(var(--tiny-input-padding-vertical) + 1px);
     opacity: 0.6;
   }
-}
-
-.@{css-prefix}-select.multiple {
-  padding-left: calc(var(--tiny-input-padding-vertical) + 1px);
 }

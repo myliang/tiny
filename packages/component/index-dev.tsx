@@ -16,6 +16,9 @@ import {
   Tag,
   Select,
   Calendar,
+  YearPicker,
+  MonthPicker,
+  DatePicker,
 } from './src';
 
 const container = document.getElementById('root');
@@ -200,6 +203,12 @@ root.render(
           },
         ]}
       />
+    </Space>
+    <Divider />
+    <Space>
+      <YearPicker />
+      <MonthPicker />
+      <DatePicker variant="filled" />
     </Space>
     <Divider />
     <Dropdown

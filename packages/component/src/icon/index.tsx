@@ -256,6 +256,9 @@ const types = {
       <path d="M508 624c-3.46 0-6.87-.16-10.25-.47l-52.82 52.82a176.09 176.09 0 00227.42-227.42l-52.82 52.82c.31 3.38.47 6.79.47 10.25a111.94 111.94 0 01-112 112z"></path>
     </>
   ),
+  calendar: (
+    <path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path>
+  ),
 };
 // 64 64 896 896
 const viewBoxes: { [key: string]: string } = {
@@ -269,6 +272,7 @@ const viewBoxes: { [key: string]: string } = {
   eye: '64 64 896 896',
   eyeInvisible: '64 64 896 896',
   search: '64 64 896 896',
+  calendar: '64 64 896 896',
 };
 export type IconType = keyof typeof types;
 export interface IconProps {

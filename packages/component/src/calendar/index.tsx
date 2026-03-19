@@ -1,12 +1,13 @@
 import { CSSProperties, ReactNode, useState } from 'react';
 import { classNames, cssPrefix } from '../helper';
+import Radio from '../radio';
+import Select, { SelectValue } from '../select';
+
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import weekday from 'dayjs/plugin/weekday';
 import 'dayjs/locale/zh-cn';
-import Radio from '../radio';
-import Select, { SelectValue } from '../select';
-
+import { monthWeeks, yearMonths } from './helper';
 dayjs.extend(weekday);
 dayjs.locale('zh-cn');
 
@@ -54,21 +55,9 @@ export default function Calendar({
 
   const rows = () => {
     if (_mode === 'year') {
-      return [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [9, 10, 11],
-      ].map((it) => it.map((i) => _value.month(i).startOf('month')));
+      return yearMonths(_value);
     } else {
-      const weeks: Dayjs[][] = [[], [], [], [], [], []];
-      const startDate = _value.startOf('month').weekday(0);
-      for (let i = 0; i < 6; i++) {
-        for (let j = 0; j < 7; j++) {
-          weeks[i][j] = startDate.weekday(i * 7 + j);
-        }
-      }
-      return weeks;
+      return monthWeeks(_value);
     }
   };
 
