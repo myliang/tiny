@@ -19,6 +19,7 @@ import {
   YearPicker,
   MonthPicker,
   DatePicker,
+  Tree,
 } from './src';
 
 const container = document.getElementById('root');
@@ -209,6 +210,57 @@ root.render(
       <YearPicker />
       <MonthPicker />
       <DatePicker variant="filled" />
+    </Space>
+    <Divider />
+    <Space>
+      <Tree
+        multiple
+        selectedKey="0-0-0-1"
+        checkedKeys={['0-0-0-1', '0-0-1-2']}
+        data={[
+          {
+            title: '0-0',
+            key: '0-0',
+            children: [
+              {
+                title: '0-0-0',
+                key: '0-0-0',
+                children: [
+                  { title: '0-0-0-0', key: '0-0-0-0', disabled: true },
+                  { title: '0-0-0-1', key: '0-0-0-1' },
+                  { title: '0-0-0-2', key: '0-0-0-2' },
+                ],
+              },
+              {
+                title: '0-0-1',
+                key: '0-0-1',
+                children: [
+                  { title: '0-0-1-0', key: '0-0-1-0' },
+                  { title: '0-0-1-1', key: '0-0-1-1' },
+                  { title: '0-0-1-2', key: '0-0-1-2' },
+                ],
+              },
+              {
+                title: '0-0-2',
+                key: '0-0-2',
+              },
+            ],
+          },
+          {
+            title: '0-1',
+            key: '0-1',
+            children: [
+              { title: '0-1-0-0', key: '0-1-0-0' },
+              { title: '0-1-0-1', key: '0-1-0-1' },
+              { title: '0-1-0-2', key: '0-1-0-2' },
+            ],
+          },
+          {
+            title: '0-2',
+            key: '0-2',
+          },
+        ]}
+      />
     </Space>
     <Divider />
     <Dropdown

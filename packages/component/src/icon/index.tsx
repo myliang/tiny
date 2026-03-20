@@ -220,13 +220,13 @@ const types = {
   angleUp: (
     <polygon
       points="5 0 .5 4.5 1.56 5.56 5 2.12 8.44 5.56 9.5 4.5"
-      transform="translate(4 5)"
+      transform="translate(4 6)"
     />
   ),
   angleDown: (
     <polygon
       points="8.44 .44 5 3.88 1.56 .44 .5 1.5 5 6 9.5 1.5"
-      transform="translate(4 5)"
+      transform="translate(4 6)"
     />
   ),
   add: (
@@ -262,10 +262,6 @@ const types = {
 };
 // 64 64 896 896
 const viewBoxes: { [key: string]: string } = {
-  angleLeft: '0 0 16 16',
-  angleRight: '0 0 16 16',
-  angleUp: '0 0 16 16',
-  angleDown: '0 0 16 16',
   add: '0 0 12 12',
   close: '0 0 12 12',
   lock: '64 64 896 896',
@@ -286,7 +282,7 @@ export interface IconProps {
 export default function Icon({
   type,
   style,
-  size = '1em',
+  size = '1.1428em',
   color = 'currentColor',
   onClick,
 }: IconProps) {

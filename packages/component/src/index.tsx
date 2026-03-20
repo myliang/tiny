@@ -17,6 +17,7 @@ import Tag from './tag';
 import Select from './select';
 import Calendar from './calendar';
 import { YearPicker, MonthPicker, DatePicker } from './date-picker';
+import Tree from './tree';
 
 export {
   Layout,
@@ -40,4 +41,5 @@ export {
   YearPicker,
   MonthPicker,
   DatePicker,
+  Tree,
 };

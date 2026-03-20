@@ -2,10 +2,10 @@
 
 .@{css-prefix}-radio {
   position: relative;
-  display: inline-block;
+  display: flex;
   backface-visibility: hidden;
   outline: 0;
-  vertical-align: baseline;
+  align-items: center;
 
   > input {
     position: absolute;
@@ -17,28 +17,10 @@
   }
 
   > label {
-    font-size: var(--tiny-radio-font-size);
-    position: relative;
-    display: block;
-    cursor: pointer;
-    user-select: none;
-    padding-left: calc(var(--tiny-radio-size) + 0.5em);
-    color: var(--tiny-radio-color);
-
-    &:before,
-    &:after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      height: var(--tiny-radio-size);
-      width: var(--tiny-radio-size);
-      border-radius: 1em;
-      border: 2px solid var(--tiny-radio-border-color);
-    }
+    padding-left: calc(var(--tiny-radio-size) * 0.4);
   }
 
-  &.checked > label {
+  &.checked > .@{css-prefix}-radio-status {
     &:before {
       border-color: var(--tiny-radio-checked-color);
     }
@@ -47,14 +29,34 @@
       background-color: var(--tiny-radio-checked-color);
     }
   }
-  &:focus,
-  &:hover {
-    > label:before {
-      border-color: hsla(
-        from var(--tiny-radio-checked-color) h s calc(l * 1.2)
-      );
-      outline: none;
-    }
+  &:focus .@{css-prefix}-radio-status {
+    outline: var(--tiny-outline);
+  }
+  &:not(.checked):hover .@{css-prefix}-radio-status:before {
+    border-color: hsla(from var(--tiny-radio-checked-color) h s calc(l * 1.2));
+    outline: none;
+  }
+}
+.@{css-prefix}-radio-status {
+  width: var(--tiny-radio-size);
+  height: var(--tiny-radio-size);
+  position: relative;
+  display: block;
+  cursor: pointer;
+  user-select: none;
+  color: var(--tiny-radio-color);
+  border-radius: 10em;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: var(--tiny-radio-size);
+    width: var(--tiny-radio-size);
+    border-radius: 1em;
+    border: 2px solid var(--tiny-radio-border-color);
   }
 }
 
@@ -92,12 +94,11 @@
         box-shadow: var(--tiny-radio-button-box-shadow);
       }
 
+      .@{css-prefix}-radio-status {
+        display: none;
+      }
       > label {
-        padding: 0;
-        &:before,
-        &:after {
-          display: none;
-        }
+        padding-left: 0;
       }
 
       &:focus,

@@ -38,7 +38,8 @@ export default function Radio({
       )}
       style={style}>
       <input value={value} type="radio" tabIndex={0} />
-      <label>{children}</label>
+      <div className={classNames(`${cssPrefix}radio-status`)} />
+      {children && <label>{children}</label>}
     </div>
   );
 }

@@ -8,7 +8,7 @@ export type CheckboxProps = {
   disabled?: boolean;
   checked?: boolean;
   indeterminate?: boolean;
-  children: ReactNode;
+  children?: ReactNode;
   value?: CheckboxValueType;
   onChange?: (
     checked: boolean,
@@ -40,7 +40,8 @@ export default function Checkbox({
       )}
       style={style}>
       <input value={value} type="checkbox" tabIndex={0} />
-      <label>{children}</label>
+      <div className={classNames(`${cssPrefix}checkbox-status`)} />
+      {children && <label>{children}</label>}
     </div>
   );
 }

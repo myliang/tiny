@@ -2,10 +2,11 @@
 
 .@{css-prefix}-checkbox {
   position: relative;
-  display: inline-block;
+  display: flex;
   backface-visibility: hidden;
   outline: 0;
-  vertical-align: baseline;
+  user-select: none;
+  align-items: center;
 
   > input {
     position: absolute;
@@ -17,28 +18,10 @@
   }
 
   > label {
-    font-size: var(--tiny-checkbox-font-size);
-    position: relative;
-    display: block;
-    cursor: pointer;
-    user-select: none;
-    padding-left: calc(var(--tiny-checkbox-size) + 0.5em);
-    color: var(--tiny-checkbox-color);
-
-    &:before,
-    &:after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      height: var(--tiny-checkbox-size);
-      width: var(--tiny-checkbox-size);
-      border-radius: 2px;
-      border: 2px solid var(--tiny-checkbox-border-color);
-    }
+    padding-left: calc(var(--tiny-checkbox-size) * 0.4);
   }
 
-  &.indeterminate > label {
+  &.indeterminate > .@{css-prefix}-checkbox-status {
     &:before {
       border-color: var(--tiny-checkbox-checked-color);
     }
@@ -48,15 +31,15 @@
     }
   }
 
-  &.checked > label {
+  &.checked > .@{css-prefix}-checkbox-status {
     &:before {
       border-color: var(--tiny-checkbox-checked-color);
       background-color: var(--tiny-checkbox-checked-color);
     }
     &:after {
       border-radius: 0;
-      top: calc(0.5 * var(--tiny-checkbox-size) + 1px);
-      left: calc(0.5 * var(--tiny-checkbox-size) - 2px);
+      top: calc(0.5 * var(--tiny-checkbox-size));
+      left: calc(0.256 * var(--tiny-checkbox-size));
       width: calc(5 * var(--tiny-checkbox-size) / 14);
       height: calc(8 * var(--tiny-checkbox-size) / 14);
       border: 2px solid #fff;
@@ -65,14 +48,36 @@
       transform: rotate(45deg) scale(1) translate(-50%, -50%);
     }
   }
-  &:focus,
-  &:hover:not(.checked) {
-    > label:before {
-      border-color: hsla(
-        from var(--tiny-checkbox-checked-color) h s calc(l * 1.2)
-      );
-      outline: none;
-    }
+  &:focus .@{css-prefix}-checkbox-status {
+    outline: var(--tiny-outline);
+  }
+  &:not(.checked):hover .@{css-prefix}-checkbox-status:before {
+    border-color: hsla(
+      from var(--tiny-checkbox-checked-color) h s calc(l * 1.2)
+    );
+    outline: none;
+  }
+}
+.@{css-prefix}-checkbox-status {
+  width: var(--tiny-checkbox-size);
+  height: var(--tiny-checkbox-size);
+  position: relative;
+  display: block;
+  cursor: pointer;
+  user-select: none;
+  color: var(--tiny-checkbox-color);
+  border-radius: var(--tiny-border-radius);
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: var(--tiny-checkbox-size);
+    width: var(--tiny-checkbox-size);
+    border-radius: 2px;
+    border: 2px solid var(--tiny-checkbox-border-color);
   }
 }
 

@@ -206,22 +206,16 @@ export function InternalSelect({
             {icon || <Icon type="angleDown" />}
           </div>
         )}
-        {clearable && (
-          <div
-            onClick={onClear}
-            className={classNames(`${cssPrefix}select-clear`)}
-            style={{
-              display: (
-                Array.isArray(value)
-                  ? value.length > 0
-                  : value !== undefined && value.value !== undefined
-              )
-                ? 'block'
-                : 'none',
-            }}>
-            <Icon type="close" />
-          </div>
-        )}
+        {clearable &&
+          (Array.isArray(value)
+            ? value.length > 0
+            : value !== undefined && value.value !== undefined) && (
+            <div
+              onClick={onClear}
+              className={classNames(`${cssPrefix}select-clear`)}>
+              <Icon type="close" />
+            </div>
+          )}
       </div>
     </Overlay>
   );

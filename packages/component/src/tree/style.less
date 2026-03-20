@@ -1,0 +1,51 @@
+@import '../style.base.less';
+
+.@{css-prefix}-tree {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+
+  .@{css-prefix}-tree-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+    line-height: var(--tiny-tree-line-height);
+    column-gap: 4px;
+
+    .disabled;
+
+    &.active {
+      .@{css-prefix}-tree-item-title {
+        background-color: var(--tiny-active-bgcolor);
+      }
+    }
+  }
+
+  .@{css-prefix}-tree-item-expand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--tiny-tree-line-height);
+    height: var(--tiny-tree-line-height);
+    border-radius: var(--tiny-border-radius);
+    &:hover {
+      background-color: var(--tiny-tree-item-hover-bgcolor);
+    }
+
+    .disabled;
+  }
+
+  .@{css-prefix}-checkbox {
+    height: 1.25em;
+  }
+
+  .@{css-prefix}-tree-item-title {
+    cursor: pointer;
+    padding: var(--tiny-tree-item-padding);
+    border-radius: var(--tiny-border-radius);
+    &:hover {
+      background-color: var(--tiny-tree-item-hover-bgcolor);
+    }
+  }
+}
