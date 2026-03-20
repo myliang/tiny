@@ -2,7 +2,13 @@ import { CSSProperties, Fragment, ReactNode, useEffect, useState } from 'react';
 import { classNames, cssPrefix } from '../helper';
 import Checkbox from '../checkbox';
 import Icon from '../icon';
-import { findNodeKeys } from './helper';
+import {
+  findNodeKeys,
+  findParentNode,
+  indeterminateKeys,
+  unzipKeys,
+  zipKeys,
+} from './helper';
 
 export type TreeNodeProps = {
   disabled?: boolean;
@@ -36,9 +42,12 @@ export default function Tree({
   const [_expandedKeys, setExpandedKeys] = useState(new Set());
   const [_selectedKey, setSelectedKey] = useState(selectedKey);
   const [_checkedKeys, setCheckedKeys] = useState(new Set<string>());
+  const [_indeterminateKeys, setIndeterminateKeys] = useState(new Set());
 
   useEffect(() => {
-    setCheckedKeys(new Set(checkedKeys));
+    const checkedKeySet = unzipKeys(data, checkedKeys);
+    // console.log('checked:', checkedKeySet);
+    setCheckedKeys(checkedKeySet);
     setSelectedKey(selectedKey);
     if (multiple) {
       if (checkedKeys && checkedKeys.length > 0) {
@@ -49,6 +58,7 @@ export default function Tree({
             keys.slice(0, -1).forEach((k1) => keySet.add(k1));
         });
         setExpandedKeys(keySet);
+        setIndeterminateKeys(indeterminateKeys(data, checkedKeySet));
       }
     } else if (selectedKey) {
       const keys = findNodeKeys(data, selectedKey);
@@ -91,24 +101,43 @@ export default function Tree({
       }
     };
 
+    const updateParentCheck = (parentNode: TreeNodeProps | null) => {
+      if (!parentNode) return;
+      const { children } = parentNode;
+      if (!children || children.length === 0) return;
+
+      if (children.every((it) => newCheckedKeys.has(it.key))) {
+        newCheckedKeys.add(parentNode.key);
+      } else {
+        newCheckedKeys.delete(parentNode.key);
+      }
+      updateParentCheck(findParentNode(data, parentNode.key));
+    };
+
     if (node) {
       if (checked) {
         newCheckedKeys.add(node.key);
         updateChildrenCheck(true, node.children);
       } else {
         newCheckedKeys.delete(node.key);
-        updateChildrenCheck(true, node.children);
+        updateChildrenCheck(false, node.children);
       }
     }
 
+    // console.log('checkedKeys', newCheckedKeys);
+    updateParentCheck(findParentNode(data, node.key));
     setCheckedKeys(newCheckedKeys);
-    if (onCheck) onCheck([...newCheckedKeys]);
+    setIndeterminateKeys(indeterminateKeys(data, newCheckedKeys));
+
+    // console.log('zipKeys', zipKeys(data, newCheckedKeys));
+    if (onCheck) onCheck(zipKeys(data, newCheckedKeys));
   };
 
   const nodeRender = (node: TreeNodeProps, level = 0) => {
     const expanded = _expandedKeys.has(node.key);
     const selected = _selectedKey === node.key;
     const checked = _checkedKeys.has(node.key);
+    const indeterminate = _indeterminateKeys.has(node.key);
     const hasChildren = node.children && node.children.length > 0;
 
     return (
@@ -131,6 +160,7 @@ export default function Tree({
           {multiple && (
             <Checkbox
               checked={checked}
+              indeterminate={indeterminate}
               onChange={(v) => onCheckChange(node, v)}
             />
           )}

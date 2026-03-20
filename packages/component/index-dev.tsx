@@ -216,7 +216,7 @@ root.render(
       <Tree
         multiple
         selectedKey="0-0-0-1"
-        checkedKeys={['0-0-0-1', '0-0-1-2']}
+        checkedKeys={['0-0-0-1', '0-0-1']}
         data={[
           {
             title: '0-0',
