@@ -11,7 +11,7 @@ export type DateContentProps = {
   weekdays?: string[];
   format?: string;
   value?: string;
-  onChange?: (value: string) => void;
+  onChange?: (value?: string) => void;
 };
 
 export function DateContent({
@@ -120,7 +120,7 @@ export default function DatePicker({
   const pickerRef = useRef<PickerMethods>(null);
   const [_value, setValue] = useState(value);
 
-  const _onChange = (v: string) => {
+  const _onChange = (v?: string) => {
     setValue(v);
     if (onChange) onChange(v);
     pickerRef.current?.hide();
@@ -132,7 +132,7 @@ export default function DatePicker({
 
   const _onClear = () => {
     setValue(undefined);
-    if (onClear) onClear();
+    if (onChange) onChange();
   };
 
   return (

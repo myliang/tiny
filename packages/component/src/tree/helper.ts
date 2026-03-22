@@ -35,6 +35,21 @@ export function findParentNode(
   return null;
 }
 
+export function findNodes(
+  nodes: TreeNodeProps[],
+  keys: Set<string>
+): TreeNodeProps[] {
+  const nNodes: TreeNodeProps[] = [];
+  for (let node of nodes) {
+    if (keys.has(node.key)) {
+      nNodes.push(node);
+    } else if (node.children) {
+      nNodes.push(...findNodes(node.children, keys));
+    }
+  }
+  return nNodes;
+}
+
 export function indeterminateKeys(
   nodes: TreeNodeProps[],
   checkedKeys: Set<string>

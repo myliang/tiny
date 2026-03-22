@@ -5,7 +5,7 @@ import Icon from '../icon';
 
 export type YearContentProps = {
   value?: number;
-  onChange?: (value: number) => void;
+  onChange?: (value?: number) => void;
 };
 export function YearContent({ value, onChange }: YearContentProps) {
   const currentYear = new Date().getFullYear();
@@ -84,13 +84,12 @@ export default function YearPicker({
   value,
   onChange,
   placeholder,
-  onClear,
   ...restProps
 }: YearPicker) {
   const pickerRef = useRef<PickerMethods>(null);
   const [_value, setValue] = useState(value);
 
-  const _onChange = (v: number) => {
+  const _onChange = (v?: number) => {
     setValue(v);
     if (onChange) onChange(v);
     pickerRef.current?.hide();
@@ -107,7 +106,7 @@ export default function YearPicker({
 
   const _onClear = () => {
     setValue(undefined);
-    if (onClear) onClear();
+    if (onChange) onChange();
   };
 
   return (

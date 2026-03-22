@@ -4,6 +4,7 @@ import Checkbox from '../checkbox';
 import Icon from '../icon';
 import {
   findNodeKeys,
+  findNodes,
   findParentNode,
   indeterminateKeys,
   unzipKeys,
@@ -25,8 +26,8 @@ export type TreeProps = {
   selectedKey?: string;
   checkedKeys?: string[];
   data: TreeNodeProps[];
-  onCheck?: (keys: string[]) => void;
-  onSelect?: (key: string) => void;
+  onCheck?: (keys: string[], nodes: TreeNodeProps[]) => void;
+  onSelect?: (key: string, node: TreeNodeProps) => void;
 };
 
 export default function Tree({
@@ -58,8 +59,8 @@ export default function Tree({
             keys.slice(0, -1).forEach((k1) => keySet.add(k1));
         });
         setExpandedKeys(keySet);
-        setIndeterminateKeys(indeterminateKeys(data, checkedKeySet));
       }
+      setIndeterminateKeys(indeterminateKeys(data, checkedKeySet));
     } else if (selectedKey) {
       const keys = findNodeKeys(data, selectedKey);
       if (keys && keys.length > 1) {
@@ -81,7 +82,7 @@ export default function Tree({
 
   const onItemClick = (node: TreeNodeProps) => {
     setSelectedKey(node.key);
-    if (onSelect) onSelect(node.key);
+    if (onSelect) onSelect(node.key, node);
   };
 
   // on check
@@ -130,7 +131,8 @@ export default function Tree({
     setIndeterminateKeys(indeterminateKeys(data, newCheckedKeys));
 
     // console.log('zipKeys', zipKeys(data, newCheckedKeys));
-    if (onCheck) onCheck(zipKeys(data, newCheckedKeys));
+    if (onCheck)
+      onCheck(zipKeys(data, newCheckedKeys), findNodes(data, newCheckedKeys));
   };
 
   const nodeRender = (node: TreeNodeProps, level = 0) => {

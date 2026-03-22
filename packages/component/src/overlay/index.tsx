@@ -7,15 +7,16 @@ import React, {
   ReactNode,
   useCallback,
   useEffectEvent,
+  CSSProperties,
 } from 'react';
 import ReactDOM from 'react-dom';
 import { position, Placement, Trigger } from './helper';
 import { classNames } from '../helper';
 
 type OverlayContentProps = {
+  style?: CSSProperties;
   placement?: Placement;
   zIndex: number;
-  maxHeight: number;
   width?: number | 'auto' | 'with';
   target: HTMLElement | null;
   children: React.ReactNode;
@@ -31,21 +32,25 @@ const SCROLL_WIDTH = 15;
 let _zIndex = 10;
 
 function OverlayContent({
+  style,
   placement = 'auto',
   target,
   children,
   zIndex,
-  maxHeight,
   width = 'auto',
   setShow,
   onMouseEnter,
   onMouseLeave,
 }: OverlayContentProps) {
   const _ref = useRef(null);
-  const [style, setStyle] = useState<React.CSSProperties>({
-    zIndex,
-    maxHeight,
-  });
+  const [_style, setStyle] = useState<React.CSSProperties>(
+    Object.assign(
+      {
+        zIndex,
+      },
+      style
+    )
+  );
 
   const currentPosition = () => {
     if (_ref && _ref.current && target != null) {
@@ -58,13 +63,16 @@ function OverlayContent({
         SPACE
       );
       setStyle(
-        Object.assign({
-          maxHeight,
-          zIndex,
-          width: width === 'with' ? target.offsetWidth : width,
-          left: `${left}px`,
-          top: `${top}px`,
-        })
+        Object.assign(
+          {
+            zIndex,
+            width: width === 'with' ? target.offsetWidth : width,
+            left: `${left}px`,
+            top: `${top}px`,
+            maxHeight: 200,
+          },
+          style
+        )
       );
     }
   };
@@ -113,7 +121,7 @@ function OverlayContent({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       ref={_ref}
-      style={style}
+      style={_style}
       onClick={() => false}>
       {children}
     </div>,
@@ -128,7 +136,7 @@ export type OverlayMethods = {
 
 export type OverlayProps = {
   ref?: React.Ref<OverlayMethods>;
-  maxHeight?: number;
+  style?: CSSProperties;
   width?: 'auto' | 'with' | number;
   placement?: Placement;
   trigger?: Trigger;
@@ -140,7 +148,7 @@ export type OverlayProps = {
 
 export function Overlay({
   ref,
-  maxHeight = 200,
+  style,
   width = 'auto',
   placement = 'auto',
   trigger = 'click',
@@ -241,7 +249,7 @@ export function Overlay({
           onMouseEnter={onContentMouseEnter}
           onMouseLeave={onContentMouseLeave}
           target={targetNode}
-          maxHeight={maxHeight}
+          style={style}
           width={width}
           zIndex={_zIndex}
           placement={placement}

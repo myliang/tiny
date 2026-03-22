@@ -39,7 +39,7 @@ export type InternalSelectProps = {
   prefix?: ReactNode;
   maxCount?: number;
   maxTags?: number;
-  popupMaxHeight?: number;
+  popupStyle?: CSSProperties;
   popupContent?: ReactNode;
   icon?: ReactNode;
   value?: LabeledValue | LabeledValue[];
@@ -64,7 +64,7 @@ export function InternalSelect({
   placement = 'auto',
   prefix,
   maxTags = 2,
-  popupMaxHeight = 200,
+  popupStyle,
   popupContent,
   icon,
   value,
@@ -140,7 +140,7 @@ export function InternalSelect({
     <Overlay
       ref={overlayRef}
       onMounted={onMounted}
-      maxHeight={popupMaxHeight}
+      style={popupStyle}
       width="with"
       trigger="click"
       placement={placement}

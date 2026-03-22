@@ -1,4 +1,4 @@
-import { ReactNode, Fragment, useState, useCallback, useRef } from 'react';
+import { ReactNode, Fragment, useState, useRef } from 'react';
 import { cssPrefix, classNames } from '../helper';
 import {
   InternalSelect,
@@ -7,6 +7,8 @@ import {
   InternalSelectProps,
   InternalSelectMethods,
 } from './select';
+
+import { SelectTree } from './tree';
 
 export type SelectOptGroupType = {
   label: ReactNode;
@@ -20,7 +22,7 @@ export type SelectProps = {
   value?: SelectValue;
   options: SelectOptionType[];
   filterOption?: (q: string, value: LabeledValue) => boolean;
-  onChange?: (value: SelectValue) => void;
+  onChange?: (value?: SelectValue) => void;
   onDeselect?: (value: LabeledValue) => void;
   onSelect?: (value: LabeledValue) => void;
 } & Omit<InternalSelectProps, 'value' | 'onTagClear' | 'popupContent'>;
@@ -144,6 +146,7 @@ export default function Select({
   const onClear = () => {
     setValue(undefined);
     setQuery('');
+    if (onChange) onChange(undefined);
   };
 
   const itemRef = (el: HTMLLIElement | null) => {
@@ -223,3 +226,5 @@ export default function Select({
     />
   );
 }
+
+Select.Tree = SelectTree;

@@ -204,6 +204,103 @@ root.render(
           },
         ]}
       />
+      <Select.Tree
+        style={{ width: 200 }}
+        popupStyle={{ maxHeight: 300 }}
+        value="0-0-0-1"
+        data={[
+          {
+            title: '0-0',
+            key: '0-0',
+            children: [
+              {
+                title: '0-0-0',
+                key: '0-0-0',
+                children: [
+                  { title: '0-0-0-0', key: '0-0-0-0', disabled: true },
+                  { title: '0-0-0-1', key: '0-0-0-1' },
+                  { title: '0-0-0-2', key: '0-0-0-2' },
+                ],
+              },
+              {
+                title: '0-0-1',
+                key: '0-0-1',
+                children: [
+                  { title: '0-0-1-0', key: '0-0-1-0' },
+                  { title: '0-0-1-1', key: '0-0-1-1' },
+                  { title: '0-0-1-2', key: '0-0-1-2' },
+                ],
+              },
+              {
+                title: '0-0-2',
+                key: '0-0-2',
+              },
+            ],
+          },
+          {
+            title: '0-1',
+            key: '0-1',
+            children: [
+              { title: '0-1-0-0', key: '0-1-0-0' },
+              { title: '0-1-0-1', key: '0-1-0-1' },
+              { title: '0-1-0-2', key: '0-1-0-2' },
+            ],
+          },
+          {
+            title: '0-2',
+            key: '0-2',
+          },
+        ]}
+      />
+      <Select.Tree
+        multiple
+        style={{ width: 300 }}
+        popupStyle={{ minWidth: 300, maxHeight: 300 }}
+        value="0-0-0-1"
+        data={[
+          {
+            title: '0-0',
+            key: '0-0',
+            children: [
+              {
+                title: '0-0-0',
+                key: '0-0-0',
+                children: [
+                  { title: '0-0-0-0', key: '0-0-0-0', disabled: true },
+                  { title: '0-0-0-1', key: '0-0-0-1' },
+                  { title: '0-0-0-2', key: '0-0-0-2' },
+                ],
+              },
+              {
+                title: '0-0-1',
+                key: '0-0-1',
+                children: [
+                  { title: '0-0-1-0', key: '0-0-1-0' },
+                  { title: '0-0-1-1', key: '0-0-1-1' },
+                  { title: '0-0-1-2', key: '0-0-1-2' },
+                ],
+              },
+              {
+                title: '0-0-2',
+                key: '0-0-2',
+              },
+            ],
+          },
+          {
+            title: '0-1',
+            key: '0-1',
+            children: [
+              { title: '0-1-0-0', key: '0-1-0-0' },
+              { title: '0-1-0-1', key: '0-1-0-1' },
+              { title: '0-1-0-2', key: '0-1-0-2' },
+            ],
+          },
+          {
+            title: '0-2',
+            key: '0-2',
+          },
+        ]}
+      />
     </Space>
     <Divider />
     <Space>

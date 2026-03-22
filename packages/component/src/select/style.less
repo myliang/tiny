@@ -4,7 +4,16 @@
   .input(select);
 
   &.multiple {
-    padding-left: calc(var(--tiny-input-padding-vertical) + 1px);
+    padding-left: calc(var(--tiny-input-padding-vertical) + 2px);
+    .@{css-prefix}-select-content {
+      .placeholder,
+      .placeholder + input {
+        margin-left: calc(
+          var(--tiny-input-padding-horizontal) -
+            var(--tiny-input-padding-vertical) - 2px
+        );
+      }
+    }
   }
 }
 
@@ -19,7 +28,7 @@
   input {
     width: 4px;
     min-width: 4px;
-    margin: 4px 2px;
+    margin: 4px 0;
   }
 
   .@{css-prefix}-tag {
@@ -29,7 +38,6 @@
   .placeholder,
   .value-text {
     position: absolute;
-    padding-left: calc(var(--tiny-input-padding-vertical) + 1px);
     opacity: 0.6;
   }
 }

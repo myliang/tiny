@@ -74,7 +74,7 @@ export default function Picker({
       ref={overlayRef}
       width="auto"
       trigger="click"
-      maxHeight={500}
+      style={{ maxHeight: 500 }}
       placement={placement}
       content={popupContent}>
       <div

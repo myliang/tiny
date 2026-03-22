@@ -10,7 +10,7 @@ import YearPicker, { YearContent } from './year';
 export type MonthContentProps = {
   format?: string;
   value?: string;
-  onChange?: (value: string) => void;
+  onChange?: (value?: string) => void;
 };
 
 export function MonthContent({ format, value, onChange }: MonthContentProps) {
@@ -32,7 +32,7 @@ export function MonthContent({ format, value, onChange }: MonthContentProps) {
   };
   const months = yearMonths(_selected);
 
-  const onYearChange = (year: number) => {
+  const onYearChange = (year?: number) => {
     if (year) {
       setSelected(_selected.year(year));
       setShowYear(false);
@@ -91,14 +91,13 @@ export default function MonthPicker({
   format = 'YYYY-MM',
   value,
   onChange,
-  onClear,
   placeholder,
   ...restProps
 }: MonthPicker) {
   const pickerRef = useRef<PickerMethods>(null);
   const [_value, setValue] = useState(value);
 
-  const _onChange = (v: string) => {
+  const _onChange = (v?: string) => {
     setValue(v);
     if (onChange) onChange(v);
     pickerRef.current?.hide();
@@ -110,7 +109,7 @@ export default function MonthPicker({
 
   const _onClear = () => {
     setValue(undefined);
-    if (onClear) onClear();
+    if (onChange) onChange();
   };
 
   return (
