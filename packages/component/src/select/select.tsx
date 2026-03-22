@@ -202,7 +202,9 @@ export function InternalSelect({
         {loading ? (
           <div className={classNames(`${cssPrefix}select-suffix loading`)} />
         ) : (
-          <div className={classNames(`${cssPrefix}select-suffix`)}>
+          <div
+            className={classNames(`${cssPrefix}select-suffix`)}
+            style={{ marginRight: -2 }}>
             {icon || <Icon type="angleDown" />}
           </div>
         )}

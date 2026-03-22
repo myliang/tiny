@@ -17,6 +17,7 @@
 @import './calendar/style.less';
 @import './date-picker/style.less';
 @import './tree/style.less';
+@import './popconfirm/style.less';
 
 :root {
   --tiny-color: rgba(0, 0, 0, 0.87);
@@ -188,5 +189,37 @@ input[type='password']::-moz-reveal {
 
   to {
     transform: rotate(360deg);
+  }
+}
+
+.tiny-messages {
+  position: fixed;
+  left: 0;
+  top: 1em;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.tiny-message {
+  display: inline-block;
+  text-align: center;
+  font-size: 1em;
+  color: var(--tiny-color);
+  background-color: var(--tiny-bgcolor);
+  border: 2px solid var(--tiny-border-color);
+  box-shadow: var(--tiny-box-shadow);
+  border-radius: var(--tiny-border-radius);
+  padding: 0.6em 1em;
+
+  &.warning {
+    border-color: var(--tiny-warning-color);
+  }
+
+  &.error {
+    border-color: var(--tiny-error-color);
+  }
+
+  &.success {
+    border-color: var(--tiny-success-color);
   }
 }

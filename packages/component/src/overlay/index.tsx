@@ -158,13 +158,9 @@ export function Overlay({
   onMounted,
 }: OverlayProps) {
   const [show, setShow] = useState(false);
-  const [targetNode, setTargetNode] = useState<HTMLElement | null>(null);
+  // const [targetNode, setTargetNode] = useState<HTMLElement | null>(null);
+  const targetRef = useRef<HTMLElement>(null);
   const isEnterContent = useRef(false);
-
-  // let targetNode: HTMLElement | null = null;
-  const targetRef = (el: HTMLElement) => {
-    setTargetNode(el);
-  };
 
   const updateShow = useCallback((v: boolean) => {
     if (v) _zIndex++;
@@ -185,7 +181,10 @@ export function Overlay({
 
   // setTimeout: Waiting for the completion of the other closing process
   const onClick = (evt: React.MouseEvent<HTMLElement>) => {
-    if ('click' === trigger) setTimeout(() => updateShow(!show), 0);
+    if ('click' === trigger)
+      setTimeout(() => {
+        updateShow(!show);
+      }, 0);
     if (target.props.onClick) {
       target.props.onClick(evt);
     }
@@ -220,7 +219,11 @@ export function Overlay({
   };
 
   const targetClone = React.cloneElement(target, {
-    ref: targetRef,
+    ref: (el) => {
+      if (el !== null) {
+        targetRef.current = el;
+      }
+    },
     className: `${classNames(target.props.className, { active: show })}`,
     onClick,
     onMouseEnter,
@@ -248,7 +251,7 @@ export function Overlay({
         <OverlayContent
           onMouseEnter={onContentMouseEnter}
           onMouseLeave={onContentMouseLeave}
-          target={targetNode}
+          target={targetRef.current}
           style={style}
           width={width}
           zIndex={_zIndex}

@@ -20,6 +20,8 @@ import {
   MonthPicker,
   DatePicker,
   Tree,
+  Popconfirm,
+  message,
 } from './src';
 
 const container = document.getElementById('root');
@@ -164,6 +166,26 @@ root.render(
         <Input.Number variant="underlined" value="100000.25" step={1.1} />
         <Input.Number variant="borderless" value="100000.25" step={1.1} />
       </Space>
+    </Space>
+    <Divider />
+    <Space>
+      <Dropdown
+        menu={{
+          items: [
+            { key: 'jack', children: 'Jack' },
+            { key: 'luck', children: 'Lucy' },
+            { key: 'active', children: 'Active' },
+            { key: 'disabled', children: 'Disabled', disabled: true },
+          ],
+        }}>
+        <Button style={{ width: 120 }}>Dropdown</Button>
+      </Dropdown>
+      <Popconfirm
+        title="Confirm"
+        content="Are you sure you want to delete?"
+        onOk={() => message('success', 'warning', 100000)}>
+        <Button>Delete</Button>
+      </Popconfirm>
     </Space>
     <Divider />
     <Space>
@@ -360,18 +382,7 @@ root.render(
       />
     </Space>
     <Divider />
-    <Dropdown
-      menu={{
-        items: [
-          { key: 'jack', children: 'Jack' },
-          { key: 'luck', children: 'Lucy' },
-          { key: 'active', children: 'Active' },
-          { key: 'disabled', children: 'Disabled', disabled: true },
-        ],
-      }}>
-      <a style={{ width: '80px' }}>Dropdown</a>
-    </Dropdown>
-    <Divider />
+
     <Space>
       <Menu
         selectedKey="active"

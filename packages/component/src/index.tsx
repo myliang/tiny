@@ -18,6 +18,9 @@ import Select from './select';
 import Calendar from './calendar';
 import { YearPicker, MonthPicker, DatePicker } from './date-picker';
 import Tree from './tree';
+import Popconfirm from './popconfirm';
+
+import message from './message';
 
 export {
   Layout,
@@ -42,4 +45,6 @@ export {
   MonthPicker,
   DatePicker,
   Tree,
+  Popconfirm,
+  message,
 };
