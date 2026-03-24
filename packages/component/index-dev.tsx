@@ -24,6 +24,7 @@ import {
   message,
   Upload,
   Image,
+  Card,
 } from './src';
 
 const container = document.getElementById('root');
@@ -208,6 +209,10 @@ root.render(
           'https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp',
         ]}></Image.PreviewGroup>
     </Space>
+    <Divider />
+    <Card style={{ width: 300 }} title="department" extra="more">
+      Department content
+    </Card>
     <Divider />
     <Space>
       <Upload

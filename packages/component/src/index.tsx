@@ -21,6 +21,7 @@ import Tree from './tree';
 import Popconfirm from './popconfirm';
 import Image from './image';
 import Upload from './upload';
+import Card from './card';
 
 import message from './message';
 
@@ -51,4 +52,5 @@ export {
   message,
   Image,
   Upload,
+  Card,
 };

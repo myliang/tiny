@@ -2,6 +2,7 @@ import { CSSProperties, ReactElement, useRef, useState } from 'react';
 import { classNames, cssPrefix } from '../helper';
 import upload from './ajax';
 import Icon from '../icon';
+import { ImagePreview } from '../image/preview';
 
 export type UploadFile = {
   percent?: number;
@@ -26,6 +27,7 @@ export type UploadProps = {
   headers?: Record<string, any>;
   children?: ReactElement;
   value?: UploadFile[];
+  onPreview: (f: UploadFile) => void;
   onChange?: (value: UploadFile[]) => void;
   onProgress?: (file: UploadFile, evt: ProgressEvent) => void;
   onSuccess?: (file: UploadFile, res: object) => void;
@@ -45,6 +47,7 @@ export default function Upload({
   limit = 1,
   withCredentials = true,
   accept = '*/*',
+  onPreview,
   onChange,
   onSuccess,
   onProgress,
@@ -66,7 +69,8 @@ export default function Upload({
     inputRef.current?.click();
   };
 
-  const onClose = (f: UploadFile) => {
+  const onClose = (f: UploadFile, evt: React.MouseEvent) => {
+    evt.stopPropagation();
     setFiles((files) => {
       const nfiles = files.filter((it) => it.uid !== f.uid);
       if (onChange) onChange(nfiles);
@@ -126,6 +130,23 @@ export default function Upload({
     }
   };
 
+  const onItemClick = (f: UploadFile) => {
+    if (type === 'picture' && f.status === 'done') setPreview([true, f]);
+    else if (onPreview) onPreview(f);
+  };
+
+  // preview image
+  const [preview, setPreview] = useState<[boolean, UploadFile | null]>([
+    false,
+    null,
+  ]);
+  const onPreviewClose = () => {
+    setPreview([false, null]);
+  };
+  const onPreviewNext = () => {};
+  const onPreviewPrev = () => {};
+
+  // render
   const input = (
     <input
       type="file"
@@ -135,9 +156,11 @@ export default function Upload({
       ref={inputRef}
     />
   );
+
   const fileRender = (f: UploadFile) => {
     return (
       <div
+        onClick={() => onItemClick(f)}
         className={classNames(`${cssPrefix}upload-item`, f.status)}
         key={f.uid}>
         {type === 'picture' && f.status === 'done' && (
@@ -162,12 +185,13 @@ export default function Upload({
         )}
         {(f.status === 'done' || f.status === 'error') && (
           <div className={classNames(`${cssPrefix}upload-item-actions`)}>
-            <Icon type="close" onClick={() => onClose(f)} />
+            <Icon type="close" onClick={(evt) => onClose(f, evt)} />
           </div>
         )}
       </div>
     );
   };
+
   return (
     <div
       className={classNames(`${cssPrefix}upload`, className, type, {
@@ -196,6 +220,16 @@ export default function Upload({
           </div>
         )}
       </div>
+      {preview[0] && type === 'picture' && preview[1] && (
+        <ImagePreview
+          src={preview[1].url}
+          hasNext={false}
+          hasPrev={false}
+          onClose={onPreviewClose}
+          onNext={onPreviewNext}
+          onPrev={onPreviewPrev}
+        />
+      )}
     </div>
   );
 }

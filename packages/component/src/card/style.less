@@ -1,0 +1,24 @@
+@import '../style.base.less';
+
+.@{css-prefix}-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--tiny-border-color);
+  box-shadow: var(--tiny-box-shadow);
+  font-size: var(--tiny-font-size);
+  overflow: hidden;
+  border-top-left-radius: var(--tiny-border-radius);
+  border-top-right-radius: var(--tiny-border-radius);
+}
+.@{css-prefix}-card-header {
+  display: flex;
+  border-bottom: 1px solid var(--tiny-border-color);
+  background-color: #f8f8f9;
+  padding: var(--tiny-card-padding);
+}
+.@{css-prefix}-card-header-title {
+  flex: auto;
+}
+.@{css-prefix}-card-body {
+  padding: var(--tiny-card-padding);
+}
