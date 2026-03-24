@@ -27,7 +27,7 @@ export type UploadProps = {
   headers?: Record<string, any>;
   children?: ReactElement;
   value?: UploadFile[];
-  onPreview: (f: UploadFile) => void;
+  onPreview?: (f: UploadFile) => void;
   onChange?: (value: UploadFile[]) => void;
   onProgress?: (file: UploadFile, evt: ProgressEvent) => void;
   onSuccess?: (file: UploadFile, res: object) => void;
