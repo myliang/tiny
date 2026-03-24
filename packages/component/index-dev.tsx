@@ -22,6 +22,8 @@ import {
   Tree,
   Popconfirm,
   message,
+  Upload,
+  Image,
 } from './src';
 
 const container = document.getElementById('root');
@@ -186,6 +188,95 @@ root.render(
         onOk={() => message('success', 'warning', 100000)}>
         <Button>Delete</Button>
       </Popconfirm>
+    </Space>
+    <Divider />
+    <Space>
+      <Image
+        src="//p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/a8c8cdb109cb051163646151a4a5083b.png~tplv-uwbnlip3yd-webp.webp"
+        alt="lamp"
+      />
+      <Image.PreviewGroup
+        images={[
+          {
+            width: 200,
+            src: 'https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp',
+          },
+        ]}
+        items={[
+          'https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp',
+          'https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp',
+          'https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp',
+        ]}></Image.PreviewGroup>
+    </Space>
+    <Divider />
+    <Space>
+      <Upload
+        action=""
+        showFiles={false}
+        value={[
+          {
+            uid: '1',
+            name: 'xxx.png',
+            status: 'uploading',
+            url: 'https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp',
+            percent: 33,
+          },
+        ]}>
+        <Button>Upload</Button>
+      </Upload>
+      <div style={{ width: 500 }}>
+        <Upload
+          action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
+          value={[
+            {
+              uid: '1',
+              name: 'xxx.png',
+              status: 'uploading',
+              url: 'https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp',
+              percent: 33,
+            },
+            {
+              uid: '2',
+              name: 'yyy.png',
+              status: 'done',
+              url: 'https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp',
+            },
+            {
+              uid: '3',
+              name: 'zzz.png',
+              status: 'error',
+              url: 'https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp',
+            },
+          ]}>
+          <Button>Upload</Button>
+        </Upload>
+      </div>
+      <Upload
+        action=""
+        type="picture"
+        value={[
+          {
+            uid: '1',
+            name: 'xxx.png',
+            status: 'uploading',
+            url: 'https://gw.alipayobjects.com/zos/antfincdn/LlvErxo8H9/photo-1503185912284-5271ff81b9a8.webp',
+            percent: 33,
+          },
+          {
+            uid: '2',
+            name: 'yyy.png',
+            status: 'done',
+            url: 'https://gw.alipayobjects.com/zos/antfincdn/cV16ZqzMjW/photo-1473091540282-9b846e7965e3.webp',
+          },
+          {
+            uid: '3',
+            name: 'zzz.png',
+            status: 'error',
+            url: 'https://gw.alipayobjects.com/zos/antfincdn/x43I27A55%26/photo-1438109491414-7198515b166b.webp',
+          },
+        ]}>
+        <Button>Upload</Button>
+      </Upload>
     </Space>
     <Divider />
     <Space>

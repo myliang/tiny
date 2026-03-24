@@ -19,6 +19,8 @@ import Calendar from './calendar';
 import { YearPicker, MonthPicker, DatePicker } from './date-picker';
 import Tree from './tree';
 import Popconfirm from './popconfirm';
+import Image from './image';
+import Upload from './upload';
 
 import message from './message';
 
@@ -47,4 +49,6 @@ export {
   Tree,
   Popconfirm,
   message,
+  Image,
+  Upload,
 };
