@@ -2,7 +2,7 @@ import TinyTable, { h } from './src';
 
 const t = TinyTable.create(
   '#table',
-  () => 1400,
+  () => 1800,
   () => 600,
   {
     scrollable: true,
@@ -10,6 +10,12 @@ const t = TinyTable.create(
     selectable: true,
     editable: true,
     copyable: true,
+    data: {
+      cols: 12,
+    },
+    renderer: {
+      colHeader: {},
+    },
   }
 )
   .freeze('D5')

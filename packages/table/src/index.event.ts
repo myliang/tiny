@@ -63,11 +63,11 @@ function mousemoveHandler(t: Table, evt: any) {
   const { buttons, offsetX, offsetY } = evt;
   // press the mouse left button
   if (viewport && buttons === 0) {
-    const { _rowHeader, _colHeader } = t._renderer;
+    const { _rowHeader, _colHeader, _rows, _cols } = t._renderer;
     if (_rowResizer && _rowHeader.width > 0) {
       if (offsetX < _rowHeader.width && offsetY > _colHeader.height) {
         const cell = viewport.cellAt(offsetX, offsetY);
-        if (cell) _rowResizer.show(cell);
+        if (cell && cell.row < _rows) _rowResizer.show(cell);
       } else {
         _rowResizer.hide();
       }
@@ -75,7 +75,7 @@ function mousemoveHandler(t: Table, evt: any) {
     if (_colResizer && _colHeader.height > 0) {
       if (offsetY < _colHeader.height && offsetX > _rowHeader.width) {
         const cell = viewport.cellAt(offsetX, offsetY);
-        if (cell) _colResizer.show(cell);
+        if (cell && cell.col < _cols) _colResizer.show(cell);
       } else {
         _colResizer.hide();
       }

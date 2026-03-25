@@ -1,5 +1,4 @@
 import './style.index.css';
-import { stylePrefix } from './config';
 import HElement, { h } from './element';
 import Scrollbar from './scrollbar';
 import Resizer from './resizer';
@@ -13,10 +12,11 @@ import TableRenderer, {
   Range,
   Rect,
   Border,
-  Formatter,
+  CellFormatter,
   expr2xy,
   Gridline,
   ViewportCell,
+  CellRenderer,
 } from '@tiny/table-renderer';
 import {
   defaultData,
@@ -65,6 +65,8 @@ export type TableRendererOptions = {
   gridline?: Partial<Gridline>;
   headerGridline?: Partial<Gridline>;
   freeGridline?: Partial<Gridline>;
+  cellRenderer?: CellRenderer;
+  cellFormatter?: CellFormatter;
 };
 
 export type TableDataOptions = {
@@ -149,7 +151,9 @@ export default class Table {
     const container: HTMLElement | null =
       typeof element === 'string' ? document.querySelector(element) : element;
     if (container === null) throw new Error('first argument error');
-    this._container = h(container, `${stylePrefix}-container`).css({
+    this._container = h(container).css({
+      position: 'relative',
+      overflow: 'hidden',
       height: height(),
       width: width(),
     });
@@ -348,11 +352,6 @@ export default class Table {
     return this;
   }
 
-  formatter(v: Formatter) {
-    this._cells.formatter(v);
-    return this;
-  }
-
   style(index: number, withDefault = true) {
     return getStyle(this._data, index, withDefault);
   }
@@ -421,7 +420,6 @@ export default class Table {
       .cell((r, c) => {
         return this.cell(r, c);
       })
-      .formatter(this._cells._formatter)
       .render();
 
     // viewport

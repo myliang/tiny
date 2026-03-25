@@ -6,22 +6,23 @@ import {
   TextLineType,
   BorderLineStyle,
   Cell,
-  Formatter,
-  CellRenderer,
+  CellFormat,
+  CellRender,
   BorderLine,
-} from ".";
-import Canvas from "./canvas";
+  cellValueString,
+} from '.';
+import Canvas from './canvas';
 
 // align: left | center | right
 // width: the width of cell
 // padding: the padding of cell
 function textx(align: Align, width: number, padding: number) {
   switch (align) {
-    case "left":
+    case 'left':
       return padding;
-    case "center":
+    case 'center':
       return width / 2;
-    case "right":
+    case 'right':
       return width - padding;
     default:
       return 0;
@@ -37,16 +38,16 @@ function texty(
   height: number,
   txtHeight: number,
   fontHeight: number,
-  padding: number,
+  padding: number
 ) {
   switch (align) {
-    case "top":
+    case 'top':
       return padding;
-    case "middle":
+    case 'middle':
       let y = height / 2 - txtHeight / 2;
       const minHeight = fontHeight / 2 + padding;
       return y < minHeight ? minHeight : y;
-    case "bottom":
+    case 'bottom':
       return height - padding - txtHeight;
     default:
       return 0;
@@ -63,28 +64,28 @@ function textLine(
   x: number,
   y: number,
   w: number,
-  h: number,
+  h: number
 ): [number, number, number, number] {
   // y
   let ty = 0;
-  if (type === "underline") {
-    if (valign === "top") {
+  if (type === 'underline') {
+    if (valign === 'top') {
       ty = -h;
-    } else if (valign === "middle") {
+    } else if (valign === 'middle') {
       ty = -h / 2;
     }
-  } else if (type === "strikethrough") {
-    if (valign === "top") {
+  } else if (type === 'strikethrough') {
+    if (valign === 'top') {
       ty = -h / 2;
-    } else if (valign === "bottom") {
+    } else if (valign === 'bottom') {
       ty = h / 2;
     }
   }
   // x
   let tx = 0;
-  if (align === "center") {
+  if (align === 'center') {
     tx = w / 2;
-  } else if (align === "right") {
+  } else if (align === 'right') {
     tx = w;
   }
   return [x - tx, y - ty, x - tx + w, y - ty];
@@ -94,12 +95,12 @@ function fontString(
   family: string,
   size: number,
   italic: boolean,
-  bold: boolean,
+  bold: boolean
 ) {
   if (family && size) {
-    let font = "";
-    if (italic) font += "italic ";
-    if (bold) font += "bold ";
+    let font = '';
+    if (italic) font += 'italic ';
+    if (bold) font += 'bold ';
     return `${font} ${size}pt ${family}`;
   }
   return undefined;
@@ -109,7 +110,7 @@ export function cellBorderRender(
   canvas: Canvas,
   rect: Rect,
   borderLine: BorderLine | [BorderLineStyle, string],
-  autoAlign: boolean = false,
+  autoAlign: boolean = false
 ) {
   let top, right, bottom, left;
   if (Array.isArray(borderLine)) {
@@ -121,7 +122,7 @@ export function cellBorderRender(
   canvas.save().beginPath().translate(rect.x, rect.y);
   const lineRects = (
     index: number,
-    offset: number,
+    offset: number
   ): [number, number, number, number] => {
     const array: [number, number, number, number][] = [
       [0 - offset, 0, rect.width + offset, 0],
@@ -136,13 +137,13 @@ export function cellBorderRender(
     if (it) {
       let lineDash: number[] = [];
       let lineWidth = 1;
-      if (it[0] === "thick") {
+      if (it[0] === 'thick') {
         lineWidth = 3;
-      } else if (it[0] === "medium") {
+      } else if (it[0] === 'medium') {
         lineWidth = 2;
-      } else if (it[0] === "dotted") {
+      } else if (it[0] === 'dotted') {
         lineDash = [1, 1];
-      } else if (it[0] === "dashed") {
+      } else if (it[0] === 'dashed') {
         lineDash = [2, 2];
       }
       let offset = 0;
@@ -165,15 +166,15 @@ export function cellRender(
   cell: Cell,
   rect: Rect,
   style: Style,
-  cellRenderer: CellRenderer | undefined,
-  formatter: Formatter,
+  cellRender: CellRender | undefined,
+  format: CellFormat | undefined
 ) {
-  let text = "";
+  let text = '';
   if (cell) {
-    if (typeof cell === "string" || typeof cell === "number") {
-      text = formatter(`${cell}`);
+    if (format) {
+      text = format(cell);
     } else {
-      text = formatter((cell.value || "") + "", cell.format);
+      text = cellValueString(cell);
     }
   }
 
@@ -197,16 +198,16 @@ export function cellRender(
 
   // clip
   canvas.rect(0, 0, rect.width, rect.height).clip();
-  if (bgcolor) canvas.prop("fillStyle", bgcolor).fill();
+  if (bgcolor) canvas.prop('fillStyle', bgcolor).fill();
 
   // rotate
   if (rotate && rotate > 0) {
     canvas.rotate(rotate * (Math.PI / 180));
   }
 
-  if (cellRenderer !== undefined) {
+  if (cellRender !== undefined) {
     canvas.save();
-    if (!cellRenderer(canvas, rect, cell, text)) {
+    if (!cellRender(canvas, rect, cell, text)) {
       canvas.restore();
       return;
     }
@@ -228,7 +229,7 @@ export function cellRender(
 
     const [xp, yp] = padding || [5, 5];
     const tx = textx(align, rect.width, xp);
-    const txts = text.split("\n");
+    const txts = text.split('\n');
     const innerWidth = rect.width - xp * 2;
     const ntxts: string[] = [];
     txts.forEach((it) => {
@@ -254,15 +255,15 @@ export function cellRender(
     const fontHeight = fontSize / 0.75; // pt => px
     const txtHeight = (ntxts.length - 1) * fontHeight;
     const lineTypes: TextLineType[] = [];
-    if (underline) lineTypes.push("underline");
-    if (strikethrough) lineTypes.push("strikethrough");
+    if (underline) lineTypes.push('underline');
+    if (strikethrough) lineTypes.push('strikethrough');
     let ty = texty(valign, rect.height, txtHeight, fontHeight, yp);
     ntxts.forEach((it) => {
       const txtWidth = canvas.measureTextWidth(it);
       canvas.fillText(it, tx, ty);
       lineTypes.forEach((type) => {
         canvas.line(
-          ...textLine(type, align, valign, tx, ty, txtWidth, fontSize),
+          ...textLine(type, align, valign, tx, ty, txtWidth, fontSize)
         );
       });
       ty += fontHeight;

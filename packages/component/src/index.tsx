@@ -22,7 +22,7 @@ import Popconfirm from './popconfirm';
 import Image from './image';
 import Upload from './upload';
 import Card from './card';
-import { Table } from './table';
+import { Table, SuperTable } from './table';
 
 import message from './message';
 
@@ -55,4 +55,5 @@ export {
   Upload,
   Card,
   Table,
+  SuperTable,
 };

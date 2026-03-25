@@ -38,21 +38,25 @@ export function Table({
       <table>
         <colgroup>
           {columns.map((c) => (
-            <col width={c.width} />
+            <col key={c.key} width={c.width} />
           ))}
         </colgroup>
         <thead>
           <tr>
             {columns.map((c) => (
-              <th>{c.title}</th>
+              <th key={c.key} style={{ textAlign: c.align }}>
+                {c.title}
+              </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {data.map((d) => (
-            <tr>
+          {data.map((d, ri) => (
+            <tr key={ri}>
               {columns.map((c) => (
-                <td>{c.render ? c.render(c, d) : d[c.key]}</td>
+                <td key={`${ri}_${c.key}`} style={{ textAlign: c.align }}>
+                  {c.render ? c.render(c, d) : d[c.key]}
+                </td>
               ))}
             </tr>
           ))}
@@ -61,3 +65,6 @@ export function Table({
     </div>
   );
 }
+
+import SuperTable from './super';
+export { SuperTable };

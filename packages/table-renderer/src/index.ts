@@ -72,7 +72,8 @@ export type Cell =
   | undefined;
 export type CellGetter = (rowIndex: number, colIndex: number) => Cell;
 
-export type Formatter = (value: string, format?: string) => string;
+export type CellFormat = (cell: Cell) => string;
+export type CellFormatter = (rowIndex: number, colIndex: number) => CellFormat;
 
 export type Row = {
   height: number;
@@ -98,7 +99,7 @@ export type RowHeader = {
   width: number;
   cols: number;
   cell: CellGetter;
-  cellRenderer?: CellRenderer;
+  cellRenderer: CellRenderer;
   merges?: string[];
 };
 
@@ -106,7 +107,7 @@ export type ColHeader = {
   height: number;
   rows: number;
   cell: CellGetter;
-  cellRenderer?: CellRenderer;
+  cellRenderer: CellRenderer;
   merges?: string[];
 };
 
@@ -126,12 +127,23 @@ export type ViewportCell = {
   placement: 'all' | 'row-header' | 'col-header' | 'body';
 } & AreaCell;
 
-export type CellRenderer = (
+export type CellRender = (
   canvas: Canvas,
   rect: Rect,
   cell: Cell,
   text: string
 ) => boolean;
+
+export type CellRenderer = (row: number, col: number) => CellRender;
+
+export function cellValue(cell: Cell) {
+  return cell instanceof Object ? cell.value : cell;
+}
+
+export function cellValueString(cell: Cell): string {
+  const v = cellValue(cell);
+  return `${v !== null && v !== undefined ? v : ''}`;
+}
 
 /**
  * ----------------------------------------------------------------
@@ -214,9 +226,9 @@ export default class TableRenderer {
    */
   _cell: CellGetter = () => undefined;
 
-  _cellRenderer: CellRenderer = () => true;
+  _cellRenderer: CellRenderer = (r, c) => () => true;
 
-  _formatter: Formatter = (v) => v;
+  _cellFormatter: CellFormatter = (r, c) => cellValueString;
 
   _merges: string[] = [];
 
@@ -247,6 +259,9 @@ export default class TableRenderer {
   _rowHeader: RowHeader = {
     width: 60,
     cols: 1,
+    cellRenderer(rowIndex, colIndex) {
+      return () => true;
+    },
     cell(rowIndex, colIndex) {
       return rowIndex + 1;
     },
@@ -256,6 +271,9 @@ export default class TableRenderer {
   _colHeader: ColHeader = {
     height: 24,
     rows: 1,
+    cellRenderer(rowIndex, colIndex) {
+      return () => true;
+    },
     cell(rowIndex, colIndex) {
       return stringAt(colIndex);
     },
@@ -394,8 +412,8 @@ export default class TableRenderer {
     return this;
   }
 
-  formatter(value: Formatter) {
-    this._formatter = value;
+  cellFormatter(value: CellFormatter) {
+    this._cellFormatter = value;
     return this;
   }
 

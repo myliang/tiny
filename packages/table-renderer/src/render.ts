@@ -1,8 +1,8 @@
-import Area from "./area";
-import Canvas from "./canvas";
-import { cellRender, cellBorderRender } from "./cell-render";
-import Range, { eachRanges } from "./range";
-import { borderRanges } from "./border";
+import Area from './area';
+import Canvas from './canvas';
+import { cellRender, cellBorderRender } from './cell-render';
+import Range, { eachRanges } from './range';
+import { borderRanges } from './border';
 import TableRenderer, {
   Cell,
   CellGetter,
@@ -12,16 +12,16 @@ import TableRenderer, {
   RowGetter,
   Border,
   BorderType,
-  Formatter,
+  CellFormatter,
   CellRenderer,
   BorderLineStyle,
   Gridline,
-} from ".";
+} from '.';
 
 function renderLines(
   canvas: Canvas,
   { width, color }: Gridline,
-  cb: () => void,
+  cb: () => void
 ) {
   if (width > 0) {
     canvas
@@ -36,7 +36,7 @@ function renderLines(
 function renderCellGridline(
   canvas: Canvas,
   gridline: Gridline,
-  { x, y, width, height }: Rect,
+  { x, y, width, height }: Rect
 ) {
   renderLines(canvas, gridline, () => {
     canvas
@@ -54,33 +54,33 @@ function renderBorder(
   type: BorderType,
   lineStyle: BorderLineStyle,
   color: string,
-  autoAlign?: boolean,
+  autoAlign?: boolean
 ) {
   const borderLineStyle = [lineStyle, color] as [BorderLineStyle, string];
   // if type === 'none', you can delete borders in ref(range)
-  if (type === "outside" || type === "all") {
+  if (type === 'outside' || type === 'all') {
     cellBorderRender(canvas, borderRect, borderLineStyle, true);
-  } else if (type === "left") {
+  } else if (type === 'left') {
     cellBorderRender(canvas, borderRect, { left: borderLineStyle }, autoAlign);
-  } else if (type === "top") {
+  } else if (type === 'top') {
     cellBorderRender(canvas, borderRect, { top: borderLineStyle }, autoAlign);
-  } else if (type === "right") {
+  } else if (type === 'right') {
     cellBorderRender(canvas, borderRect, { right: borderLineStyle }, autoAlign);
-  } else if (type === "bottom") {
+  } else if (type === 'bottom') {
     cellBorderRender(
       canvas,
       borderRect,
       { bottom: borderLineStyle },
-      autoAlign,
+      autoAlign
     );
   }
   if (
-    type === "all" ||
-    type === "inside" ||
-    type === "horizontal" ||
-    type === "vertical"
+    type === 'all' ||
+    type === 'inside' ||
+    type === 'horizontal' ||
+    type === 'vertical'
   ) {
-    if (type !== "horizontal") {
+    if (type !== 'horizontal') {
       range.eachCol((index) => {
         if (index < range.endCol) {
           const r1 = range.clone();
@@ -90,13 +90,13 @@ function renderBorder(
               canvas,
               area.rect(r1),
               { right: borderLineStyle },
-              autoAlign,
+              autoAlign
             );
           }
         }
       });
     }
-    if (type !== "vertical") {
+    if (type !== 'vertical') {
       range.eachRow((index) => {
         if (index < range.endRow) {
           const r1 = range.clone();
@@ -106,7 +106,7 @@ function renderBorder(
               canvas,
               area.rect(r1),
               { bottom: borderLineStyle },
-              autoAlign,
+              autoAlign
             );
           }
         }
@@ -119,7 +119,7 @@ function renderBorders(
   canvas: Canvas,
   area: Area,
   borders: Border[] | undefined,
-  areaMerges: Range[],
+  areaMerges: Range[]
 ) {
   // render borders
   if (borders && borders.length > 0) {
@@ -133,16 +133,16 @@ function renderBorders(
 }
 
 function renderArea(
-  type: "body" | "row-header" | "col-header",
+  type: 'body' | 'row-header' | 'col-header',
   canvas: Canvas,
   area: Area | null,
-  renderer: TableRenderer,
+  renderer: TableRenderer
 ) {
   if (!area) return;
 
   let cell: CellGetter;
-  let cellRenderer: CellRenderer | undefined;
-  let formatter: Formatter = (v) => v;
+  let cellRenderer: CellRenderer;
+  let cellFormatter: CellFormatter;
   let style: Style = renderer._headerStyle;
   let gridline: Gridline = renderer._headerGridline;
   let styles: Partial<Style>[] = renderer._styles;
@@ -152,16 +152,16 @@ function renderArea(
   let col: ColGetter | undefined;
 
   const { _rowHeader, _colHeader } = renderer;
-  if (type === "row-header") {
+  if (type === 'row-header') {
     if (_rowHeader.width <= 0) return;
     ({ cell, merges, cellRenderer } = _rowHeader);
-  } else if (type === "col-header") {
+  } else if (type === 'col-header') {
     if (_colHeader.height <= 0) return;
     ({ cell, merges, cellRenderer } = _colHeader);
   } else {
     cell = renderer._cell;
     cellRenderer = renderer._cellRenderer;
-    formatter = renderer._formatter;
+    cellFormatter = renderer._cellFormatter;
     style = renderer._style;
     gridline = renderer._gridline;
     styles = renderer._styles;
@@ -174,7 +174,7 @@ function renderArea(
   canvas
     .save()
     .translate(area.x, area.y)
-    .prop("fillStyle", renderer._bgcolor)
+    .prop('fillStyle', renderer._bgcolor)
     .rect(0, 0, area.width, area.height)
     .fill()
     .clip();
@@ -196,7 +196,7 @@ function renderArea(
   };
 
   const areaMerges: Range[] = [];
-  const areaMergeRenderParams: [Cell, Rect, Style][] = [];
+  const areaMergeRenderParams: [number, number, Cell, Rect, Style][] = [];
   const cellMerges = new Set();
   if (merges) {
     eachRanges(merges, (it) => {
@@ -204,7 +204,13 @@ function renderArea(
         const cellv = cell(it.startRow, it.startCol);
         const cellStyle = mergeCellStyle(it.startRow, it.startCol, cellv);
         const cellRect = area.rect(it);
-        areaMergeRenderParams.push([cellv, cellRect, cellStyle]);
+        areaMergeRenderParams.push([
+          it.startRow,
+          it.startCol,
+          cellv,
+          cellRect,
+          cellStyle,
+        ]);
         areaMerges.push(it);
         it.each((r, c) => {
           cellMerges.add(`${r}_${c}`);
@@ -213,12 +219,25 @@ function renderArea(
     });
   }
 
-  const _render = (cell: Cell, rect: Rect, cstyle: Style) => {
-    if (type === "body") {
+  const _render = (
+    r: number,
+    c: number,
+    cell: Cell,
+    rect: Rect,
+    cstyle: Style
+  ) => {
+    if (type === 'body') {
       renderCellGridline(canvas, gridline, rect);
-      cellRender(canvas, cell, rect, cstyle, cellRenderer, formatter);
+      cellRender(
+        canvas,
+        cell,
+        rect,
+        cstyle,
+        cellRenderer(r, c),
+        cellFormatter(r, c)
+      );
     } else {
-      cellRender(canvas, cell, rect, cstyle, cellRenderer, formatter);
+      cellRender(canvas, cell, rect, cstyle, cellRenderer(r, c), undefined);
       renderCellGridline(canvas, gridline, rect);
     }
   };
@@ -227,12 +246,12 @@ function renderArea(
   area.each((r, c, rect) => {
     if (!cellMerges.has(`${r}_${c}`)) {
       const cellv = cell(r, c);
-      _render(cellv, rect, mergeCellStyle(r, c, cellv));
+      _render(r, c, cellv, rect, mergeCellStyle(r, c, cellv));
     }
   });
 
   // render merges
-  areaMergeRenderParams.forEach((it) => _render(...it));
+  areaMergeRenderParams.forEach((it, i) => _render(...it));
 
   // render borders
   renderBorders(canvas, area, borders, areaMerges);
@@ -260,20 +279,20 @@ export function render(renderer: TableRenderer) {
       _viewport.headerAreas;
 
     // render-4
-    renderArea("body", canvas, area4, renderer);
+    renderArea('body', canvas, area4, renderer);
 
     // render-1
-    renderArea("body", canvas, area1, renderer);
-    renderArea("col-header", canvas, headerArea1, renderer);
+    renderArea('body', canvas, area1, renderer);
+    renderArea('col-header', canvas, headerArea1, renderer);
 
     // render-3
-    renderArea("body", canvas, area3, renderer);
-    renderArea("row-header", canvas, headerArea3, renderer);
+    renderArea('body', canvas, area3, renderer);
+    renderArea('row-header', canvas, headerArea3, renderer);
 
     // render 2
-    renderArea("body", canvas, area2, renderer);
-    renderArea("col-header", canvas, headerArea21, renderer);
-    renderArea("row-header", canvas, headerArea23, renderer);
+    renderArea('body', canvas, area2, renderer);
+    renderArea('col-header', canvas, headerArea21, renderer);
+    renderArea('row-header', canvas, headerArea23, renderer);
 
     // render freeze
     const [row, col] = _freeze;

@@ -4,11 +4,8 @@
 @import './overlayer/style.css';
 @import './editor/style.css';
 
-.tiny-table-container {
-  position: relative;
-  overflow: hidden;
-}
-.tiny-table-container canvas {
+canvas,
+canvas:focus {
   outline: none;
 }
 

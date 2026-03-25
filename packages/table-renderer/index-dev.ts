@@ -1,4 +1,4 @@
-import TableRenderer, { Rect, Cell, Canvas } from './src';
+import TableRenderer, { Rect, Cell, Canvas, cellValueString } from './src';
 const longText = {
   value: 'you are a good boy, a very good boy-------!!!',
   style: 0,
@@ -42,17 +42,19 @@ TableRenderer.create('#table', 1400, 800)
     height: 50,
     rows: 2,
     merges: ['A1:C1', 'D1:D2'],
-    cellRenderer: (canvas, { x, y, width, height }) => {
-      canvas
-        .prop({ fillStyle: '#0069c2' })
-        .beginPath()
-        .moveTo(width - 12, 2)
-        .lineTo(width - 2, 2)
-        .lineTo(width - 7, 10)
-        .closePath()
-        .fill();
-      return true;
-    },
+    cellRenderer:
+      () =>
+      (canvas, { x, y, width, height }) => {
+        canvas
+          .prop({ fillStyle: '#0069c2' })
+          .beginPath()
+          .moveTo(width - 12, 2)
+          .lineTo(width - 2, 2)
+          .lineTo(width - 7, 10)
+          .closePath()
+          .fill();
+        return true;
+      },
   })
   .merges(['I10:J11', 'B9:D10', 'G21:H22', 'J22:L23', 'I3:K4'])
   .borders([
@@ -70,6 +72,7 @@ TableRenderer.create('#table', 1400, 800)
   .freeze('C6')
   .scrollRows(2)
   .scrollCols(1)
+  .formatter((r, c) => (cell) => `%${cellValueString(cell)}`)
   .cell((ri, ci) => cellText(ri, ci))
-  .cellRenderer(cellRenderer)
+  .cellRenderer(() => cellRenderer)
   .render();

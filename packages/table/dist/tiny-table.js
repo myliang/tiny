@@ -1,5 +1,4 @@
-const Y = "tiny-table";
-function ct(s) {
+function ft(s) {
   const t = document.createDocumentFragment();
   return s.forEach((e) => {
     let r;
@@ -94,13 +93,13 @@ class Q {
     return t !== void 0 ? (e.scrollTop = t, this) : e.scrollTop;
   }
   after(...t) {
-    return this._.after(ct(t)), this;
+    return this._.after(ft(t)), this;
   }
   before(...t) {
-    return this._.before(ct(t)), this;
+    return this._.before(ft(t)), this;
   }
   append(...t) {
-    return this._.append(ct(t)), this;
+    return this._.append(ft(t)), this;
   }
   remove(...t) {
     t.forEach((e) => {
@@ -118,13 +117,14 @@ class Q {
     return t ? new Q(t) : null;
   }
 }
-function O(s, t) {
+function W(s, t) {
   return new Q(s, t);
 }
+const U = "tiny-table", J = 2;
 function j() {
-  return O("div", `${Y}-overlayer-area`);
+  return W("div", `${U}-overlayer-area`);
 }
-class Ft {
+class Kt {
   _areas;
   _headerAreas;
   _areaRects = [];
@@ -160,16 +160,16 @@ class Ft {
   }
 }
 const ut = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-function Kt(s) {
+function Gt(s) {
   return ut.charAt(s % ut.length);
 }
-function Wt(s) {
+function zt(s) {
   const t = [];
   for (; s >= 0; )
-    t.push(Kt(s)), s = parseInt(s / ut.length + "", 10) - 1;
+    t.push(Gt(s)), s = parseInt(s / ut.length + "", 10) - 1;
   return t.reverse().join("");
 }
-function Gt(s) {
+function qt(s) {
   let t = 0;
   for (let e = 0; e < s.length; e++)
     t = 26 * t + s.charCodeAt(e) - 64;
@@ -179,16 +179,16 @@ function q(s) {
   let t = "", e = "";
   for (let r = 0; r < s.length; r += 1)
     s.charAt(r) >= "0" && s.charAt(r) <= "9" ? e += s.charAt(r) : t += s.charAt(r).toUpperCase();
-  return [Gt(t), parseInt(e, 10) - 1];
+  return [qt(t), parseInt(e, 10) - 1];
 }
-function tt(s, t) {
-  return `${Wt(s)}${t + 1}`;
+function et(s, t) {
+  return `${zt(s)}${t + 1}`;
 }
 function gt(s, t, e) {
   const [r, o] = q(s);
-  return tt(r + t, o + e);
+  return et(r + t, o + e);
 }
-class qt {
+class Xt {
   constructor(t, e) {
     this.target = t;
     const r = t.getContext("2d");
@@ -507,8 +507,8 @@ class x {
     return new x(this.startRow, this.startCol, this.endRow, this.endCol);
   }
   toString() {
-    let t = tt(this.startCol, this.startRow);
-    return this.multiple && (t += `:${tt(this.endCol, this.endRow)}`), t;
+    let t = et(this.startCol, this.startRow);
+    return this.multiple && (t += `:${et(this.endCol, this.endRow)}`), t;
   }
   equals(t) {
     return this.startRow === t.startRow && this.startCol === t.startCol && this.endRow === t.endRow && this.endCol === t.endCol;
@@ -528,12 +528,12 @@ class x {
     return this.create(o, r, n, i);
   }
 }
-function Xt(s, t) {
+function Yt(s, t) {
   s && s.length > 0 && s.forEach((e) => {
     t(x.with(e));
   });
 }
-function Yt(s, t, e) {
+function Nt(s, t, e) {
   switch (s) {
     case "left":
       return e;
@@ -545,7 +545,7 @@ function Yt(s, t, e) {
       return 0;
   }
 }
-function Nt(s, t, e, r, o) {
+function Qt(s, t, e, r, o) {
   switch (s) {
     case "top":
       return o;
@@ -559,13 +559,13 @@ function Nt(s, t, e, r, o) {
       return 0;
   }
 }
-function Qt(s, t, e, r, o, i, n) {
+function Ut(s, t, e, r, o, i, n) {
   let l = 0;
   s === "underline" ? e === "top" ? l = -n : e === "middle" && (l = -n / 2) : s === "strikethrough" && (e === "top" ? l = -n / 2 : e === "bottom" && (l = n / 2));
   let h = 0;
   return t === "center" ? h = i / 2 : t === "right" && (h = i), [r - h, o - l, r - h + i, o - l];
 }
-function Ut(s, t, e, r) {
+function Zt(s, t, e, r) {
   if (s && t) {
     let o = "";
     return e && (o += "italic "), r && (o += "bold "), `${o} ${t}pt ${s}`;
@@ -582,24 +582,24 @@ function B(s, t, e, r = !1) {
   ][a];
   [o, i, n, l].forEach((a, c) => {
     if (a) {
-      let d = [], u = 1;
-      a[0] === "thick" ? u = 3 : a[0] === "medium" ? u = 2 : a[0] === "dotted" ? d = [1, 1] : a[0] === "dashed" && (d = [2, 2]);
-      let w = 0;
-      r && (w = u / 2), s.prop({ strokeStyle: a[1], lineWidth: u }).setLineDash(d).line(...h(c, w));
+      let w = [], u = 1;
+      a[0] === "thick" ? u = 3 : a[0] === "medium" ? u = 2 : a[0] === "dotted" ? w = [1, 1] : a[0] === "dashed" && (w = [2, 2]);
+      let d = 0;
+      r && (d = u / 2), s.prop({ strokeStyle: a[1], lineWidth: u }).setLineDash(w).line(...h(c, d));
     }
   }), s.restore();
 }
 function pt(s, t, e, r, o, i) {
   let n = "";
-  t && (typeof t == "string" || typeof t == "number" ? n = i(`${t}`) : n = i((t.value || "") + "", t.format));
+  t && (i ? n = i(t) : n = Wt(t));
   const {
     fontSize: l,
     fontFamily: h,
     bold: a,
     italic: c,
-    color: d,
+    color: w,
     bgcolor: u,
-    align: w,
+    align: d,
     valign: f,
     underline: _,
     strikethrough: C,
@@ -616,12 +616,12 @@ function pt(s, t, e, r, o, i) {
   }
   if (n && !/^\s*$/.test(n)) {
     s.save().beginPath().prop({
-      textAlign: w,
+      textAlign: d,
       textBaseline: f,
-      font: Ut(h, l, c, a),
-      fillStyle: d
+      font: Zt(h, l, c, a),
+      fillStyle: w
     });
-    const [m, y] = A || [5, 5], v = Yt(w, e.width, m), H = n.split(`
+    const [m, y] = A || [5, 5], v = Nt(d, e.width, m), H = n.split(`
 `), b = e.width - m * 2, S = [];
     H.forEach((g) => {
       const k = s.measureTextWidth(g);
@@ -633,21 +633,21 @@ function pt(s, t, e, r, o, i) {
       } else
         S.push(g);
     });
-    const W = l / 0.75, E = (S.length - 1) * W, I = [];
+    const z = l / 0.75, E = (S.length - 1) * z, I = [];
     _ && I.push("underline"), C && I.push("strikethrough");
-    let z = Nt(f, e.height, E, W, y);
+    let O = Qt(f, e.height, E, z, y);
     S.forEach((g) => {
       const k = s.measureTextWidth(g);
-      s.fillText(g, v, z), I.forEach(($) => {
+      s.fillText(g, v, O), I.forEach(($) => {
         s.line(
-          ...Qt($, w, f, v, z, k, l)
+          ...Ut($, d, f, v, O, k, l)
         );
-      }), z += W;
+      }), O += z;
     }), s.restore();
   }
   s.restore();
 }
-function zt(s, [t, e, ...r], o) {
+function Ot(s, [t, e, ...r], o) {
   const i = [], n = x.with(t), l = o.filter((h) => h.intersects(n));
   if (n.intersects(s.range) || l.length > 0)
     if (l.length <= 0)
@@ -667,14 +667,14 @@ function zt(s, [t, e, ...r], o) {
           const a = l.filter((c) => !c.equals(h));
           if (n.difference(h).forEach((c) => {
             if (c.intersects(s.range)) {
-              const d = s.rect(c);
+              const w = s.rect(c);
               i.push(
-                ...zt(
+                ...Ot(
                   s,
                   [c.toString(), e, ...r],
                   a
                 )
-              ), (e === "inside" || e === "horizontal") && (c.startRow < h.startRow && c.endRow < h.startRow ? i.push([c, d, "bottom"]) : c.startRow > h.startRow && c.endRow > h.startRow && i.push([c, d, "top"])), (e === "inside" || e === "vertical") && (c.startCol < h.startCol && c.endCol < h.startCol && i.push([c, d, "right"]), c.startCol > h.startCol && c.endCol > h.startCol && i.push([c, d, "left"]));
+              ), (e === "inside" || e === "horizontal") && (c.startRow < h.startRow && c.endRow < h.startRow ? i.push([c, w, "bottom"]) : c.startRow > h.startRow && c.endRow > h.startRow && i.push([c, w, "top"])), (e === "inside" || e === "vertical") && (c.startCol < h.startCol && c.endCol < h.startCol && i.push([c, w, "right"]), c.startCol > h.startCol && c.endCol > h.startCol && i.push([c, w, "left"]));
             }
           }), e === "all") {
             const c = s.rect(h);
@@ -692,7 +692,7 @@ function Rt(s, t, { x: e, y: r, width: o, height: i }) {
     s.translate(e, r).line(o, 0, o, i).line(0, i, o, i);
   });
 }
-function Zt(s, t, e, r, o, i, n, l) {
+function Jt(s, t, e, r, o, i, n, l) {
   const h = [i, n];
   o === "outside" || o === "all" ? B(s, r, h, !0) : o === "left" ? B(s, r, { left: h }, l) : o === "top" ? B(s, r, { top: h }, l) : o === "right" ? B(s, r, { right: h }, l) : o === "bottom" && B(
     s,
@@ -721,17 +721,17 @@ function Zt(s, t, e, r, o, i, n, l) {
     }
   }));
 }
-function Jt(s, t, e, r) {
+function te(s, t, e, r) {
   e && e.length > 0 && e.forEach((o) => {
     const [, , i, n] = o;
-    zt(t, o, r).forEach(([l, h, a]) => {
-      Zt(s, t, l, h, a, i, n);
+    Ot(t, o, r).forEach(([l, h, a]) => {
+      Jt(s, t, l, h, a, i, n);
     });
   });
 }
 function L(s, t, e, r) {
   if (!e) return;
-  let o, i, n = (y) => y, l = r._headerStyle, h = r._headerGridline, a = r._styles, c, d, u, w;
+  let o, i, n, l = r._headerStyle, h = r._headerGridline, a = r._styles, c, w, u, d;
   const { _rowHeader: f, _colHeader: _ } = r;
   if (s === "row-header") {
     if (f.width <= 0) return;
@@ -740,7 +740,7 @@ function L(s, t, e, r) {
     if (_.height <= 0) return;
     ({ cell: o, merges: c, cellRenderer: i } = _);
   } else
-    o = r._cell, i = r._cellRenderer, n = r._formatter, l = r._style, h = r._gridline, a = r._styles, c = r._merges, d = r._borders, u = r._row, w = r._col;
+    o = r._cell, i = r._cellRenderer, n = r._cellFormatter, l = r._style, h = r._gridline, a = r._styles, c = r._merges, w = r._borders, u = r._row, d = r._col;
   t.save().translate(e.x, e.y).prop("fillStyle", r._bgcolor).rect(0, 0, e.width, e.height).fill().clip();
   const C = (y, v, H) => {
     const b = { ...l };
@@ -748,31 +748,44 @@ function L(s, t, e, r) {
       const S = u(y);
       S && S.style !== void 0 && Object.assign(b, a[S.style]);
     }
-    if (w) {
-      const S = w(v);
+    if (d) {
+      const S = d(v);
       S && S.style !== void 0 && Object.assign(b, a[S.style]);
     }
     return H instanceof Object && H.style !== void 0 && Object.assign(b, a[H.style]), b;
   }, R = [], p = [], A = /* @__PURE__ */ new Set();
-  c && Xt(c, (y) => {
+  c && Yt(c, (y) => {
     if (y.intersects(e.range)) {
       const v = o(y.startRow, y.startCol), H = C(y.startRow, y.startCol, v), b = e.rect(y);
-      p.push([v, b, H]), R.push(y), y.each((S, W) => {
-        A.add(`${S}_${W}`);
+      p.push([
+        y.startRow,
+        y.startCol,
+        v,
+        b,
+        H
+      ]), R.push(y), y.each((S, z) => {
+        A.add(`${S}_${z}`);
       });
     }
   });
-  const m = (y, v, H) => {
-    s === "body" ? (Rt(t, h, v), pt(t, y, v, H, i, n)) : (pt(t, y, v, H, i, n), Rt(t, h, v));
+  const m = (y, v, H, b, S) => {
+    s === "body" ? (Rt(t, h, b), pt(
+      t,
+      H,
+      b,
+      S,
+      i(y, v),
+      n(y, v)
+    )) : (pt(t, H, b, S, i(y, v), void 0), Rt(t, h, b));
   };
   e.each((y, v, H) => {
     if (!A.has(`${y}_${v}`)) {
       const b = o(y, v);
-      m(b, H, C(y, v, b));
+      m(y, v, b, H, C(y, v, b));
     }
-  }), p.forEach((y) => m(...y)), Jt(t, e, d, R), t.restore();
+  }), p.forEach((y, v) => m(...y)), te(t, e, w, R), t.restore();
 }
-function te(s) {
+function ee(s) {
   const {
     _width: t,
     _height: e,
@@ -784,15 +797,15 @@ function te(s) {
     _colHeader: h
   } = s;
   if (i) {
-    const a = new qt(r, o);
+    const a = new Xt(r, o);
     a.size(t, e);
-    const [c, d, u, w] = i.areas, [f, _, C, R] = i.headerAreas;
-    L("body", a, w, s), L("body", a, c, s), L("col-header", a, f, s), L("body", a, u, s), L("row-header", a, R, s), L("body", a, d, s), L("col-header", a, _, s), L("row-header", a, C, s);
+    const [c, w, u, d] = i.areas, [f, _, C, R] = i.headerAreas;
+    L("body", a, d, s), L("body", a, c, s), L("col-header", a, f, s), L("body", a, u, s), L("row-header", a, R, s), L("body", a, w, s), L("col-header", a, _, s), L("row-header", a, C, s);
     const [p, A] = n;
     (A > 0 || p > 0) && dt(a, s._freezeGridline, () => {
-      A > 0 && a.line(0, w.y, t, w.y), p > 0 && a.line(w.x, 0, w.x, e);
+      A > 0 && a.line(0, d.y, t, d.y), p > 0 && a.line(d.x, 0, d.x, e);
     });
-    const { x: m, y } = d;
+    const { x: m, y } = w;
     if (m > 0 && y > 0) {
       const { height: v } = h, { width: H } = l, { bgcolor: b } = s._headerStyle;
       b && a.save().prop({ fillStyle: b }).rect(0, 0, H, v).fill().restore(), dt(a, s._headerGridline, () => {
@@ -806,13 +819,13 @@ class P {
     this.range = t, this.x = e, this.y = r, this.width = o, this.height = i, this.rowHeight = n, this.colWidth = l;
     let h = 0;
     t.eachRow((c) => {
-      const d = n(c);
-      this.rowMap.set(c, { y: h, height: d }), h += d;
+      const w = n(c);
+      this.rowMap.set(c, { y: h, height: w }), h += w;
     }), this.height <= 0 && (this.height = h);
     let a = 0;
     t.eachCol((c) => {
-      const d = l(c);
-      this.colMap.set(c, { x: a, width: d }), a += d;
+      const w = l(c);
+      this.colMap.set(c, { x: a, width: w }), a += w;
     }), this.width <= 0 && (this.width = a);
   }
   // { rowIndex: { y, height }}
@@ -916,7 +929,7 @@ class P {
     );
   }
 }
-class ee {
+class re {
   /**
    * [area1, area2, area3, area4]
    * -----------------------
@@ -938,7 +951,7 @@ class ee {
   _render;
   constructor(t) {
     this._render = t;
-    const [e, r] = [t._rowHeader.width, t._colHeader.height], [o, i] = t._freeze, { _startRow: n, _startCol: l, _rows: h, _cols: a, _width: c, _height: d } = t, u = ($) => t.rowHeightAt($), w = ($) => t.colWidthAt($), f = P.create(
+    const [e, r] = [t._rowHeader.width, t._colHeader.height], [o, i] = t._freeze, { _startRow: n, _startCol: l, _rows: h, _cols: a, _width: c, _height: w } = t, u = ($) => t.rowHeightAt($), d = ($) => t.colWidthAt($), f = P.create(
       n,
       l,
       o - 1,
@@ -948,20 +961,20 @@ class ee {
       0,
       0,
       u,
-      w
+      d
     ), [_, C] = [
       o + t._scrollRows,
       i + t._scrollCols
     ];
     let R = f.height + r, p = _;
-    for (; R < d && p < h; )
+    for (; R < w && p < h; )
       R += u(p), p += 1;
     let A = f.width + e, m = C;
     for (; A < c && m < a; )
-      A += w(m), m += 1;
+      A += d(m), m += 1;
     const y = e + f.width, v = r + f.height;
-    let H = c - y, b = d - v;
-    m === a && (H -= c - A), p === h && (b -= d - R), m -= 1, p -= 1;
+    let H = c - y, b = w - v;
+    m === a && (H -= c - A), p === h && (b -= w - R), m -= 1, p -= 1;
     const S = P.create(
       _,
       C,
@@ -972,8 +985,8 @@ class ee {
       H,
       b,
       u,
-      w
-    ), W = P.create(
+      d
+    ), z = P.create(
       n,
       C,
       o - 1,
@@ -983,7 +996,7 @@ class ee {
       H,
       0,
       u,
-      w
+      d
     ), E = P.create(
       _,
       l,
@@ -994,34 +1007,34 @@ class ee {
       0,
       b,
       u,
-      w
+      d
     );
-    this.areas = [W, f, E, S];
-    const { _rowHeader: I, _colHeader: z } = t, g = () => z.height / z.rows, k = () => I.width / I.cols;
+    this.areas = [z, f, E, S];
+    const { _rowHeader: I, _colHeader: O } = t, g = () => O.height / O.rows, k = () => I.width / I.cols;
     this.headerAreas = [
       P.create(
         0,
-        W.range.startCol,
-        z.rows - 1,
-        W.range.endCol,
+        z.range.startCol,
+        O.rows - 1,
+        z.range.endCol,
         S.x,
         0,
         S.width,
         0,
         g,
-        w
+        d
       ),
       P.create(
         0,
         f.range.startCol,
-        z.rows - 1,
+        O.rows - 1,
         f.range.endCol,
         f.x,
         0,
         f.width,
         0,
         g,
-        w
+        d
       ),
       P.create(
         f.range.startRow,
@@ -1083,7 +1096,13 @@ class ee {
     return null;
   }
 }
-class at {
+function se(s) {
+  return s instanceof Object ? s.value : s;
+}
+function Wt(s) {
+  return `${se(s) ?? ""}`;
+}
+class ct {
   _target;
   _bgcolor = "#ffffff";
   // table width
@@ -1129,8 +1148,8 @@ class at {
    */
   _cell = () => {
   };
-  _cellRenderer = () => !0;
-  _formatter = (t) => t;
+  _cellRenderer = (t, e) => () => !0;
+  _cellFormatter = (t, e) => Wt;
   _merges = [];
   _borders = [];
   _styles = [];
@@ -1155,6 +1174,9 @@ class at {
   _rowHeader = {
     width: 60,
     cols: 1,
+    cellRenderer(t, e) {
+      return () => !0;
+    },
     cell(t, e) {
       return t + 1;
     }
@@ -1163,8 +1185,11 @@ class at {
   _colHeader = {
     height: 24,
     rows: 1,
+    cellRenderer(t, e) {
+      return () => !0;
+    },
     cell(t, e) {
-      return Wt(e);
+      return zt(e);
     }
   };
   _headerGridline = {
@@ -1199,7 +1224,7 @@ class at {
     this._target = o, this._width = e, this._height = r;
   }
   render() {
-    return this._viewport = new ee(this), te(this), this;
+    return this._viewport = new re(this), ee(this), this;
   }
   bgcolor(t) {
     return this._bgcolor = t, this;
@@ -1249,8 +1274,8 @@ class at {
   cellRenderer(t) {
     return this._cellRenderer = t, this;
   }
-  formatter(t) {
-    return this._formatter = t, this;
+  cellFormatter(t) {
+    return this._cellFormatter = t, this;
   }
   merges(t) {
     return this._merges = t, this;
@@ -1307,26 +1332,22 @@ class at {
   }
   // get methods ---- end -------
   static create(t, e, r) {
-    return new at(t, e, r);
+    return new ct(t, e, r);
   }
 }
 try {
-  window && (window.tiny ||= {}, window.tiny.table_renderer = at.create);
+  window && (window.tiny ||= {}, window.tiny.table_renderer = ct.create);
 } catch {
 }
-class re {
+class oe {
   _ = [];
   _indexes = /* @__PURE__ */ new Map();
   _formulas = [];
   _formulaParser = (t) => t;
-  _formatter = (t) => t;
   constructor() {
   }
   formulaParser(t) {
     return this._formulaParser = t, this;
-  }
-  formatter(t) {
-    return this._formatter = t, this;
   }
   load({ cells: t }) {
     t && (this._ = t, this.resetIndexes());
@@ -1355,7 +1376,7 @@ class re {
         this.updateIndex(t, e, i), this.addFormula(r, i);
       }
     } else {
-      const i = o[2], n = U(i), l = U(r);
+      const i = o[2], n = X(i), l = X(r);
       l === "" ? (i instanceof Object && Object.keys(i).length > 1 ? delete i.value : this.remove(t, e), this.resetFormulas()) : (i instanceof Object ? Object.assign(i, r instanceof Object ? r : { value: r }) : o[2] = r, l !== n && this.resetFormulas());
     }
   }
@@ -1380,37 +1401,37 @@ class re {
     });
   }
 }
-function Ot(s) {
+function It(s) {
   return s instanceof Object ? s.value : s;
 }
-function U(s) {
-  const t = Ot(s);
+function X(s) {
+  const t = It(s);
   return `${t ?? ""}`;
 }
-function It(s, t, e, r, o) {
+function kt(s, t, e, r, o) {
   const { scroll: i } = s, n = r === "row" ? 0 : 1, l = r === "row" ? 3 : 2;
-  let h = i[l], a = !1, c = i[n], d = 0;
+  let h = i[l], a = !1, c = i[n], w = 0;
   const { freeze: u } = s;
-  if (u && (d = q(u)[r === "row" ? 1 : 0]), e > 0)
+  if (u && (w = q(u)[r === "row" ? 1 : 0]), e > 0)
     if (t === "+")
-      for (let w = c; !(h >= e); w += 1) {
-        const f = o(d + w);
-        h += f, s.scroll[n] = w + 1, a = !0;
+      for (let d = c; !(h >= e); d += 1) {
+        const f = o(w + d);
+        h += f, s.scroll[n] = d + 1, a = !0;
       }
     else
-      for (let w = c; !(h <= e); w -= 1) {
-        const f = o(d + w - 1);
-        if (h -= f, s.scroll[n] = w - 1, a = !0, f > 0) break;
+      for (let d = c; !(h <= e); d -= 1) {
+        const f = o(w + d - 1);
+        if (h -= f, s.scroll[n] = d - 1, a = !0, f > 0) break;
       }
   else
     s.scroll[n] = 0, h = 0, a = !0;
   return i[l] = h, a;
 }
-function se(s, t, e) {
-  return t && e !== void 0 ? It(s, t, e, "col", (r) => K(s, r).width) : s.scroll[2];
+function ie(s, t, e) {
+  return t && e !== void 0 ? kt(s, t, e, "col", (r) => K(s, r).width) : s.scroll[2];
 }
-function oe(s, t, e) {
-  return t && e !== void 0 ? It(s, t, e, "row", (r) => G(s, r).height) : s.scroll[3];
+function ne(s, t, e) {
+  return t && e !== void 0 ? kt(s, t, e, "row", (r) => G(s, r).height) : s.scroll[3];
 }
 function yt({ merges: s }, t) {
   if (s) {
@@ -1439,7 +1460,7 @@ function mt({ merges: s }, t) {
       }
   }
 }
-function kt({ merges: s }, t) {
+function Mt({ merges: s }, t) {
   if (s)
     for (let e = 0; e < s.length; e += 1) {
       const r = x.with(s[e]);
@@ -1447,7 +1468,7 @@ function kt({ merges: s }, t) {
     }
   return t;
 }
-function Mt(s, t, e) {
+function Pt(s, t, e) {
   let r = 0;
   for (let o = s; o < t; o += 1) r += e(o);
   return r;
@@ -1469,10 +1490,10 @@ function wt(s, t) {
   }
   return !0;
 }
-function ie(s) {
+function le(s) {
   return s <= 0.75 ? 1 : s <= 1.5 ? 2 : s <= 2.25 ? 3 : s <= 3 ? 4 : s <= 3.75 ? 5 : s <= 4.5 ? 6 : 96 / 72 * s;
 }
-function Pt(s, t) {
+function jt(s, t) {
   if (s.styles || (s.styles = []), t)
     for (let e = 0; e < s.styles.length; e += 1) {
       const r = s.styles[e];
@@ -1481,14 +1502,14 @@ function Pt(s, t) {
     }
   return s.styles.push(t) - 1;
 }
-function ne(s, t, e = !0) {
+function he(s, t, e = !0) {
   const r = s.styles[t];
   return e ? Object.assign({}, s.style, s.styles[t] || {}) : r;
 }
-function le(s) {
+function ae(s) {
   s.styles.length = 0;
 }
-function he(s, t) {
+function ce(s, t) {
   s.borders || (s.borders = []);
   const e = x.with(t[0]), { borders: r } = s;
   for (let o = 0; o < r.length; o += 1) {
@@ -1505,7 +1526,7 @@ function he(s, t) {
   }
   r.push(t);
 }
-function ae(s, t) {
+function fe(s, t) {
   const { borders: e } = s;
   if (e) {
     const r = [], o = x.with(t);
@@ -1518,14 +1539,14 @@ function ae(s, t) {
     e.push(...r);
   }
 }
-function ce(s) {
+function ue(s) {
   s.borders.length = 0;
 }
 function K(s, t, e) {
   const r = s.cols[t] || { width: s.colWidth };
   return e ? s.cols[t] = Object.assign(r, e) : r;
 }
-function et(s, t, e) {
+function rt(s, t, e) {
   if (e) {
     const { cols: r } = s;
     r[t] ? r[t].width = e : r[t] = { width: e };
@@ -1534,27 +1555,27 @@ function et(s, t, e) {
     return r.hide ? 0 : r.width;
   }
 }
-function jt(s, t, e) {
+function Lt(s, t, e) {
   const { cols: r } = s;
   if (arguments.length === 1) {
     let o = r.len * s.colWidth;
     for (let i in r)
       if (i !== "len") {
-        const n = et(s, parseInt(i, 10));
+        const n = rt(s, parseInt(i, 10));
         n > 0 && (o += n, o -= s.colWidth);
       }
     return o;
   }
-  return Mt(
+  return Pt(
     t !== void 0 ? t : 0,
     e !== void 0 ? e : r.len,
-    (o) => et(s, o)
+    (o) => rt(s, o)
   );
 }
-function fe(s, t) {
+function de(s, t) {
   return s.cols.len - 1 === t;
 }
-function rt(s, t, e) {
+function st(s, t, e) {
   for (; ; )
     if (K(s, t).hide) t += e;
     else return t;
@@ -1563,7 +1584,7 @@ function G(s, t, e) {
   const r = s.rows[t] || { height: s.rowHeight };
   return e ? s.rows[t] = Object.assign(r, e) : r;
 }
-function st(s, t, e) {
+function ot(s, t, e) {
   if (e) {
     const { rows: r } = s;
     r[t] ? r[t].height = e : r[t] = { height: e };
@@ -1572,51 +1593,51 @@ function st(s, t, e) {
     return r.hide ? 0 : r.height;
   }
 }
-function Lt(s, t, e) {
+function Bt(s, t, e) {
   const { rows: r } = s;
   if (arguments.length === 1) {
     let o = r.len * s.rowHeight;
     for (let i in r)
       if (i !== "len") {
-        const n = st(s, parseInt(i, 10));
+        const n = ot(s, parseInt(i, 10));
         n > 0 && (o += n, o -= s.rowHeight);
       }
     return o;
   }
-  return Mt(
+  return Pt(
     t !== void 0 ? t : 0,
     e !== void 0 ? e : r.len,
-    (o) => st(s, o)
+    (o) => ot(s, o)
   );
 }
-function ue(s, t) {
+function we(s, t) {
   return s.rows.len - 1 === t;
 }
-function ot(s, t, e) {
+function it(s, t, e) {
   for (; ; )
     if (G(s, t).hide) t += e;
     else return t;
 }
-function de(s, t, e = !1) {
+function _e(s, t, e = !1) {
   if (!s || !t) return;
   const r = s.range.position(t.range);
   if (r === "none") return;
   const { rows: o, cols: i } = s.range;
   t.range.each((n, l) => {
-    let h = s.range.startRow, a = s.range.startCol, c, d, u = [n - t.range.startRow, l - t.range.startCol];
-    ["up", "left"].includes(r) && (u = [t.range.endRow - n, t.range.endCol - l]), r === "down" || r === "up" ? o <= 0 && e && (c = r, d = u[0] + 1, r === "up" && (d = 0 - d)) : i <= 0 && e && (c = r, d = u[1] + 1, r === "left" && (d = 0 - d));
-    let w = u[1] % (i + 1), f = u[0] % (o + 1);
-    ["up", "left"].includes(r) ? (h = s.range.endRow - f, a = s.range.endCol - w) : (h += f, a += w), we(h, a, n, l, s, t, c, d);
+    let h = s.range.startRow, a = s.range.startCol, c, w, u = [n - t.range.startRow, l - t.range.startCol];
+    ["up", "left"].includes(r) && (u = [t.range.endRow - n, t.range.endCol - l]), r === "down" || r === "up" ? o <= 0 && e && (c = r, w = u[0] + 1, r === "up" && (w = 0 - w)) : i <= 0 && e && (c = r, w = u[1] + 1, r === "left" && (w = 0 - w));
+    let d = u[1] % (i + 1), f = u[0] % (o + 1);
+    ["up", "left"].includes(r) ? (h = s.range.endRow - f, a = s.range.endCol - d) : (h += f, a += d), ge(h, a, n, l, s, t, c, w);
   });
 }
-function we(s, t, e, r, o, i, n, l) {
+function ge(s, t, e, r, o, i, n, l) {
   let h = o.cells.get(s, t);
   if (h !== null && h[2] !== void 0 && h[2] !== null) {
     let a = h[2];
     if (a instanceof Object) {
       if (a = Object.assign({}, a), a.style !== void 0 && o.cells !== i.cells) {
         const c = Object.assign({}, o.data.styles[a.style]);
-        a.style = Pt(i.data, c);
+        a.style = jt(i.data, c);
       }
       n !== void 0 && l !== void 0 && (a.formula ? a.formula = a.formula.replace(
         /[a-zA-Z]{1,3}\d+/g,
@@ -1631,7 +1652,7 @@ function we(s, t, e, r, o, i, n, l) {
 function bt(s, t) {
   return typeof s == "string" ? s.replace(/([0-9]+$)|(([0-9]+)[^0-9]+$)/g, (e) => e.replace(/[0-9]+/, (r) => `${parseInt(r) + t}`)) : s + t;
 }
-function _e() {
+function pe() {
   return {
     rows: {
       len: 100
@@ -1660,19 +1681,19 @@ function _e() {
     cells: []
   };
 }
-function it(s, t, e) {
+function nt(s, t, e) {
   s.addEventListener(t, e);
 }
-function nt(s, t, e) {
+function lt(s, t, e) {
   s.removeEventListener(t, e);
 }
-function ge(s, t, e) {
+function Re(s, t, e) {
   const r = (o) => {
-    e(o), nt(s, "mousemove", t), nt(s, "mouseup", r);
+    e(o), lt(s, "mousemove", t), lt(s, "mouseup", r);
   };
-  it(s, "mousemove", t), it(s, "mouseup", r);
+  nt(s, "mousemove", t), nt(s, "mouseup", r);
 }
-class pe {
+class ye {
   _events = /* @__PURE__ */ new Map();
   on(t, e) {
     const { _events: r } = this;
@@ -1695,7 +1716,7 @@ class pe {
     return r.has(t) && r.get(t).forEach((o) => o(...e)), this;
   }
 }
-class xt {
+class vt {
   _;
   _hover;
   _line;
@@ -1706,11 +1727,11 @@ class xt {
   _change;
   constructor(t, e, r, o, i = () => {
   }) {
-    this._type = t, this._minValue = r, this._lineLength = o, this._change = i, this._ = O("div", `${Y}-resizer ${t}`).append(
-      this._hover = O("div", "hover").on("mousedown", (n) => {
-        n.stopPropagation(), Re(this, n);
+    this._type = t, this._minValue = r, this._lineLength = o, this._change = i, this._ = W("div", `${U}-resizer ${t}`).append(
+      this._hover = W("div", "hover").on("mousedown", (n) => {
+        n.stopPropagation(), Ce(this, n);
       }),
-      this._line = O("div", "line")
+      this._line = W("div", "line")
     ), e.append(this._);
   }
   show(t) {
@@ -1724,23 +1745,23 @@ class xt {
     this._.hide();
   }
 }
-function Re(s, t) {
+function Ce(s, t) {
   const { _type: e, _cell: r, _minValue: o, _: i, _line: n, _change: l } = s;
   let h = 0;
   n.show();
-  const a = (d) => {
-    t !== null && d.buttons === 1 && r && (e === "row" ? (h += d.movementY, h + r.height >= o ? i.css("top", `${r.y + r.height + h}px`) : h = o - r.height) : (h += d.movementX, h + r.width >= o ? i.css("left", `${r.x + r.width + h}px`) : h = o - r.width));
+  const a = (w) => {
+    t !== null && w.buttons === 1 && r && (e === "row" ? (h += w.movementY, h + r.height >= o ? i.css("top", `${r.y + r.height + h}px`) : h = o - r.height) : (h += w.movementX, h + r.width >= o ? i.css("left", `${r.x + r.width + h}px`) : h = o - r.width));
   }, c = () => {
-    nt(window, "mousemove", a), nt(window, "mouseup", c), n.hide(), i.hide(), r && h != 0 && l(h, r);
+    lt(window, "mousemove", a), lt(window, "mouseup", c), n.hide(), i.hide(), r && h != 0 && l(h, r);
   };
-  it(window, "mousemove", a), it(window, "mouseup", c);
+  nt(window, "mousemove", a), nt(window, "mouseup", c);
 }
 class V {
   _;
   _rect = null;
   _target = null;
   constructor(t, e = !1) {
-    this._ = O("div", `${Y}-${t}`), e && this.show();
+    this._ = W("div", `${U}-${t}`), e && this.show();
   }
   append(t) {
     return this._.append(t), this;
@@ -1771,7 +1792,7 @@ class V {
     t && (t.remove(e), this._target = null);
   }
 }
-class ye {
+class me {
   _placement = "body";
   _editable = !1;
   _ranges = [];
@@ -1819,9 +1840,9 @@ class ye {
     e && (this._ranges.splice(-1, 1, t(e)), At(this));
   }
   addAreaOutline(t, e) {
-    const r = new V("selector", !0).rect(ft(t, 2)).target(e);
+    const r = new V("selector", !0).rect(t).target(e);
     this._placement === "body" && r.append(
-      O("div", "corner").attr("draggable", "false").on("mousedown", this._autofillTrigger)
+      W("div", "corner").attr("draggable", "false").on("mousedown", this._autofillTrigger)
     ), this._areas.push(r);
   }
   addArea(t, e) {
@@ -1841,12 +1862,12 @@ class ye {
   }
   addCopyArea(t, e) {
     return this._copyAreas.push(
-      new V("selector-copy", !0).rect(ft(t, 2)).target(e)
+      new V("selector-copy", !0).rect(t).target(e)
     ), this;
   }
   addAutofillArea(t, e) {
     return this._autofillAreas.push(
-      new V("selector-autofill", !0).rect(ft(t, 2)).target(e)
+      new V("selector-autofill", !0).rect(t).target(e)
     ), this;
   }
   setFocusArea(t, e) {
@@ -1866,7 +1887,7 @@ class ye {
     });
   }
 }
-function vt(s, t, e) {
+function xt(s, t, e) {
   s.sort(t);
   let r = s[0];
   const o = [];
@@ -1884,25 +1905,17 @@ function At(s) {
       const { startRow: o, startCol: i, endRow: n, endCol: l } = r;
       (o >= 0 || n >= 0) && t.push(x.create(o, 0, n, 0)), (i >= 0 || l >= 0) && e.push(x.create(0, i, 0, l));
     }
-  s._rowHeaderRanges = vt(
+  s._rowHeaderRanges = xt(
     t,
     (r, o) => r.startRow - o.startRow,
     (r, o) => r.intersectsRow(o.startRow, o.endRow)
-  ), s._colHeaderRanges = vt(
+  ), s._colHeaderRanges = xt(
     e,
     (r, o) => r.startCol - o.startCol,
     (r, o) => r.intersectsCol(o.startCol, o.endCol)
   );
 }
-function ft(s, t) {
-  return {
-    x: s.x - t / 2,
-    y: s.y - t / 2,
-    width: s.width - t,
-    height: s.height - t
-  };
-}
-const Ce = { vertical: "height", horizontal: "width" };
+const be = { vertical: "height", horizontal: "width" };
 class Ht {
   _;
   _content;
@@ -1912,7 +1925,7 @@ class Ht {
   _type;
   _change = null;
   constructor(t, e) {
-    this._type = t, this._content = O("div", "content"), this._ = O("div", `${Y}-scrollbar ${t}`).append(this._content).on("scroll", (r) => {
+    this._type = t, this._content = W("div", "content"), this._ = W("div", `${U}-scrollbar ${t}`).append(this._content).on("scroll", (r) => {
       r.stopPropagation();
       const { scrollTop: o, scrollLeft: i } = r.target;
       if (this._change) {
@@ -1943,14 +1956,14 @@ class Ht {
   // update this size
   resize(t, e) {
     if (e > t - 1) {
-      const r = Ce[this._type];
+      const r = be[this._type];
       this._content.css(r, `${e}px`), this._.css(r, `${t}px`).show(), this._maxValue = e - t;
     } else
       this._.hide();
     return this;
   }
 }
-function me(s, t) {
+function ve(s, t) {
   let e = "text";
   t instanceof Object && t.type && (e = t.type);
   const { _editors: r } = s, o = r.get(e);
@@ -1961,7 +1974,7 @@ function me(s, t) {
     i !== "none" && n && (T.move(s, !0, i, 1), s._canvas.focus());
   })), o;
 }
-function be(s) {
+function xe(s) {
   const { _editor: t, _selector: e, _renderer: r } = s;
   if (t && e) {
     const { _focusArea: o, _focus: i } = e;
@@ -1971,49 +1984,49 @@ function be(s) {
     }
   }
 }
-function xe(s) {
+function Ae(s) {
   const { _selector: t } = s;
   if (t) {
     const { _focusRange: e, _focusArea: r } = t;
     if (e && r) {
-      const { _rect: o, _target: i } = r, { startRow: n, startCol: l } = e, h = s.cell(n, l), a = me(s, h);
-      a != null && (s._editor = a, a && o && i && (h && a.value(h), a.cellIndex(n, l).rect(o).target(i).show()));
+      const { _rect: o, _target: i } = r, { startRow: n, startCol: l } = e, h = s.cell(n, l), a = ve(s, h);
+      a != null && (s._editor = a, a && o && i && (a.cellIndex(n, l).rect(o).target(i).show(), h && a.value(h)));
     }
   }
 }
-const lt = {
-  move: be,
-  reset: xe
+const ht = {
+  move: xe,
+  reset: Ae
 };
-function ve(s) {
+function He(s) {
   s._vScrollbar = new Ht("vertical", s._container).change(
     (t, e) => {
-      oe(s._data, t, e) && (s.render(), T.reset(s), lt.move(s));
+      ne(s._data, t, e) && (s.render(), T.reset(s), ht.move(s));
     }
   ), s._hScrollbar = new Ht("horizontal", s._container).change(
     (t, e) => {
-      se(s._data, t, e) && (s.render(), T.reset(s), lt.move(s));
+      ie(s._data, t, e) && (s.render(), T.reset(s), ht.move(s));
     }
   );
 }
-function Ae(s) {
+function Se(s) {
   const { x: t, y: e, height: r, width: o } = s._contentRect;
   s._vScrollbar && s._vScrollbar.resize(s._height(), r + e), s._hScrollbar && s._hScrollbar.resize(s._width(), o + t);
 }
-function He(s, t, e) {
+function $e(s, t, e) {
   if (!t) return;
   const { _selector: r, _vScrollbar: o, _hScrollbar: i, _data: n } = s, { viewport: l } = s._renderer;
   if (l && r) {
-    const [, h, , a] = l.areas, c = a.range, d = h.range;
+    const [, h, , a] = l.areas, c = a.range, w = h.range;
     if (o) {
-      const u = (w, f, _) => {
+      const u = (d, f, _) => {
         const C = s.rowsHeight(f, _ + 1);
         let R = 0;
-        for (let p = w; R < C; p += 1)
+        for (let p = d; R < C; p += 1)
           R += s.rowHeight(p);
         return R;
       };
-      e ? t.endRow === e.endRow ? t.startRow < e.startRow ? t.startRow > d.endRow && t.startRow < c.startRow && o.scrollBy(
+      e ? t.endRow === e.endRow ? t.startRow < e.startRow ? t.startRow > w.endRow && t.startRow < c.startRow && o.scrollBy(
         -s.rowsHeight(t.startRow, c.startRow)
       ) : t.startRow > e.startRow && t.startRow >= c.endRow && o.scrollBy(
         u(c.startRow, c.endRow, t.startRow)
@@ -2023,17 +2036,17 @@ function He(s, t, e) {
         -s.rowsHeight(t.endRow, c.startRow)
       )) : t.endRow === n.rows.len - 1 ? o.scrollToEnd() : t.startRow === 0 ? o.scrollToStart() : t.endRow >= c.endRow ? o.scrollBy(
         u(c.startRow, c.endRow, t.endRow)
-      ) : t.startRow > d.endRow && t.startRow < c.startRow && o.scrollBy(-s.rowsHeight(t.startRow, c.startRow));
+      ) : t.startRow > w.endRow && t.startRow < c.startRow && o.scrollBy(-s.rowsHeight(t.startRow, c.startRow));
     }
     if (i) {
-      const u = (w, f, _) => {
+      const u = (d, f, _) => {
         const C = s.colsWidth(f, _ + 1);
         let R = 0;
-        for (let p = w; R < C; p += 1)
+        for (let p = d; R < C; p += 1)
           R += s.colWidth(p);
         return R;
       };
-      e ? t.endCol === e.endCol ? t.startCol < e.startCol ? t.startCol > d.endCol && t.startCol < c.startCol && i.scrollBy(
+      e ? t.endCol === e.endCol ? t.startCol < e.startCol ? t.startCol > w.endCol && t.startCol < c.startCol && i.scrollBy(
         -s.colsWidth(t.startCol, c.startCol)
       ) : t.startCol > e.startCol && t.startCol >= c.endCol && i.scrollBy(
         u(c.startCol, c.endCol, t.startCol)
@@ -2041,19 +2054,19 @@ function He(s, t, e) {
         u(c.startCol, c.endCol, t.endCol)
       ) : t.endCol < e.endCol && t.endCol < c.startCol && i.scrollBy(-s.colsWidth(t.endCol, c.startCol))) : t.endCol === n.cols.len - 1 ? i.scrollToEnd() : t.startCol === 0 ? i.scrollToStart() : t.endCol >= c.endCol ? i.scrollBy(
         u(c.startCol, c.endCol, t.endCol)
-      ) : t.startCol > d.endCol && t.startCol < c.startCol && i.scrollBy(-s.colsWidth(t.startCol, c.startCol));
+      ) : t.startCol > w.endCol && t.startCol < c.startCol && i.scrollBy(-s.colsWidth(t.startCol, c.startCol));
     }
   }
 }
-const X = {
-  init: ve,
-  resize: Ae,
-  autoMove: He
+const Y = {
+  init: He,
+  resize: Se,
+  autoMove: $e
 };
-function Se(s) {
-  s._selector = new ye(!!s._editable).autofillTrigger((t) => {
+function Te(s) {
+  s._selector = new me(!!s._editable).autofillTrigger((t) => {
     const { _selector: e } = s;
-    e && Dt(
+    e && Ft(
       s,
       (r, o) => {
         const { currentRange: i } = e;
@@ -2079,7 +2092,7 @@ function Se(s) {
     );
   });
 }
-function $e(s, t) {
+function Ee(s, t) {
   const { _selector: e } = s;
   if (e) {
     e.clearCopy();
@@ -2091,30 +2104,30 @@ function $e(s, t) {
     }), s.render();
   }
 }
-function Bt(s, t, e, r) {
-  const { _selector: o, _data: i } = s, n = x.create(t, e), l = kt(i, n);
+function Vt(s, t, e, r) {
+  const { _selector: o, _data: i } = s, n = x.create(t, e), l = Mt(i, n);
   o && o.focus(t, e, l).addRange(o._placement === "body" ? l : n, r);
 }
-function Vt(s, t, e) {
+function Dt(s, t, e) {
   const { _selector: r, _data: o } = s;
-  r && r.move(t, e).updateLastRange((i) => kt(o, i.union(x.create(t, e))));
+  r && r.move(t, e).updateLastRange((i) => Mt(o, i.union(x.create(t, e))));
 }
 function D(s) {
   const { _selector: t, _overlayer: e } = s, { _rowHeader: r, _colHeader: o, viewport: i } = s._renderer;
   if (t && i) {
     const { _placement: n } = t;
     t.clear();
-    const l = r.width, h = o.height, a = (u, w) => {
+    const l = r.width, h = o.height, a = (u, d) => {
       const f = u.clone();
-      return (n === "all" || n === "row-header") && (f.endCol = w.endCol, u.startCol < w.startCol && (f.startCol = w.startCol)), (n === "all" || n === "col-header") && (f.endRow = w.endRow, u.startRow < w.startRow && (f.startRow = w.startRow)), f;
-    }, c = ({ range: u }, w) => n === "body" ? u.intersects(w) : n === "col-header" ? u.intersectsCol(w.startCol, w.endCol) : n === "row-header" ? u.intersectsRow(w.startRow, w.endRow) : !0, d = (u, w, f) => {
-      let _ = u.rect(w);
-      return n === "col-header" ? (_ = u.rectCol(w.startCol, w.endCol), _.height += 2, (f === 2 || f === 3) && (_.y -= 2)) : n === "row-header" && (_ = u.rectRow(w.startRow, w.endRow), _.width += 2, (f === 0 || f === 3) && (_.x -= 2)), _;
+      return (n === "all" || n === "row-header") && (f.endCol = d.endCol, u.startCol < d.startCol && (f.startCol = d.startCol)), (n === "all" || n === "col-header") && (f.endRow = d.endRow, u.startRow < d.startRow && (f.startRow = d.startRow)), f;
+    }, c = ({ range: u }, d) => n === "body" ? u.intersects(d) : n === "col-header" ? u.intersectsCol(d.startCol, d.endCol) : n === "row-header" ? u.intersectsRow(d.startRow, d.endRow) : !0, w = (u, d, f) => {
+      let _ = u.rect(d);
+      return n === "col-header" ? (_ = u.rectCol(d.startCol, d.endCol), _.height += J, (f === 2 || f === 3) && (_.y -= J)) : n === "row-header" && (_ = u.rectRow(d.startRow, d.endRow), _.width += J, (f === 0 || f === 3) && (_.x -= J)), _;
     };
-    i.areas.forEach((u, w) => {
-      const f = e._areas[w], { _ranges: _, _focusRange: C, _copyRange: R, _autofillRange: p } = t;
+    i.areas.forEach((u, d) => {
+      const f = e._areas[d], { _ranges: _, _focusRange: C, _copyRange: R, _autofillRange: p } = t;
       _.forEach((A, m) => {
-        let y = c(u, A), v = d(u, A, w);
+        let y = c(u, A), v = w(u, A, d);
         if (y)
           if (m === _.length - 1) {
             if ((n !== "all" || u.range.intersects(A)) && t.addAreaOutline(v, f), C) {
@@ -2122,14 +2135,14 @@ function D(s) {
               const H = a(A, u.range), b = H.difference(C);
               b.length > 0 ? b.forEach((S) => {
                 y = c(u, S), y && t.addArea(u.rect(S), f);
-              }) : (n !== "body" || !A.equals(C)) && t.addArea(d(u, H, w), f);
+              }) : (n !== "body" || !A.equals(C)) && t.addArea(w(u, H, d), f);
             }
           } else
             t.addArea(v, f);
       }), R && u.range.intersects(R) && t.addCopyArea(u.rect(R), f), p && u.range.intersects(p) && t.addAutofillArea(u.rect(p), f);
-    }), i.headerAreas.forEach((u, w) => {
-      const f = e._headerAreas[w], { width: _, height: C } = u;
-      w <= 1 ? n === "row-header" || n === "all" ? t.addColHeaderArea({ x: 0, y: 0, width: _, height: h }, f) : t._colHeaderRanges.forEach((R) => {
+    }), i.headerAreas.forEach((u, d) => {
+      const f = e._headerAreas[d], { width: _, height: C } = u;
+      d <= 1 ? n === "row-header" || n === "all" ? t.addColHeaderArea({ x: 0, y: 0, width: _, height: h }, f) : t._colHeaderRanges.forEach((R) => {
         u.range.intersectsCol(R.startCol, R.endCol) && t.addColHeaderArea(
           u.rectCol(R.startCol, R.endCol),
           f
@@ -2143,27 +2156,27 @@ function D(s) {
     });
   }
 }
-function Te(s, t) {
+function ze(s, t) {
   const { _selector: e, _data: r } = s;
   if (e) {
     const o = e._autofillRange;
     if (o)
-      return t === "up" ? o.startRow = ot(r, o.startRow - 1, -1) : t === "down" ? o.endRow = ot(r, o.endRow + 1, 1) : t === "left" ? o.startCol = rt(r, o.startCol - 1, -1) : t === "right" && (o.endCol = rt(r, o.endCol + 1, 1)), X.autoMove(s, o), D(s), !0;
+      return t === "up" ? o.startRow = it(r, o.startRow - 1, -1) : t === "down" ? o.endRow = it(r, o.endRow + 1, 1) : t === "left" ? o.startCol = st(r, o.startCol - 1, -1) : t === "right" && (o.endCol = st(r, o.endCol + 1, 1)), Y.autoMove(s, o), D(s), !0;
   }
   return !1;
 }
 function _t(s, t, e, r) {
-  if (Te(s, e)) return;
+  if (ze(s, e)) return;
   const { _selector: o, _data: i } = s, { viewport: n } = s._renderer;
   if (o && n) {
     const { _focusRange: l } = o;
     if (l) {
-      let { startRow: h, startCol: a, endRow: c, endCol: d } = l;
-      const { rows: u, cols: w } = i;
+      let { startRow: h, startCol: a, endRow: c, endCol: w } = l;
+      const { rows: u, cols: d } = i;
       let [f, _] = o._move;
-      t || (h = c = f, a = d = _);
+      t || (h = c = f, a = w = _);
       const C = o.currentRange?.clone();
-      r ? e === "up" ? f = ot(i, h - r, -1) : e === "down" ? f = ot(i, c + r, 1) : e === "left" ? _ = rt(i, a - r, -1) : e === "right" && (_ = rt(i, d + r, 1)) : e === "up" ? f = 0 : e === "down" ? f = u.len - 1 : e === "left" ? _ = 0 : e === "right" && (_ = w.len - 1), f >= 0 && f <= u.len - 1 && _ >= 0 && _ <= w.len - 1 && (t ? Bt(s, f, _, !0) : (Vt(s, f, _), o._move = [f, _])), o.placement("body"), X.autoMove(
+      r ? e === "up" ? f = it(i, h - r, -1) : e === "down" ? f = it(i, c + r, 1) : e === "left" ? _ = st(i, a - r, -1) : e === "right" && (_ = st(i, w + r, 1)) : e === "up" ? f = 0 : e === "down" ? f = u.len - 1 : e === "left" ? _ = 0 : e === "right" && (_ = d.len - 1), f >= 0 && f <= u.len - 1 && _ >= 0 && _ <= d.len - 1 && (t ? Vt(s, f, _, !0) : (Dt(s, f, _), o._move = [f, _])), o.placement("body"), Y.autoMove(
         s,
         o.currentRange,
         t ? void 0 : C
@@ -2171,18 +2184,18 @@ function _t(s, t, e, r) {
     }
   }
 }
-function Dt(s, t, e, r = (o) => {
+function Ft(s, t, e, r = (o) => {
 }) {
   const { _selector: o, _renderer: i } = s;
   if (!o) return;
   const { _placement: n } = o, l = { row: 0, col: 0 };
   if (n !== "all") {
     const { left: h, top: a } = s._canvas.rect();
-    let c = [0, 0], d = null;
+    let c = [0, 0], w = null;
     const u = () => {
-      d !== null && (clearInterval(d), d = null);
+      w !== null && (clearInterval(w), w = null);
     };
-    ge(window, (f) => {
+    Re(window, (f) => {
       let [_, C] = [0, 0];
       f.x > 0 && (_ = f.x - h), f.y > 0 && (C = f.y - a), n === "row-header" && (_ = 1), n === "col-header" && (C = 1);
       const R = o.currentRange?.clone(), { target: p } = f;
@@ -2190,12 +2203,12 @@ function Dt(s, t, e, r = (o) => {
         const A = i.viewport?.cellAt(_, C);
         if (A) {
           let { row: m, col: y } = A;
-          (m != l.row || y !== l.col) && (t(m, y), n === "body" && X.autoMove(s, e(o), R), D(s), l.row = m, l.col = y);
+          (m != l.row || y !== l.col) && (t(m, y), n === "body" && Y.autoMove(s, e(o), R), D(s), l.row = m, l.col = y);
         }
         u();
-      } else if (d === null) {
+      } else if (w === null) {
         const A = f.x - c[0], m = f.y - c[1];
-        A >= 0 && m >= 0 && (d = setInterval(() => {
+        A >= 0 && m >= 0 && (w = setInterval(() => {
           const y = e(o);
           if (y) {
             const { endRow: v, endCol: H } = y;
@@ -2209,25 +2222,25 @@ function Dt(s, t, e, r = (o) => {
     });
   }
 }
-function Ee(s) {
+function Oe(s) {
   s._selector && (s._selector.showCopy(), D(s));
 }
 function We(s) {
   s._selector && (s._selector.clearCopy(), D(s));
 }
 const T = {
-  init: Se,
-  setCellValue: $e,
-  addRange: Bt,
-  unionRange: Vt,
+  init: Te,
+  setCellValue: Ee,
+  addRange: Vt,
+  unionRange: Dt,
   reset: D,
   move: _t,
-  bindMousemove: Dt,
-  showCopy: Ee,
+  bindMousemove: Ft,
+  showCopy: Oe,
   clearCopy: We
 };
-function ze(s) {
-  s._rowResizer = new xt(
+function Ie(s) {
+  s._rowResizer = new vt(
     "row",
     s._container,
     s._minRowHeight,
@@ -2235,7 +2248,7 @@ function ze(s) {
     (t, { row: e, height: r }) => {
       s.rowHeight(e, r + t).render(), T.reset(s), s._canvas.focus();
     }
-  ), s._colResizer = new xt(
+  ), s._colResizer = new vt(
     "col",
     s._container,
     s._minColWidth,
@@ -2245,22 +2258,22 @@ function ze(s) {
     }
   );
 }
-const Oe = {
-  init: ze
+const ke = {
+  init: Ie
 };
-function Ie(s) {
-  s._canvas.on("mousedown", (t) => ke(s, t)).on("mousemove", (t) => Me(s, t)).on("keydown", (t) => Le(s, t)).on("wheel", (t) => Pe(s, t)).on("contextmenu", (t) => je(s, t)).on("dblclick", (t) => {
-    t.preventDefault(), lt.reset(s);
+function Me(s) {
+  s._canvas.on("mousedown", (t) => Pe(s, t)).on("mousemove", (t) => je(s, t)).on("keydown", (t) => Ve(s, t)).on("wheel", (t) => Le(s, t)).on("contextmenu", (t) => Be(s, t)).on("dblclick", (t) => {
+    t.preventDefault(), ht.reset(s);
   });
 }
-function ke(s, t) {
+function Pe(s, t) {
   const { _selector: e, _renderer: r, _editor: o, _emitter: i } = s, { viewport: n } = r;
   if (o && o.changed(), e && n) {
-    const { offsetX: l, offsetY: h, ctrlKey: a, metaKey: c, shiftKey: d } = t, u = n.cellAt(l, h);
+    const { offsetX: l, offsetY: h, ctrlKey: a, metaKey: c, shiftKey: w } = t, u = n.cellAt(l, h);
     if (u) {
       i.emit("click", u, t);
-      const { placement: w, row: f, col: _ } = u;
-      d ? T.unionRange(s, f, _) : (e.placement(w), T.addRange(s, f, _, !(c || a)), w === "body" && X.autoMove(s, e.currentRange)), T.reset(s), T.bindMousemove(
+      const { placement: d, row: f, col: _ } = u;
+      w ? T.unionRange(s, f, _) : (e.placement(d), T.addRange(s, f, _, !(c || a)), d === "body" && Y.autoMove(s, e.currentRange)), T.reset(s), T.bindMousemove(
         s,
         (C, R) => {
           T.unionRange(s, C, R);
@@ -2270,30 +2283,30 @@ function ke(s, t) {
     }
   }
 }
-function Me(s, t) {
+function je(s, t) {
   const { _rowResizer: e, _colResizer: r, _renderer: o } = s, { viewport: i } = o, { buttons: n, offsetX: l, offsetY: h } = t;
   if (i && n === 0) {
-    const { _rowHeader: a, _colHeader: c } = s._renderer;
+    const { _rowHeader: a, _colHeader: c, _rows: w, _cols: u } = s._renderer;
     if (e && a.width > 0)
       if (l < a.width && h > c.height) {
         const d = i.cellAt(l, h);
-        d && e.show(d);
+        d && d.row < w && e.show(d);
       } else
         e.hide();
     if (r && c.height > 0)
       if (h < c.height && l > a.width) {
         const d = i.cellAt(l, h);
-        d && r.show(d);
+        d && d.col < u && r.show(d);
       } else
         r.hide();
   }
 }
-function Pe(s, t) {
+function Le(s, t) {
   t.preventDefault();
   const { deltaX: e, deltaY: r } = t, { _hScrollbar: o, _vScrollbar: i } = s;
   Math.abs(e) > Math.abs(r) ? o && o.scrollBy(e) : i && i.scrollBy(r);
 }
-function je(s, t) {
+function Be(s, t) {
   t.preventDefault();
   const { _renderer: e, _editor: r, _emitter: o } = s, { viewport: i } = e;
   if (r && r.changed(), i) {
@@ -2301,7 +2314,7 @@ function je(s, t) {
     o.emit("contextmenu", h, t);
   }
 }
-function Le(s, t) {
+function Ve(s, t) {
   const { ctrlKey: e, shiftKey: r, metaKey: o, altKey: i, code: n } = t;
   let l = null;
   if (n === "Enter" && !e && !o && !i)
@@ -2323,27 +2336,27 @@ function Le(s, t) {
     "Period",
     "Slash"
   ].includes(n)))
-    lt.reset(s), t.preventDefault();
+    ht.reset(s), t.preventDefault();
   else if (n === "KeyC" && (e || o)) {
     const { _selector: h } = s;
     if (s._copyable && h) {
       const a = {}, c = h.currentRange;
-      c && (T.showCopy(s), ["text/plain", "text/html"].forEach((d) => {
-        const u = c.toString(), w = d === "text/html" ? s.toHtml(u) : Be(s, u);
-        a[d] = new Blob([w], { type: d });
+      c && (T.showCopy(s), ["text/plain", "text/html"].forEach((w) => {
+        const u = c.toString(), d = w === "text/html" ? s.toHtml(u) : De(s, u);
+        a[w] = new Blob([d], { type: w });
       }), navigator.clipboard.write([new ClipboardItem(a)]).then(
         () => console.log("clipboard has writed success"),
-        (d) => console.log("clipboard has wirted failure: ", d)
+        (w) => console.log("clipboard has wirted failure: ", w)
       ));
     }
   } else n === "KeyV" && (e || o) ? s._editable && navigator.clipboard.read().then((h) => {
     if (h.length > 0) {
       const a = h[0];
       let c = r;
-      c || (c = !St(a, "text/html", (d) => {
-        s.fill(d).render();
-      })), c && St(a, "text/plain", (d) => {
-        s.fill(Ve(d)).render();
+      c || (c = !St(a, "text/html", (w) => {
+        s.fill(w).render();
+      })), c && St(a, "text/plain", (w) => {
+        s.fill(Fe(w)).render();
       });
     }
   }) : n === "Escape" && T.clearCopy(s);
@@ -2354,7 +2367,7 @@ function Le(s, t) {
     o || e ? void 0 : 1
   ), t.preventDefault());
 }
-function Be(s, t) {
+function De(s, t) {
   const e = x.with(t);
   let r = "";
   return e.eachRow((o) => {
@@ -2366,7 +2379,7 @@ function Be(s, t) {
 `;
   }), r;
 }
-function Ve(s) {
+function Fe(s) {
   const t = [];
   let [e, r] = [0, 0], o = "", i = 0;
   const n = () => {
@@ -2394,17 +2407,17 @@ function St(s, t, e = (r) => {
     });
   }), !0) : !1;
 }
-function De(s, t) {
+function Ke(s, t) {
   let e = '<table xmlns="http://www.w3.org/1999/xhtml" style="border-spacing: 0; border-collapse: collapse;">';
   const r = x.with(t), o = s._data.merges.map((l) => x.with(l)).filter((l) => l.intersects(r)), i = (l, h) => l === "dashed" || l === "dotted" ? `1px ${l} ${h}` : `${l === "thick" ? 3 : l === "medium" ? 2 : 1}px solid ${h}`, n = /* @__PURE__ */ new Map();
   for (let l of s._data.borders) {
-    const [h, a, c, d] = l, u = x.with(h);
+    const [h, a, c, w] = l, u = x.with(h);
     if (u.intersects(r)) {
-      const { startRow: w, startCol: f, endRow: _, endCol: C } = u;
+      const { startRow: d, startCol: f, endRow: _, endCol: C } = u;
       u.each((R, p) => {
-        const A = i(c, d);
+        const A = i(c, w);
         let m = [];
-        a === "all" && m.push("border"), (a === "outside" || a === "left") && p === f && m.push("border-left"), (a === "outside" || a === "right") && p === C && m.push("border-right"), (a === "outside" || a === "top") && R === w && m.push("border-top"), (a === "outside" || a === "bottom") && R === _ && m.push("border-bottom"), (a === "inside" || a === "vertical") && p >= f && p < C && m.push("border-right"), (a === "inside" || a === "horizontal") && R >= w && R < _ && m.push("border-bottom"), m.length > 0 && n.set(
+        a === "all" && m.push("border"), (a === "outside" || a === "left") && p === f && m.push("border-left"), (a === "outside" || a === "right") && p === C && m.push("border-right"), (a === "outside" || a === "top") && R === d && m.push("border-top"), (a === "outside" || a === "bottom") && R === _ && m.push("border-bottom"), (a === "inside" || a === "vertical") && p >= f && p < C && m.push("border-right"), (a === "inside" || a === "horizontal") && R >= d && R < _ && m.push("border-bottom"), m.length > 0 && n.set(
           `${R}_${p}`,
           m.map((y) => `${y}:${A};`).join("")
         );
@@ -2416,27 +2429,27 @@ function De(s, t) {
   }), e += "</colgroup>", e += "<tbody>", r.eachRow((l) => {
     e += `<tr style="height: ${s.rowHeight(l)}px;">`, r.eachCol((h) => {
       const a = s.cell(l, h), c = x.create(l, h);
-      let d = !1, [u, w] = [1, 1];
+      let w = !1, [u, d] = [1, 1];
       for (let f of o) {
         if (f.startRow === l && f.startCol === h) {
-          u = f.rows + 1, w = f.cols + 1;
+          u = f.rows + 1, d = f.cols + 1;
           break;
         }
         if (f.intersects(c)) {
-          d = !0;
+          w = !0;
           break;
         }
       }
-      if (!d) {
-        e += "<td", u > 1 && (e += ` rowspan="${u}"`), w > 1 && (e += ` colspan="${w}"`);
+      if (!w) {
+        e += "<td", u > 1 && (e += ` rowspan="${u}"`), d > 1 && (e += ` colspan="${d}"`);
         let f = "";
         const _ = `${l}_${h}`;
-        n.has(_) && (f += n.get(_)), a && a instanceof Object && a.style !== void 0 && (f += Ke(s.style(a.style, !0))), f !== "" && (e += ` style="${f}"`), e += `>${s.cellValueString(l, h)}</td>`;
+        n.has(_) && (f += n.get(_)), a && a instanceof Object && a.style !== void 0 && (f += qe(s.style(a.style, !0))), f !== "" && (e += ` style="${f}"`), e += `>${s.cellValueString(l, h)}</td>`;
       }
     }), e += "</tr>";
   }), e + "</tbody></table>";
 }
-function Fe(s, t, [e, r]) {
+function Ge(s, t, [e, r]) {
   const o = [0, 0];
   if (t && t.includes("</table>")) {
     const { _data: i } = s, n = i.style, l = document.createElement("template");
@@ -2444,18 +2457,18 @@ function Fe(s, t, [e, r]) {
     const h = [], a = l.content.querySelectorAll("tr");
     o[0] = e + a.length - 1;
     const c = [];
-    if (a.forEach((d, u) => {
-      const w = d.querySelectorAll("td");
-      u === 0 && (o[1] = r + w.length - 1);
+    if (a.forEach((w, u) => {
+      const d = w.querySelectorAll("td");
+      u === 0 && (o[1] = r + d.length - 1);
       let f = null;
       const _ = [];
-      for (let R = 0; R < w.length; R += 1) {
-        const p = w[R];
+      for (let R = 0; R < d.length; R += 1) {
+        const p = d[R];
         let [A, m] = [u + e, R + r];
         h.length > 0 && h.forEach((g) => {
           g.containsRow(A) && g.startCol <= m && (m += g.cols, g.startRow !== A && (m += 1));
         });
-        const y = tt(m, A);
+        const y = et(m, A);
         let [v, H] = [1, 1];
         if ($t(p, "rowspan", (g) => v = parseInt(g)), $t(p, "colspan", (g) => H = parseInt(g)), v > 1 || H > 1) {
           const g = x.create(A, m, A + v - 1, m + H - 1);
@@ -2483,22 +2496,22 @@ function Fe(s, t, [e, r]) {
           "vertical-align",
           n.valign,
           (g) => b.valign = g
-        ), J(
+        ), tt(
           p,
           "white-space",
           "normal",
           (g) => b.textwrap = !0
-        ), J(
+        ), tt(
           p,
           "text-decoration",
           "underline",
           (g) => b.underline = !0
-        ), J(
+        ), tt(
           p,
           "text-decoration",
           "line-through",
           (g) => b.strikethrough = !0
-        ), J(
+        ), tt(
           p,
           "font-style",
           "italic",
@@ -2521,28 +2534,28 @@ function Fe(s, t, [e, r]) {
           let Z = "thin";
           if ($ === "solid") {
             let N = parseInt(k);
-            k.includes("pt") && (N = ie(parseInt(k))), N === 2 ? Z = "medium" : N === 3 && (Z = "thick");
+            k.includes("pt") && (N = le(parseInt(k))), N === 2 ? Z = "medium" : N === 3 && (Z = "thick");
           } else
             Z = $;
           return [Z, F.join("")];
         };
-        let W = [], E = null;
+        let z = [], E = null;
         M(
           p,
           "border-width",
           "",
-          (g) => W.push(g)
+          (g) => z.push(g)
         ), M(
           p,
           "border-style",
           "",
-          (g) => W.push(g)
+          (g) => z.push(g)
         ), M(
           p,
           "border-color",
           "",
-          (g) => W.push(g)
-        ), W.length >= 3 ? E = [y, "all", ...S(W.join(" "))] : M(
+          (g) => z.push(g)
+        ), z.length >= 3 ? E = [y, "all", ...S(z.join(" "))] : M(
           p,
           "border",
           "none",
@@ -2556,8 +2569,8 @@ function Fe(s, t, [e, r]) {
           );
         }), f === null ? E !== null && (f = E) : E !== null && E[1] === f[1] && E[2] === f[2] && E[3] === f[3] ? f[0] = `${f[0].split(":")[0]}:${y}` : (_.push(f), f = E);
         const I = p.innerHTML.replace(/<br(\/){0,1}>/gi, `
-`).replace(/(<([^>]+)>|)/gi, "").replace("&nbsp;", " "), z = {};
-        Object.keys(b).length > 0 && (z.style = s.addStyle(b)), I !== null && !/^\s*$/.test(I) && (z.value = I), Object.keys(z).length > 0 && s.cell(A, m, z);
+`).replace(/(<([^>]+)>|)/gi, "").replace("&nbsp;", " "), O = {};
+        Object.keys(b).length > 0 && (O.style = s.addStyle(b)), I !== null && !/^\s*$/.test(I) && (O.value = I), Object.keys(O).length > 0 && s.cell(A, m, O);
       }
       f != null && _.push(f);
       const C = c.at(-1);
@@ -2570,8 +2583,8 @@ function Fe(s, t, [e, r]) {
       else
         c.push(_);
     }), c.length > 0)
-      for (let d of c)
-        d.forEach((u) => s.addBorder(...u));
+      for (let w of c)
+        w.forEach((u) => s.addBorder(...u));
   }
   return o;
 }
@@ -2585,15 +2598,15 @@ function M(s, t, e, r) {
   const o = s.style.getPropertyValue(t), i = o !== null && o !== "" && o !== e;
   return i && r(o), i;
 }
-function J(s, t, e, r) {
+function tt(s, t, e, r) {
   const o = s.style.getPropertyValue(t);
   o === e && r(o);
 }
-function Ke(s) {
+function qe(s) {
   let t = "";
   return s.bgcolor && (t += `background-color: ${s.bgcolor};`), s.color && (t += `color: ${s.color};`), s.align && (t += `text-align: ${s.align};`), s.valign && (t += `vertical-align: ${s.valign};`), s.textwrap === !0 && (t += "white-space: normal;"), s.underline === !0 && (t += "text-decoration: underline;"), s.strikethrough === !0 && (t += "text-decoration: line-through;"), s.bold === !0 && (t += "font-weight: bold;"), s.italic === !0 && (t += "font-style: italic;"), s.fontFamily && (t += `font-family: ${s.fontFamily};`), s.fontSize && (t += `font-size: ${s.fontSize}pt;`), t;
 }
-class Ge {
+class Xe {
   _;
   _target = null;
   _rect = null;
@@ -2604,7 +2617,7 @@ class Ge {
   _changer = () => {
   };
   constructor(t) {
-    this._ = O("div", t);
+    this._ = W("div", t);
   }
   get visible() {
     return this._visible;
@@ -2626,10 +2639,10 @@ class Ge {
       this._visible = !0, this._rect = t;
       const { x: e, y: r, width: o, height: i } = t;
       this._.css({
-        left: e - 2 / 2,
-        top: r - 2 / 2,
-        width: o - 2,
-        height: i - 2
+        left: e,
+        top: r,
+        width: o,
+        height: i
       }).show();
     }
     return this;
@@ -2647,26 +2660,26 @@ class Ge {
     return this._changer = t, this;
   }
 }
-class qe extends Ge {
-  _text = O("textarea", "");
-  _textMeasure = O("div", "measure");
+class Ye extends Xe {
+  _text = W("textarea", "");
+  _textMeasure = W("div", "measure");
   _editing = !1;
   constructor() {
-    super(`${Y}-editor`), this._.append(this._text, this._textMeasure), this._text.on("keydown", (t) => {
-      Xe(this, t);
+    super(`${U}-editor`), this._.append(this._text, this._textMeasure), this._text.on("keydown", (t) => {
+      Ne(this, t);
     }).on("input", ({ target: t }) => {
       const { value: e } = t;
       this._editing = !0, this._value = e, this._changer(e), Tt(this);
     });
   }
   value(t) {
-    return super.value(t), this._text.value(U(t) || ""), Tt(this), this;
+    return super.value(t), this._text.value(X(t) || ""), Tt(this), this;
   }
   rect(t) {
     return super.rect(t), t && setTimeout(() => {
       const { _value: e } = this;
       let r = 0;
-      e !== null && (r = U(e).length);
+      e !== null && (r = X(e).length);
       const o = this._text.element();
       o.focus(), o.setSelectionRange(r, r);
     }, 0), this;
@@ -2676,28 +2689,29 @@ class qe extends Ge {
   }
 }
 function Tt(s) {
-  const { _: t, _value: e, _rect: r, _textMeasure: o, _target: i } = s;
-  if (typeof e != "string") return;
-  let n = e.replace(`
+  const { _: t, _value: e, _rect: r, _textMeasure: o, _target: i } = s, n = X(e);
+  let l = n.replace(`
 `, "<br/>");
-  if (e.endsWith(`
-`) && (n += "T"), o.html(n), r && i) {
-    const l = parseInt(
+  if (n.endsWith(`
+`) && (l += "T"), o.textContent(l), r && i) {
+    const h = parseInt(
       o.computedStyle().getPropertyValue("padding")
-    ), h = i.offset(), a = h.width - r.x - 2, c = h.height - r.y - 2;
-    t.css("max-width", `${a}px`), o.css("max-width", `${a - l * 2}px`);
-    const { width: d, height: u } = o.rect(), w = r.width - 2;
-    d > w && t.css({ width: d }), u > r.height && u <= c ? t.css({ height: u }) : u < r.height && t.css({ height: r.height - 2 });
+    ), a = i.offset(), c = a.width - r.x, w = a.height - r.y;
+    t.css("max-width", `${c}px`), o.css("max-width", `${c}px`);
+    let { width: u, height: d } = o.rect();
+    u += h * 2;
+    const f = r.width;
+    u > f && t.css({ width: u }), d > r.height && d <= w ? t.css({ height: d }) : d < r.height && t.css({ height: r.height });
   }
 }
-function Xe(s, t) {
+function Ne(s, t) {
   const { code: e, shiftKey: r, metaKey: o, altKey: i, ctrlKey: n, target: l } = t, h = (a) => {
     s._moveChanger(a), s.hide();
   };
   e === "Enter" ? (n || o || i ? (l.value += `
 `, s.value(l.value)) : h(r ? "up" : "down"), t.preventDefault()) : e === "Tab" && !n && !o && !i && (h(r ? "left" : "right"), t.preventDefault());
 }
-class ht {
+class at {
   // renderer options
   _rendererOptions = {};
   _copyable = !1;
@@ -2711,7 +2725,7 @@ class ht {
   _container;
   _data;
   _renderer;
-  _cells = new re();
+  _cells = new oe();
   // scrollbar
   _vScrollbar = null;
   _hScrollbar = null;
@@ -2725,23 +2739,25 @@ class ht {
   _overlayer;
   _canvas;
   // event emitter
-  _emitter = new pe();
+  _emitter = new ye();
   constructor(t, e, r, o) {
     this._width = e, this._height = r;
     const i = typeof t == "string" ? document.querySelector(t) : t;
     if (i === null) throw new Error("first argument error");
-    if (this._container = O(i, `${Y}-container`).css({
+    if (this._container = W(i).css({
+      position: "relative",
+      overflow: "hidden",
       height: r(),
       width: e()
-    }), this._data = _e(), o) {
+    }), this._data = pe(), o) {
       const { minColWidth: l, minRowHeight: h, renderer: a, data: c } = o;
       if (l && (this._minColWidth = l), h && (this._minRowHeight = h), a && (this._rendererOptions = a), c) {
-        const { cols: d, rows: u, rowHeight: w, colWidth: f } = c, { _data: _ } = this;
-        d && (_.cols.len = d), u && (_.rows.len = u), w && (_.rowHeight = w), f && (_.colWidth = f);
+        const { cols: w, rows: u, rowHeight: d, colWidth: f } = c, { _data: _ } = this;
+        w && (_.cols.len = w), u && (_.rows.len = u), d && (_.rowHeight = d), f && (_.colWidth = f);
       }
     }
     const n = document.createElement("canvas");
-    this._canvas = O(n).attr("tabIndex", "1"), this._container.append(n), this._renderer = new at(n, e(), r()), this._overlayer = new Ft(this._container), Et(this), o?.selectable && T.init(this), o?.scrollable && X.init(this), o?.resizable && Oe.init(this), o?.editable && (this._editable = !0), this._copyable = o?.copyable || !1, this._editors.set("text", new qe()), Ie(this);
+    this._canvas = W(n).attr("tabIndex", "1"), this._container.append(n), this._renderer = new ct(n, e(), r()), this._overlayer = new Kt(this._container), Et(this), o?.selectable && T.init(this), o?.scrollable && Y.init(this), o?.resizable && ke.init(this), o?.editable && (this._editable = !0), this._copyable = o?.copyable || !1, this._editors.set("text", new Ye()), Me(this);
   }
   contentRect() {
     return this._contentRect;
@@ -2786,51 +2802,48 @@ class ht {
     return e ? (e.height && this.rowHeight(t, e.height), G(this._data, t, e), this) : G(this._data, t);
   }
   rowHeight(t, e) {
-    const r = st(this._data, t);
-    return e ? (r !== e && (st(this._data, t, e), this._contentRect.height += e - r), this) : r;
+    const r = ot(this._data, t);
+    return e ? (r !== e && (ot(this._data, t, e), this._contentRect.height += e - r), this) : r;
   }
   rowsHeight(t, e) {
-    return Lt(this._data, t, e);
+    return Bt(this._data, t, e);
   }
   isLastRow(t) {
-    return ue(this._data, t);
+    return we(this._data, t);
   }
   col(t, e) {
     return e ? (e.width && this.colWidth(t, e.width), K(this._data, t, e), this) : K(this._data, t);
   }
   colWidth(t, e) {
-    const r = et(this._data, t);
-    return e ? (r !== e && (et(this._data, t, e), this._contentRect.width += e - r), this) : r;
+    const r = rt(this._data, t);
+    return e ? (r !== e && (rt(this._data, t, e), this._contentRect.width += e - r), this) : r;
   }
   colsWidth(t, e) {
-    return jt(this._data, t, e);
+    return Lt(this._data, t, e);
   }
   isLastCol(t) {
-    return fe(this._data, t);
+    return de(this._data, t);
   }
   formulaParser(t) {
     return this._cells.formulaParser(t), this;
   }
-  formatter(t) {
-    return this._cells.formatter(t), this;
-  }
   style(t, e = !0) {
-    return ne(this._data, t, e);
+    return he(this._data, t, e);
   }
   addStyle(t) {
-    return Pt(this._data, t);
+    return jt(this._data, t);
   }
   clearStyles() {
-    return le(this._data), this;
+    return ae(this._data), this;
   }
   addBorder(...t) {
-    return he(this._data, t), this;
+    return ce(this._data, t), this;
   }
   clearBorder(t) {
-    return ae(this._data, t), this;
+    return fe(this._data, t), this;
   }
   clearBorders() {
-    return ce(this._data), this;
+    return ue(this._data), this;
   }
   cell(t, e, r) {
     const { _cells: o } = this;
@@ -2840,10 +2853,10 @@ class ht {
     return i != null ? i[2] : i;
   }
   cellValue(t, e) {
-    return Ot(this.cell(t, e));
+    return It(this.cell(t, e));
   }
   cellValueString(t, e) {
-    return U(this.cell(t, e));
+    return X(this.cell(t, e));
   }
   render() {
     const { _data: t, _renderer: e, _overlayer: r } = this;
@@ -2851,13 +2864,13 @@ class ht {
       const n = this._rendererOptions[i];
       n && e[i](n);
     }
-    e.scrollRows(t.scroll[0]).scrollCols(t.scroll[1]).merges(t.merges).freeze(t.freeze).styles(t.styles).borders(t.borders).rows(t.rows.len).cols(t.cols.len).row((i) => G(t, i)).col((i) => K(t, i)).cell((i, n) => this.cell(i, n)).formatter(this._cells._formatter).render();
+    e.scrollRows(t.scroll[0]).scrollCols(t.scroll[1]).merges(t.merges).freeze(t.freeze).styles(t.styles).borders(t.borders).rows(t.rows.len).cols(t.cols.len).row((i) => G(t, i)).col((i) => K(t, i)).cell((i, n) => this.cell(i, n)).render();
     const { viewport: o } = e;
     return o && (o.areas.forEach((i, n) => {
       r.area(n, i);
     }), o.headerAreas.forEach((i, n) => {
       r.headerArea(n, i);
-    }), X.resize(this)), this;
+    }), Y.resize(this)), this;
   }
   data(t) {
     return t ? (Object.assign(this._data, t), this._cells.load(this._data), Et(this), this) : this._data;
@@ -2879,9 +2892,9 @@ class ht {
       const l = n.currentRange;
       return l === void 0 ? null : r(l, i);
     };
-    return de(
+    return _e(
       o(this),
-      t instanceof ht ? o(t) : r(t, this),
+      t instanceof at ? o(t) : r(t, this),
       e
     ), this;
   }
@@ -2903,14 +2916,14 @@ class ht {
           this.cell(o + h, i + c, a[c]);
       }
       n = o + t.length - 1;
-    } else typeof t == "string" && ([n, l] = Fe(this, t, [o, i]));
+    } else typeof t == "string" && ([n, l] = Ge(this, t, [o, i]));
     return (n > 0 || l > 0) && (T.unionRange(this, n, l), T.reset(this)), this;
   }
   /**
    * @param from A1:H12
    */
   toHtml(t) {
-    return De(this, t);
+    return Ke(this, t);
   }
   toArrays(t) {
     const e = x.with(t), r = [];
@@ -2933,20 +2946,20 @@ class ht {
     return this._editors.set(t, e), this;
   }
   static create(t, e, r, o) {
-    return new ht(t, e, r, o);
+    return new at(t, e, r, o);
   }
 }
 function Et(s) {
   s._contentRect = {
     x: s._renderer._rowHeader.width,
     y: s._renderer._colHeader.height,
-    width: jt(s._data),
-    height: Lt(s._data)
+    width: Lt(s._data),
+    height: Bt(s._data)
   };
 }
-window && (window.tiny ||= {}, window.tiny.table = ht.create);
+window && (window.tiny ||= {}, window.tiny.table = at.create);
 export {
   Q as HElement,
-  ht as default,
-  O as h
+  at as default,
+  W as h
 };

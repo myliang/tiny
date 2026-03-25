@@ -1,10 +1,11 @@
 import { AreaCell } from '@tiny/table-renderer';
 import { Border } from '@tiny/table-renderer';
 import { Cell } from '@tiny/table-renderer';
+import { CellFormatter } from '@tiny/table-renderer';
+import { CellRenderer } from '@tiny/table-renderer';
 import { Col } from '@tiny/table-renderer';
 import { ColHeader } from '@tiny/table-renderer';
 import { default as default_2 } from '@tiny/table-renderer';
-import { Formatter } from '@tiny/table-renderer';
 import { Gridline } from '@tiny/table-renderer';
 import { Range as Range_2 } from '@tiny/table-renderer';
 import { Rect } from '@tiny/table-renderer';
@@ -18,10 +19,8 @@ declare class Cells {
     _indexes: Map<any, any>;
     _formulas: number[];
     _formulaParser: FormulaParser;
-    _formatter: Formatter;
     constructor();
     formulaParser(v: FormulaParser): this;
-    formatter(v: Formatter): this;
     load({ cells }: TableData): void;
     get(row: number, col: number): IndexDataCell | null;
     remove(row: number, col: number): this;
@@ -304,7 +303,6 @@ declare class Table {
     colsWidth(min: number, max: number): number;
     isLastCol(index: number): boolean;
     formulaParser(v: FormulaParser): this;
-    formatter(v: Formatter): this;
     style(index: number, withDefault?: boolean): Partial<Style>;
     addStyle(value: Partial<Style>): number;
     clearStyles(): this;
@@ -389,6 +387,8 @@ export declare type TableRendererOptions = {
     gridline?: Partial<Gridline>;
     headerGridline?: Partial<Gridline>;
     freeGridline?: Partial<Gridline>;
+    cellRenderer?: CellRenderer;
+    cellFormatter?: CellFormatter;
 };
 
 export { }

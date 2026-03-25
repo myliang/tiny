@@ -133,9 +133,19 @@ export declare type Cell = {
     [property: string]: any;
 } | string | number | null | undefined;
 
+export declare type CellFormat = (cell: Cell) => string;
+
+export declare type CellFormatter = (rowIndex: number, colIndex: number) => CellFormat;
+
 export declare type CellGetter = (rowIndex: number, colIndex: number) => Cell;
 
-export declare type CellRenderer = (canvas: Canvas, rect: Rect, cell: Cell, text: string) => boolean;
+export declare type CellRender = (canvas: Canvas, rect: Rect, cell: Cell, text: string) => boolean;
+
+export declare type CellRenderer = (row: number, col: number) => CellRender;
+
+export declare function cellValue(cell: Cell): string | number | null | undefined;
+
+export declare function cellValueString(cell: Cell): string;
 
 export declare type Col = {
     width: number;
@@ -150,7 +160,7 @@ export declare type ColHeader = {
     height: number;
     rows: number;
     cell: CellGetter;
-    cellRenderer?: CellRenderer;
+    cellRenderer: CellRenderer;
     merges?: string[];
 };
 
@@ -173,8 +183,6 @@ declare type FillStrokeProperties = {
 };
 
 export declare function findRanges(refs: string[], filter: (it: Range_2) => boolean): Range_2 | null;
-
-export declare type Formatter = (value: string, format?: string) => string;
 
 export declare type Gridline = {
     width: number;
@@ -311,7 +319,7 @@ export declare type RowHeader = {
     width: number;
     cols: number;
     cell: CellGetter;
-    cellRenderer?: CellRenderer;
+    cellRenderer: CellRenderer;
     merges?: string[];
 };
 
@@ -397,7 +405,7 @@ declare class TableRenderer {
      */
     _cell: CellGetter;
     _cellRenderer: CellRenderer;
-    _formatter: Formatter;
+    _cellFormatter: CellFormatter;
     _merges: string[];
     _borders: Border[];
     _styles: Partial<Style>[];
@@ -428,7 +436,7 @@ declare class TableRenderer {
     col(value: ColGetter): this;
     cell(value: (rowIndex: number, colIndex: number) => Cell): this;
     cellRenderer(value: CellRenderer): this;
-    formatter(value: Formatter): this;
+    cellFormatter(value: CellFormatter): this;
     merges(value: string[]): this;
     styles(value: Partial<Style>[]): this;
     borders(value: Border[]): this;

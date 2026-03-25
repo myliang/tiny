@@ -1,4 +1,4 @@
-import { Formatter } from '@tiny/table-renderer';
+import { CellFormatter } from '@tiny/table-renderer';
 import {
   IndexDataCell,
   DataCell,
@@ -12,17 +12,11 @@ export default class Cells {
   _indexes = new Map();
   _formulas: number[] = [];
   _formulaParser: FormulaParser = (v) => v;
-  _formatter: Formatter = (v) => v;
 
   constructor() {}
 
   formulaParser(v: FormulaParser) {
     this._formulaParser = v;
-    return this;
-  }
-
-  formatter(v: Formatter) {
-    this._formatter = v;
     return this;
   }
 

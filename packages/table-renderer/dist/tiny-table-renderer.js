@@ -1,14 +1,14 @@
 const E = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-function J(i) {
+function K(i) {
   return E.charAt(i % E.length);
 }
-function U(i) {
+function V(i) {
   const t = [];
   for (; i >= 0; )
-    t.push(J(i)), i = parseInt(i / E.length + "", 10) - 1;
+    t.push(K(i)), i = parseInt(i / E.length + "", 10) - 1;
   return t.reverse().join("");
 }
-function K(i) {
+function N(i) {
   let t = 0;
   for (let e = 0; e < i.length; e++)
     t = 26 * t + i.charCodeAt(e) - 64;
@@ -18,16 +18,16 @@ function D(i) {
   let t = "", e = "";
   for (let s = 0; s < i.length; s += 1)
     i.charAt(s) >= "0" && i.charAt(s) <= "9" ? e += i.charAt(s) : t += i.charAt(s).toUpperCase();
-  return [K(t), parseInt(e, 10) - 1];
+  return [N(t), parseInt(e, 10) - 1];
 }
 function L(i, t) {
-  return `${U(i)}${t + 1}`;
+  return `${V(i)}${t + 1}`;
 }
-function ot(i, t, e) {
+function lt(i, t, e) {
   const [s, r] = D(i);
   return L(s + t, r + e);
 }
-class N {
+class Q {
   constructor(t, e) {
     this.target = t;
     const s = t.getContext("2d");
@@ -117,7 +117,7 @@ class N {
   arcTo(t, e, s, r, o) {
     return this._ctx.arcTo(t, e, s, r, o), this;
   }
-  ellipse(t, e, s, r, o, n, l, h) {
+  ellipse(t, e, s, r, o, n, h, l) {
     return this._ctx.ellipse(
       t,
       e,
@@ -125,8 +125,8 @@ class N {
       r,
       o,
       n,
-      l,
-      h
+      h,
+      l
     ), this;
   }
   rect(t, e, s, r) {
@@ -304,17 +304,17 @@ class y {
   difference(t) {
     const e = [];
     if (!this.intersects(t)) return e;
-    const { startRow: s, startCol: r, endRow: o, endCol: n } = this, l = this.intersection(t);
+    const { startRow: s, startCol: r, endRow: o, endCol: n } = this, h = this.intersection(t);
     return [
-      new y(s, r, l.startRow - 1, n),
+      new y(s, r, h.startRow - 1, n),
       // top
-      new y(l.endRow + 1, r, o, n),
+      new y(h.endRow + 1, r, o, n),
       // bottom
-      new y(l.startRow, r, l.endRow, l.startCol - 1),
+      new y(h.startRow, r, h.endRow, h.startCol - 1),
       // left
-      new y(l.startRow, l.endCol + 1, l.endRow, n)
+      new y(h.startRow, h.endCol + 1, h.endRow, n)
       // right
-    ].filter((h) => h.rows >= 0 && h.cols >= 0);
+    ].filter((l) => l.rows >= 0 && l.cols >= 0);
   }
   touches(t) {
     return t.startRow === this.startRow && t.endRow === this.endRow && (t.endCol + 1 === this.startCol || this.endCol + 1 === t.startCol) || t.startCol === this.startCol && t.endCol === this.endCol && (t.endRow + 1 === this.startRow || this.endRow + 1 === this.startCol);
@@ -354,8 +354,8 @@ class y {
   }
   static create(t, e, s, r) {
     if (s !== void 0 && r !== void 0) {
-      let [o, n, l, h] = [t, e, s, r];
-      return t > s && (o = s, l = t), e > r && (n = r, h = e), new y(o, n, l, h);
+      let [o, n, h, l] = [t, e, s, r];
+      return t > s && (o = s, h = t), e > r && (n = r, l = e), new y(o, n, h, l);
     }
     return new y(t, e, t, e);
   }
@@ -367,12 +367,12 @@ class y {
     return this.create(r, s, n, o);
   }
 }
-function Q(i, t) {
+function X(i, t) {
   i && i.length > 0 && i.forEach((e) => {
     t(y.with(e));
   });
 }
-function nt(i, t) {
+function ht(i, t) {
   if (i && i.length > 0)
     for (let e of i) {
       const s = y.with(e);
@@ -380,7 +380,7 @@ function nt(i, t) {
     }
   return null;
 }
-function X(i, t, e) {
+function Y(i, t, e) {
   switch (i) {
     case "left":
       return e;
@@ -392,7 +392,7 @@ function X(i, t, e) {
       return 0;
   }
 }
-function Y(i, t, e, s, r) {
+function Z(i, t, e, s, r) {
   switch (i) {
     case "top":
       return r;
@@ -406,55 +406,55 @@ function Y(i, t, e, s, r) {
       return 0;
   }
 }
-function Z(i, t, e, s, r, o, n) {
-  let l = 0;
-  i === "underline" ? e === "top" ? l = -n : e === "middle" && (l = -n / 2) : i === "strikethrough" && (e === "top" ? l = -n / 2 : e === "bottom" && (l = n / 2));
+function tt(i, t, e, s, r, o, n) {
   let h = 0;
-  return t === "center" ? h = o / 2 : t === "right" && (h = o), [s - h, r - l, s - h + o, r - l];
+  i === "underline" ? e === "top" ? h = -n : e === "middle" && (h = -n / 2) : i === "strikethrough" && (e === "top" ? h = -n / 2 : e === "bottom" && (h = n / 2));
+  let l = 0;
+  return t === "center" ? l = o / 2 : t === "right" && (l = o), [s - l, r - h, s - l + o, r - h];
 }
-function tt(i, t, e, s) {
+function et(i, t, e, s) {
   if (i && t) {
     let r = "";
     return e && (r += "italic "), s && (r += "bold "), `${r} ${t}pt ${i}`;
   }
 }
 function G(i, t, e, s = !1) {
-  let r, o, n, l;
-  Array.isArray(e) ? r = o = n = l = e : { top: r, right: o, bottom: n, left: l } = e, i.save().beginPath().translate(t.x, t.y);
-  const h = (c, a) => [
-    [0 - a, 0, t.width + a, 0],
+  let r, o, n, h;
+  Array.isArray(e) ? r = o = n = h = e : { top: r, right: o, bottom: n, left: h } = e, i.save().beginPath().translate(t.x, t.y);
+  const l = (a, c) => [
+    [0 - c, 0, t.width + c, 0],
     [t.width, 0, t.width, t.height],
-    [0 - a, t.height, t.width + a, t.height],
+    [0 - c, t.height, t.width + c, t.height],
     [0, 0, 0, t.height]
-  ][c];
-  [r, o, n, l].forEach((c, a) => {
-    if (c) {
-      let w = [], _ = 1;
-      c[0] === "thick" ? _ = 3 : c[0] === "medium" ? _ = 2 : c[0] === "dotted" ? w = [1, 1] : c[0] === "dashed" && (w = [2, 2]);
+  ][a];
+  [r, o, n, h].forEach((a, c) => {
+    if (a) {
+      let d = [], C = 1;
+      a[0] === "thick" ? C = 3 : a[0] === "medium" ? C = 2 : a[0] === "dotted" ? d = [1, 1] : a[0] === "dashed" && (d = [2, 2]);
       let u = 0;
-      s && (u = _ / 2), i.prop({ strokeStyle: c[1], lineWidth: _ }).setLineDash(w).line(...h(a, u));
+      s && (u = C / 2), i.prop({ strokeStyle: a[1], lineWidth: C }).setLineDash(d).line(...l(c, u));
     }
   }), i.restore();
 }
-function v(i, t, e, s, r, o) {
+function q(i, t, e, s, r, o) {
   let n = "";
-  t && (typeof t == "string" || typeof t == "number" ? n = o(`${t}`) : n = o((t.value || "") + "", t.format));
+  t && (o ? n = o(t) : n = J(t));
   const {
-    fontSize: l,
-    fontFamily: h,
-    bold: c,
-    italic: a,
-    color: w,
-    bgcolor: _,
+    fontSize: h,
+    fontFamily: l,
+    bold: a,
+    italic: c,
+    color: d,
+    bgcolor: C,
     align: u,
-    valign: g,
+    valign: R,
     underline: H,
     strikethrough: P,
     rotate: T,
     textwrap: p,
     padding: A
   } = s;
-  if (i.save().beginPath().translate(e.x, e.y), i.rect(0, 0, e.width, e.height).clip(), _ && i.prop("fillStyle", _).fill(), T && T > 0 && i.rotate(T * (Math.PI / 180)), r !== void 0) {
+  if (i.save().beginPath().translate(e.x, e.y), i.rect(0, 0, e.width, e.height).clip(), C && i.prop("fillStyle", C).fill(), T && T > 0 && i.rotate(T * (Math.PI / 180)), r !== void 0) {
     if (i.save(), !r(i, e, t, n)) {
       i.restore();
       return;
@@ -464,162 +464,175 @@ function v(i, t, e, s, r, o) {
   if (n && !/^\s*$/.test(n)) {
     i.save().beginPath().prop({
       textAlign: u,
-      textBaseline: g,
-      font: tt(h, l, a, c),
-      fillStyle: w
+      textBaseline: R,
+      font: et(l, h, c, a),
+      fillStyle: d
     });
-    const [m, f] = A || [5, 5], d = X(u, e.width, m), C = n.split(`
-`), x = e.width - m * 2, R = [];
-    C.forEach((S) => {
+    const [b, f] = A || [5, 5], w = Y(u, e.width, b), x = n.split(`
+`), g = e.width - b * 2, _ = [];
+    x.forEach((S) => {
       const O = i.measureTextWidth(S);
-      if (p && O > x) {
-        let b = { w: 0, len: 0, start: 0 };
-        for (let j = 0; j < S.length; j += 1)
-          b.w > x && (R.push(S.substr(b.start, b.len)), b = { w: 0, len: 0, start: j }), b.len += 1, b.w += i.measureTextWidth(S[j]) + 1;
-        b.len > 0 && R.push(S.substr(b.start, b.len));
+      if (p && O > g) {
+        let m = { w: 0, len: 0, start: 0 };
+        for (let $ = 0; $ < S.length; $ += 1)
+          m.w > g && (_.push(S.substr(m.start, m.len)), m = { w: 0, len: 0, start: $ }), m.len += 1, m.w += i.measureTextWidth(S[$]) + 1;
+        m.len > 0 && _.push(S.substr(m.start, m.len));
       } else
-        R.push(S);
+        _.push(S);
     });
-    const z = l / 0.75, $ = (R.length - 1) * z, I = [];
-    H && I.push("underline"), P && I.push("strikethrough");
-    let M = Y(g, e.height, $, z, f);
-    R.forEach((S) => {
+    const W = h / 0.75, j = (_.length - 1) * W, z = [];
+    H && z.push("underline"), P && z.push("strikethrough");
+    let M = Z(R, e.height, j, W, f);
+    _.forEach((S) => {
       const O = i.measureTextWidth(S);
-      i.fillText(S, d, M), I.forEach((b) => {
+      i.fillText(S, w, M), z.forEach((m) => {
         i.line(
-          ...Z(b, u, g, d, M, O, l)
+          ...tt(m, u, R, w, M, O, h)
         );
-      }), M += z;
+      }), M += W;
     }), i.restore();
   }
   i.restore();
 }
-function V(i, [t, e, ...s], r) {
-  const o = [], n = y.with(t), l = r.filter((h) => h.intersects(n));
-  if (n.intersects(i.range) || l.length > 0)
-    if (l.length <= 0)
+function U(i, [t, e, ...s], r) {
+  const o = [], n = y.with(t), h = r.filter((l) => l.intersects(n));
+  if (n.intersects(i.range) || h.length > 0)
+    if (h.length <= 0)
       o.push([n, i.rect(n), e]);
     else
-      for (let h of l)
-        if (n.within(h))
-          n.startRow === h.startRow && n.startCol === h.startCol && e !== "inside" && e !== "horizontal" && e !== "vertical" && o.push([
-            h,
-            i.rect(h),
+      for (let l of h)
+        if (n.within(l))
+          n.startRow === l.startRow && n.startCol === l.startCol && e !== "inside" && e !== "horizontal" && e !== "vertical" && o.push([
+            l,
+            i.rect(l),
             e === "all" ? "outside" : e
           ]);
         else if (e === "outside" || e === "left" || e === "top" || e === "right" || e === "bottom") {
           o.push([n, i.rect(n), e]);
           break;
         } else {
-          const c = l.filter((a) => !a.equals(h));
-          if (n.difference(h).forEach((a) => {
-            if (a.intersects(i.range)) {
-              const w = i.rect(a);
+          const a = h.filter((c) => !c.equals(l));
+          if (n.difference(l).forEach((c) => {
+            if (c.intersects(i.range)) {
+              const d = i.rect(c);
               o.push(
-                ...V(
+                ...U(
                   i,
-                  [a.toString(), e, ...s],
-                  c
+                  [c.toString(), e, ...s],
+                  a
                 )
-              ), (e === "inside" || e === "horizontal") && (a.startRow < h.startRow && a.endRow < h.startRow ? o.push([a, w, "bottom"]) : a.startRow > h.startRow && a.endRow > h.startRow && o.push([a, w, "top"])), (e === "inside" || e === "vertical") && (a.startCol < h.startCol && a.endCol < h.startCol && o.push([a, w, "right"]), a.startCol > h.startCol && a.endCol > h.startCol && o.push([a, w, "left"]));
+              ), (e === "inside" || e === "horizontal") && (c.startRow < l.startRow && c.endRow < l.startRow ? o.push([c, d, "bottom"]) : c.startRow > l.startRow && c.endRow > l.startRow && o.push([c, d, "top"])), (e === "inside" || e === "vertical") && (c.startCol < l.startCol && c.endCol < l.startCol && o.push([c, d, "right"]), c.startCol > l.startCol && c.endCol > l.startCol && o.push([c, d, "left"]));
             }
           }), e === "all") {
-            const a = i.rect(h);
-            n.startRow === h.startRow && o.push([h, a, "top"]), n.endRow === h.endRow && o.push([h, a, "bottom"]), n.startCol === h.startCol && o.push([h, a, "left"]), n.endCol === h.endCol && o.push([h, a, "right"]);
+            const c = i.rect(l);
+            n.startRow === l.startRow && o.push([l, c, "top"]), n.endRow === l.endRow && o.push([l, c, "bottom"]), n.startCol === l.startCol && o.push([l, c, "left"]), n.endCol === l.endCol && o.push([l, c, "right"]);
           }
           break;
         }
   return o;
 }
-function q(i, { width: t, color: e }, s) {
+function F(i, { width: t, color: e }, s) {
   t > 0 && (i.save().beginPath().prop({ lineWidth: t - 0.5, strokeStyle: e }), s(), i.restore());
 }
-function F(i, t, { x: e, y: s, width: r, height: o }) {
-  q(i, t, () => {
+function B(i, t, { x: e, y: s, width: r, height: o }) {
+  F(i, t, () => {
     i.translate(e, s).line(r, 0, r, o).line(0, o, r, o);
   });
 }
-function et(i, t, e, s, r, o, n, l) {
-  const h = [o, n];
-  r === "outside" || r === "all" ? G(i, s, h, !0) : r === "left" ? G(i, s, { left: h }, l) : r === "top" ? G(i, s, { top: h }, l) : r === "right" ? G(i, s, { right: h }, l) : r === "bottom" && G(
+function st(i, t, e, s, r, o, n, h) {
+  const l = [o, n];
+  r === "outside" || r === "all" ? G(i, s, l, !0) : r === "left" ? G(i, s, { left: l }, h) : r === "top" ? G(i, s, { top: l }, h) : r === "right" ? G(i, s, { right: l }, h) : r === "bottom" && G(
     i,
     s,
-    { bottom: h },
-    l
-  ), (r === "all" || r === "inside" || r === "horizontal" || r === "vertical") && (r !== "horizontal" && e.eachCol((c) => {
-    if (c < e.endCol) {
-      const a = e.clone();
-      a.endCol = a.startCol = c, a.intersects(t.range) && G(
+    { bottom: l },
+    h
+  ), (r === "all" || r === "inside" || r === "horizontal" || r === "vertical") && (r !== "horizontal" && e.eachCol((a) => {
+    if (a < e.endCol) {
+      const c = e.clone();
+      c.endCol = c.startCol = a, c.intersects(t.range) && G(
         i,
-        t.rect(a),
-        { right: h },
-        l
+        t.rect(c),
+        { right: l },
+        h
       );
     }
-  }), r !== "vertical" && e.eachRow((c) => {
-    if (c < e.endRow) {
-      const a = e.clone();
-      a.endRow = a.startRow = c, a.intersects(t.range) && G(
+  }), r !== "vertical" && e.eachRow((a) => {
+    if (a < e.endRow) {
+      const c = e.clone();
+      c.endRow = c.startRow = a, c.intersects(t.range) && G(
         i,
-        t.rect(a),
-        { bottom: h },
-        l
+        t.rect(c),
+        { bottom: l },
+        h
       );
     }
   }));
 }
-function st(i, t, e, s) {
+function rt(i, t, e, s) {
   e && e.length > 0 && e.forEach((r) => {
     const [, , o, n] = r;
-    V(t, r, s).forEach(([l, h, c]) => {
-      et(i, t, l, h, c, o, n);
+    U(t, r, s).forEach(([h, l, a]) => {
+      st(i, t, h, l, a, o, n);
     });
   });
 }
 function k(i, t, e, s) {
   if (!e) return;
-  let r, o, n = (f) => f, l = s._headerStyle, h = s._headerGridline, c = s._styles, a, w, _, u;
-  const { _rowHeader: g, _colHeader: H } = s;
+  let r, o, n, h = s._headerStyle, l = s._headerGridline, a = s._styles, c, d, C, u;
+  const { _rowHeader: R, _colHeader: H } = s;
   if (i === "row-header") {
-    if (g.width <= 0) return;
-    ({ cell: r, merges: a, cellRenderer: o } = g);
+    if (R.width <= 0) return;
+    ({ cell: r, merges: c, cellRenderer: o } = R);
   } else if (i === "col-header") {
     if (H.height <= 0) return;
-    ({ cell: r, merges: a, cellRenderer: o } = H);
+    ({ cell: r, merges: c, cellRenderer: o } = H);
   } else
-    r = s._cell, o = s._cellRenderer, n = s._formatter, l = s._style, h = s._gridline, c = s._styles, a = s._merges, w = s._borders, _ = s._row, u = s._col;
+    r = s._cell, o = s._cellRenderer, n = s._cellFormatter, h = s._style, l = s._gridline, a = s._styles, c = s._merges, d = s._borders, C = s._row, u = s._col;
   t.save().translate(e.x, e.y).prop("fillStyle", s._bgcolor).rect(0, 0, e.width, e.height).fill().clip();
-  const P = (f, d, C) => {
-    const x = { ...l };
-    if (_) {
-      const R = _(f);
-      R && R.style !== void 0 && Object.assign(x, c[R.style]);
+  const P = (f, w, x) => {
+    const g = { ...h };
+    if (C) {
+      const _ = C(f);
+      _ && _.style !== void 0 && Object.assign(g, a[_.style]);
     }
     if (u) {
-      const R = u(d);
-      R && R.style !== void 0 && Object.assign(x, c[R.style]);
+      const _ = u(w);
+      _ && _.style !== void 0 && Object.assign(g, a[_.style]);
     }
-    return C instanceof Object && C.style !== void 0 && Object.assign(x, c[C.style]), x;
+    return x instanceof Object && x.style !== void 0 && Object.assign(g, a[x.style]), g;
   }, T = [], p = [], A = /* @__PURE__ */ new Set();
-  a && Q(a, (f) => {
+  c && X(c, (f) => {
     if (f.intersects(e.range)) {
-      const d = r(f.startRow, f.startCol), C = P(f.startRow, f.startCol, d), x = e.rect(f);
-      p.push([d, x, C]), T.push(f), f.each((R, z) => {
-        A.add(`${R}_${z}`);
+      const w = r(f.startRow, f.startCol), x = P(f.startRow, f.startCol, w), g = e.rect(f);
+      p.push([
+        f.startRow,
+        f.startCol,
+        w,
+        g,
+        x
+      ]), T.push(f), f.each((_, W) => {
+        A.add(`${_}_${W}`);
       });
     }
   });
-  const m = (f, d, C) => {
-    i === "body" ? (F(t, h, d), v(t, f, d, C, o, n)) : (v(t, f, d, C, o, n), F(t, h, d));
+  const b = (f, w, x, g, _) => {
+    i === "body" ? (B(t, l, g), q(
+      t,
+      x,
+      g,
+      _,
+      o(f, w),
+      n(f, w)
+    )) : (q(t, x, g, _, o(f, w), void 0), B(t, l, g));
   };
-  e.each((f, d, C) => {
-    if (!A.has(`${f}_${d}`)) {
-      const x = r(f, d);
-      m(x, C, P(f, d, x));
+  e.each((f, w, x) => {
+    if (!A.has(`${f}_${w}`)) {
+      const g = r(f, w);
+      b(f, w, g, x, P(f, w, g));
     }
-  }), p.forEach((f) => m(...f)), st(t, e, w, T), t.restore();
+  }), p.forEach((f, w) => b(...f)), rt(t, e, d, T), t.restore();
 }
-function rt(i) {
+function it(i) {
   const {
     _width: t,
     _height: e,
@@ -627,40 +640,40 @@ function rt(i) {
     _scale: r,
     _viewport: o,
     _freeze: n,
-    _rowHeader: l,
-    _colHeader: h
+    _rowHeader: h,
+    _colHeader: l
   } = i;
   if (o) {
-    const c = new N(s, r);
-    c.size(t, e);
-    const [a, w, _, u] = o.areas, [g, H, P, T] = o.headerAreas;
-    k("body", c, u, i), k("body", c, a, i), k("col-header", c, g, i), k("body", c, _, i), k("row-header", c, T, i), k("body", c, w, i), k("col-header", c, H, i), k("row-header", c, P, i);
+    const a = new Q(s, r);
+    a.size(t, e);
+    const [c, d, C, u] = o.areas, [R, H, P, T] = o.headerAreas;
+    k("body", a, u, i), k("body", a, c, i), k("col-header", a, R, i), k("body", a, C, i), k("row-header", a, T, i), k("body", a, d, i), k("col-header", a, H, i), k("row-header", a, P, i);
     const [p, A] = n;
-    (A > 0 || p > 0) && q(c, i._freezeGridline, () => {
-      A > 0 && c.line(0, u.y, t, u.y), p > 0 && c.line(u.x, 0, u.x, e);
+    (A > 0 || p > 0) && F(a, i._freezeGridline, () => {
+      A > 0 && a.line(0, u.y, t, u.y), p > 0 && a.line(u.x, 0, u.x, e);
     });
-    const { x: m, y: f } = w;
-    if (m > 0 && f > 0) {
-      const { height: d } = h, { width: C } = l, { bgcolor: x } = i._headerStyle;
-      x && c.save().prop({ fillStyle: x }).rect(0, 0, C, d).fill().restore(), q(c, i._headerGridline, () => {
-        c.line(0, d, C, d).line(C, 0, C, d);
+    const { x: b, y: f } = d;
+    if (b > 0 && f > 0) {
+      const { height: w } = l, { width: x } = h, { bgcolor: g } = i._headerStyle;
+      g && a.save().prop({ fillStyle: g }).rect(0, 0, x, w).fill().restore(), F(a, i._headerGridline, () => {
+        a.line(0, w, x, w).line(x, 0, x, w);
       });
     }
   }
 }
-class W {
-  constructor(t, e, s, r, o, n, l) {
-    this.range = t, this.x = e, this.y = s, this.width = r, this.height = o, this.rowHeight = n, this.colWidth = l;
-    let h = 0;
-    t.eachRow((a) => {
-      const w = n(a);
-      this.rowMap.set(a, { y: h, height: w }), h += w;
-    }), this.height <= 0 && (this.height = h);
-    let c = 0;
-    t.eachCol((a) => {
-      const w = l(a);
-      this.colMap.set(a, { x: c, width: w }), c += w;
-    }), this.width <= 0 && (this.width = c);
+class I {
+  constructor(t, e, s, r, o, n, h) {
+    this.range = t, this.x = e, this.y = s, this.width = r, this.height = o, this.rowHeight = n, this.colWidth = h;
+    let l = 0;
+    t.eachRow((c) => {
+      const d = n(c);
+      this.rowMap.set(c, { y: l, height: d }), l += d;
+    }), this.height <= 0 && (this.height = l);
+    let a = 0;
+    t.eachCol((c) => {
+      const d = h(c);
+      this.colMap.set(c, { x: a, width: d }), a += d;
+    }), this.width <= 0 && (this.width = a);
   }
   // { rowIndex: { y, height }}
   rowMap = /* @__PURE__ */ new Map();
@@ -697,8 +710,8 @@ class W {
   }
   each(t) {
     this.eachRow((e, s, r) => {
-      this.eachCol((o, n, l) => {
-        t(e, o, { x: n, y: s, width: l, height: r });
+      this.eachCol((o, n, h) => {
+        t(e, o, { x: n, y: s, width: h, height: r });
       });
     });
   }
@@ -706,23 +719,23 @@ class W {
     const { rowMap: s, range: r } = this;
     let [o, n] = [0, 0];
     t >= r.startRow && (o = s.get(t)?.y || 0);
-    for (let h = t; h <= e; h += 1) {
-      const c = this.rowHeight(h);
-      c > 0 && (h < r.startRow && (o -= c), n += c);
+    for (let l = t; l <= e; l += 1) {
+      const a = this.rowHeight(l);
+      a > 0 && (l < r.startRow && (o -= a), n += a);
     }
-    const { width: l } = this;
-    return { x: 0, y: o, width: l, height: n };
+    const { width: h } = this;
+    return { x: 0, y: o, width: h, height: n };
   }
   rectCol(t, e) {
     const { colMap: s, range: r } = this;
     let [o, n] = [0, 0];
     t >= r.startCol && (o = s.get(t)?.x || 0);
-    for (let h = t; h <= e; h += 1) {
-      const c = this.colWidth(h);
-      c > 0 && (h < r.startCol && (o -= c), n += c);
+    for (let l = t; l <= e; l += 1) {
+      const a = this.colWidth(l);
+      a > 0 && (l < r.startCol && (o -= a), n += a);
     }
-    const { height: l } = this;
-    return { x: o, y: 0, width: n, height: l };
+    const { height: h } = this;
+    return { x: o, y: 0, width: n, height: h };
   }
   rect(t) {
     let { y: e, height: s } = this.rectRow(t.startRow, t.endRow), { x: r, width: o } = this.rectCol(t.startCol, t.endCol);
@@ -742,28 +755,28 @@ class W {
       height: 0
     };
     for (; n.y < e; ) {
-      const l = this.rowHeight(n.row++);
-      n.y += l, n.height = l;
+      const h = this.rowHeight(n.row++);
+      n.y += h, n.height = h;
     }
     for (n.y -= n.height, n.row--; n.x < t; ) {
-      const l = this.colWidth(n.col++);
-      n.x += l, n.width = l;
+      const h = this.colWidth(n.col++);
+      n.x += h, n.width = h;
     }
     return n.x -= n.width, n.col--, this.cellAtCache = n, n;
   }
-  static create(t, e, s, r, o, n, l, h, c, a) {
-    return new W(
+  static create(t, e, s, r, o, n, h, l, a, c) {
+    return new I(
       new y(t, e, s, r),
       o,
       n,
-      l,
       h,
-      c,
-      a
+      l,
+      a,
+      c
     );
   }
 }
-class it {
+class ot {
   /**
    * [area1, area2, area3, area4]
    * -----------------------
@@ -785,72 +798,84 @@ class it {
   _render;
   constructor(t) {
     this._render = t;
-    const [e, s] = [t._rowHeader.width, t._colHeader.height], [r, o] = t._freeze, { _startRow: n, _startCol: l, _rows: h, _cols: c, _width: a, _height: w } = t, _ = (b) => t.rowHeightAt(b), u = (b) => t.colWidthAt(b), g = W.create(
+    const [e, s] = [t._rowHeader.width, t._colHeader.height], [r, o] = t._freeze, { _startRow: n, _startCol: h, _rows: l, _cols: a, _width: c, _height: d } = t, C = (m) => t.rowHeightAt(m), u = (m) => t.colWidthAt(m), R = I.create(
       n,
-      l,
+      h,
       r - 1,
       o - 1,
       e,
       s,
       0,
       0,
-      _,
+      C,
       u
     ), [H, P] = [
       r + t._scrollRows,
       o + t._scrollCols
     ];
-    let T = g.height + s, p = H;
-    for (; T < w && p < h; )
-      T += _(p), p += 1;
-    let A = g.width + e, m = P;
-    for (; A < a && m < c; )
-      A += u(m), m += 1;
-    const f = e + g.width, d = s + g.height;
-    let C = a - f, x = w - d;
-    m === c && (C -= a - A), p === h && (x -= w - T), m -= 1, p -= 1;
-    const R = W.create(
+    let T = R.height + s, p = H;
+    for (; T < d && p < l; )
+      T += C(p), p += 1;
+    let A = R.width + e, b = P;
+    for (; A < c && b < a; )
+      A += u(b), b += 1;
+    const f = e + R.width, w = s + R.height;
+    let x = c - f, g = d - w;
+    b === a && (x -= c - A), p === l && (g -= d - T), b -= 1, p -= 1;
+    const _ = I.create(
       H,
       P,
       p,
-      m,
+      b,
       f,
-      d,
-      C,
+      w,
       x,
-      _,
+      g,
+      C,
       u
-    ), z = W.create(
+    ), W = I.create(
       n,
       P,
       r - 1,
-      m,
+      b,
       f,
       s,
-      C,
+      x,
       0,
-      _,
+      C,
       u
-    ), $ = W.create(
+    ), j = I.create(
       H,
-      l,
+      h,
       p,
       o - 1,
       e,
-      d,
+      w,
       0,
-      x,
-      _,
+      g,
+      C,
       u
     );
-    this.areas = [z, g, $, R];
-    const { _rowHeader: I, _colHeader: M } = t, S = () => M.height / M.rows, O = () => I.width / I.cols;
+    this.areas = [W, R, j, _];
+    const { _rowHeader: z, _colHeader: M } = t, S = () => M.height / M.rows, O = () => z.width / z.cols;
     this.headerAreas = [
-      W.create(
+      I.create(
         0,
-        z.range.startCol,
+        W.range.startCol,
         M.rows - 1,
-        z.range.endCol,
+        W.range.endCol,
+        _.x,
+        0,
+        _.width,
+        0,
+        S,
+        u
+      ),
+      I.create(
+        0,
+        R.range.startCol,
+        M.rows - 1,
+        R.range.endCol,
         R.x,
         0,
         R.width,
@@ -858,40 +883,28 @@ class it {
         S,
         u
       ),
-      W.create(
+      I.create(
+        R.range.startRow,
         0,
-        g.range.startCol,
-        M.rows - 1,
-        g.range.endCol,
-        g.x,
-        0,
-        g.width,
-        0,
-        S,
-        u
-      ),
-      W.create(
-        g.range.startRow,
-        0,
-        g.range.endRow,
-        I.cols - 1,
-        0,
-        g.y,
-        0,
-        g.height,
-        _,
-        O
-      ),
-      W.create(
-        $.range.startRow,
-        0,
-        $.range.endRow,
-        I.cols - 1,
+        R.range.endRow,
+        z.cols - 1,
         0,
         R.y,
         0,
         R.height,
-        _,
+        C,
+        O
+      ),
+      I.create(
+        j.range.startRow,
+        0,
+        j.range.endRow,
+        z.cols - 1,
+        0,
+        _.y,
+        0,
+        _.height,
+        C,
         O
       )
     ];
@@ -903,7 +916,7 @@ class it {
     return !1;
   }
   cellAt(t, e) {
-    const s = this.areas[1], [r, o, n, l] = this.headerAreas;
+    const s = this.areas[1], [r, o, n, h] = this.headerAreas;
     if (t < s.x && e < s.y)
       return {
         placement: "all",
@@ -917,20 +930,27 @@ class it {
     if (t < s.x)
       return {
         placement: "row-header",
-        ...(n.containsy(e) ? n : l).cellAt(t, e)
+        ...(n.containsy(e) ? n : h).cellAt(t, e)
       };
     if (e < s.y)
       return {
         placement: "col-header",
         ...(o.containsx(t) ? o : r).cellAt(t, e)
       };
-    for (let h of this.areas)
-      if (h.contains(t, e))
-        return { placement: "body", ...h.cellAt(t, e) };
+    for (let l of this.areas)
+      if (l.contains(t, e))
+        return { placement: "body", ...l.cellAt(t, e) };
     return null;
   }
 }
-class B {
+function nt(i) {
+  return i instanceof Object ? i.value : i;
+}
+function J(i) {
+  const t = nt(i);
+  return `${t ?? ""}`;
+}
+class v {
   _target;
   _bgcolor = "#ffffff";
   // table width
@@ -976,8 +996,8 @@ class B {
    */
   _cell = () => {
   };
-  _cellRenderer = () => !0;
-  _formatter = (t) => t;
+  _cellRenderer = (t, e) => () => !0;
+  _cellFormatter = (t, e) => J;
   _merges = [];
   _borders = [];
   _styles = [];
@@ -1002,6 +1022,9 @@ class B {
   _rowHeader = {
     width: 60,
     cols: 1,
+    cellRenderer(t, e) {
+      return () => !0;
+    },
     cell(t, e) {
       return t + 1;
     }
@@ -1010,8 +1033,11 @@ class B {
   _colHeader = {
     height: 24,
     rows: 1,
+    cellRenderer(t, e) {
+      return () => !0;
+    },
     cell(t, e) {
-      return U(e);
+      return V(e);
     }
   };
   _headerGridline = {
@@ -1046,7 +1072,7 @@ class B {
     this._target = r, this._width = e, this._height = s;
   }
   render() {
-    return this._viewport = new it(this), rt(this), this;
+    return this._viewport = new ot(this), it(this), this;
   }
   bgcolor(t) {
     return this._bgcolor = t, this;
@@ -1096,8 +1122,8 @@ class B {
   cellRenderer(t) {
     return this._cellRenderer = t, this;
   }
-  formatter(t) {
-    return this._formatter = t, this;
+  cellFormatter(t) {
+    return this._cellFormatter = t, this;
   }
   merges(t) {
     return this._merges = t, this;
@@ -1154,23 +1180,25 @@ class B {
   }
   // get methods ---- end -------
   static create(t, e, s) {
-    return new B(t, e, s);
+    return new v(t, e, s);
   }
 }
 try {
-  window && (window.tiny ||= {}, window.tiny.table_renderer = B.create);
+  window && (window.tiny ||= {}, window.tiny.table_renderer = v.create);
 } catch {
 }
 export {
-  W as Area,
-  N as Canvas,
+  I as Area,
+  Q as Canvas,
   y as Range,
-  it as Viewport,
-  B as default,
-  Q as eachRanges,
-  ot as expr2expr,
+  ot as Viewport,
+  nt as cellValue,
+  J as cellValueString,
+  v as default,
+  X as eachRanges,
+  lt as expr2expr,
   D as expr2xy,
-  nt as findRanges,
-  U as stringAt,
+  ht as findRanges,
+  V as stringAt,
   L as xy2expr
 };
