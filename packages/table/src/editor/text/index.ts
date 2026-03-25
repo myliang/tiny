@@ -1,5 +1,5 @@
 import HElement, { h } from '../../element';
-import { borderWidth, stylePrefix } from '../../config';
+import { stylePrefix } from '../../config';
 import { Rect } from '@tiny/table-renderer';
 import Editor from '..';
 import { MoveDirection } from '../..';
@@ -60,30 +60,30 @@ export default class TextEditor extends Editor {
 
 function resizeSize(editor: TextEditor) {
   const { _, _value, _rect, _textMeasure, _target } = editor;
-  if (typeof _value !== 'string') return;
-  // const txts = _value.split('\n');
-  let measureHtml = _value.replace('\n', '<br/>');
-  if (_value.endsWith('\n')) measureHtml += 'T';
-  _textMeasure.html(measureHtml);
+  const text = cellValueString(_value);
+  let measureHtml = text.replace('\n', '<br/>');
+  if (text.endsWith('\n')) measureHtml += 'T';
+  _textMeasure.textContent(measureHtml);
 
   if (_rect && _target) {
     const padding = parseInt(
       _textMeasure.computedStyle().getPropertyValue('padding')
     );
     const toffset = _target.offset();
-    const maxWidth = toffset.width - _rect.x - borderWidth;
-    const maxHeight = toffset.height - _rect.y - borderWidth;
+    const maxWidth = toffset.width - _rect.x;
+    const maxHeight = toffset.height - _rect.y;
     _.css('max-width', `${maxWidth}px`);
-    _textMeasure.css('max-width', `${maxWidth - padding * 2}px`);
-    const { width, height } = _textMeasure.rect();
-    const minWidth = _rect.width - borderWidth;
+    _textMeasure.css('max-width', `${maxWidth}px`);
+    let { width, height } = _textMeasure.rect();
+    width += padding * 2;
+    const minWidth = _rect.width;
     if (width > minWidth) {
-      _.css({ width: width });
+      _.css({ width });
     }
     if (height > _rect.height && height <= maxHeight) {
       _.css({ height: height });
     } else if (height < _rect.height) {
-      _.css({ height: _rect.height - borderWidth });
+      _.css({ height: _rect.height });
     }
   }
 }

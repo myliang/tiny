@@ -1,5 +1,4 @@
 import HElement, { h } from '../element';
-import { borderWidth } from '../config';
 import { Rect } from '@tiny/table-renderer';
 import { DataCell } from '../data';
 
@@ -54,10 +53,10 @@ export default class Editor {
       this._rect = rect;
       const { x, y, width, height } = rect;
       this._.css({
-        left: x - borderWidth / 2,
-        top: y - borderWidth / 2,
-        width: width - borderWidth,
-        height: height - borderWidth,
+        left: x,
+        top: y,
+        width,
+        height,
       }).show();
     }
     return this;

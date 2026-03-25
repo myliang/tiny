@@ -1,5 +1,5 @@
 import { Range, Rect } from '@tiny/table-renderer';
-import { stylePrefix, borderWidth } from '../config';
+import { stylePrefix } from '../config';
 import HElement, { h } from '../element';
 
 class SelectArea {
@@ -137,9 +137,7 @@ export default class Selector {
   }
 
   addAreaOutline(rect: Rect, target: HElement) {
-    const outline = new SelectArea(`selector`, true)
-      .rect(rect2outlineRect(rect, borderWidth))
-      .target(target);
+    const outline = new SelectArea(`selector`, true).rect(rect).target(target);
     if (this._placement === 'body') {
       outline.append(
         h('div', 'corner')
@@ -173,18 +171,14 @@ export default class Selector {
 
   addCopyArea(rect: Rect, target: HElement) {
     this._copyAreas.push(
-      new SelectArea(`selector-copy`, true)
-        .rect(rect2outlineRect(rect, borderWidth))
-        .target(target)
+      new SelectArea(`selector-copy`, true).rect(rect).target(target)
     );
     return this;
   }
 
   addAutofillArea(rect: Rect, target: HElement) {
     this._autofillAreas.push(
-      new SelectArea(`selector-autofill`, true)
-        .rect(rect2outlineRect(rect, borderWidth))
-        .target(target)
+      new SelectArea(`selector-autofill`, true).rect(rect).target(target)
     );
     return this;
   }

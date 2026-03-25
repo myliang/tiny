@@ -54,15 +54,14 @@ function reset(t: Table) {
       if (editor != undefined) {
         t._editor = editor;
         if (editor && _rect && _target) {
-          // console.log('row:', startRow, ', col:', startCol, ', rect:', _rect);
-          if (cell) {
-            editor.value(cell);
-          }
           editor
             .cellIndex(startRow, startCol)
             .rect(_rect)
             .target(_target)
             .show();
+          if (cell) {
+            editor.value(cell);
+          }
         }
       }
     }

@@ -232,7 +232,7 @@ export function h(
   return new HElement(tag, className);
 }
 
-export function textWidth(text: string, fontSize: string, fontFamily: string) {
+export function textRect(text: string, fontSize: string, fontFamily: string) {
   const el = document.createElement('span');
   el.style.display = 'inline-block';
   el.style.position = 'absolute';
@@ -242,7 +242,8 @@ export function textWidth(text: string, fontSize: string, fontFamily: string) {
   el.style.fontFamily = fontFamily;
   el.textContent = text;
   document.body.appendChild(el);
-  const width = el.clientWidth;
+  const rect = el.getBoundingClientRect();
+  console.log('rect:', rect, el.offsetHeight, el.offsetWidth);
   document.body.removeChild(el);
-  return width;
+  return rect;
 }
