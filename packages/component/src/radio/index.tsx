@@ -1,4 +1,10 @@
-import { CSSProperties, MouseEvent, ReactNode, useState } from 'react';
+import {
+  CSSProperties,
+  MouseEvent,
+  ReactNode,
+  useEffect,
+  useState,
+} from 'react';
 import { classNames, cssPrefix } from '../helper';
 
 export type RadioValueType = string | number;
@@ -56,11 +62,12 @@ export type RadioOptionType = {
 export type RadioGroupProps = {
   className?: string | string[];
   style?: CSSProperties;
+  optionStyle?: CSSProperties;
   type?: 'default' | 'button';
   vertical?: boolean;
   disabled?: boolean;
   options: RadioOptionType[];
-  value: RadioValueType;
+  value?: RadioValueType;
   onChange?: (
     value: RadioValueType,
     evt: React.MouseEvent | React.KeyboardEvent
@@ -69,6 +76,7 @@ export type RadioGroupProps = {
 function RadioGroup({
   className,
   style,
+  optionStyle,
   type,
   vertical,
   disabled,
@@ -77,6 +85,11 @@ function RadioGroup({
   onChange,
 }: RadioGroupProps) {
   const [checkedValue, setCheckedValue] = useState(value);
+
+  useEffect(() => {
+    setCheckedValue(value);
+  }, [value]);
+
   const onChanger = (
     value: RadioValueType,
     evt: React.MouseEvent | React.KeyboardEvent
@@ -97,6 +110,7 @@ function RadioGroup({
       {options.map(({ label, ...it }) => (
         <Radio
           key={it.value}
+          style={optionStyle}
           onChange={(value, evt) => onChanger(value, evt)}
           checked={checkedValue === it.value}
           {...it}>

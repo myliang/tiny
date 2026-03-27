@@ -140,6 +140,8 @@ export default class Table {
   // event emitter
   _emitter = new EventEmitter();
 
+  _moveViewportCell: ViewportCell | null = null;
+
   constructor(
     element: HTMLElement | string,
     width: () => number,

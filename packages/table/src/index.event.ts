@@ -4,11 +4,15 @@ import { DataCellValue } from './data';
 import selector from './index.selector';
 import editor from './index.editor';
 import scrollbar from './index.scrollbar';
+import { equals } from './helper';
 
 export function initEvents(t: Table) {
   t._canvas
     .on('mousedown', (evt) => mousedownHandler(t, evt))
     .on('mousemove', (evt) => mousemoveHandler(t, evt))
+    .on('mouseleave', (evt) => {
+      t._moveViewportCell = null;
+    })
     .on('keydown', (evt) => keydownHandler(t, evt))
     .on('wheel', (evt) => wheelHandler(t, evt))
     .on('contextmenu', (evt) => contextmenuHandler(t, evt))
@@ -58,24 +62,33 @@ function mousedownHandler(t: Table, evt: any) {
 }
 
 function mousemoveHandler(t: Table, evt: any) {
-  const { _rowResizer, _colResizer, _renderer } = t;
+  const { _rowResizer, _colResizer, _renderer, _moveViewportCell } = t;
   const { viewport } = _renderer;
   const { buttons, offsetX, offsetY } = evt;
   // press the mouse left button
   if (viewport && buttons === 0) {
+    const cell = viewport.cellAt(offsetX, offsetY);
+    // move-change-cell
+    if (
+      _moveViewportCell === null ||
+      (_moveViewportCell != null && cell === null) ||
+      !equals(_moveViewportCell, cell)
+    ) {
+      t._moveViewportCell = cell;
+    }
     const { _rowHeader, _colHeader, _rows, _cols } = t._renderer;
     if (_rowResizer && _rowHeader.width > 0) {
       if (offsetX < _rowHeader.width && offsetY > _colHeader.height) {
-        const cell = viewport.cellAt(offsetX, offsetY);
-        if (cell && cell.row < _rows) _rowResizer.show(cell);
+        // const cell = viewport.cellAt(offsetX, offsetY);
+        if (cell && cell.row < _rows) _rowResizer.show(cell, offsetX, offsetY);
       } else {
         _rowResizer.hide();
       }
     }
     if (_colResizer && _colHeader.height > 0) {
       if (offsetY < _colHeader.height && offsetX > _rowHeader.width) {
-        const cell = viewport.cellAt(offsetX, offsetY);
-        if (cell && cell.col < _cols) _colResizer.show(cell);
+        // const cell = viewport.cellAt(offsetX, offsetY);
+        if (cell && cell.col < _cols) _colResizer.show(cell, offsetX, offsetY);
       } else {
         _colResizer.hide();
       }

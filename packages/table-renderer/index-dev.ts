@@ -72,7 +72,7 @@ TableRenderer.create('#table', 1400, 800)
   .freeze('C6')
   .scrollRows(2)
   .scrollCols(1)
-  .formatter((r, c) => (cell) => `%${cellValueString(cell)}`)
+  .cellFormatter((r, c) => (cell) => cellValueString(cell))
   .cell((ri, ci) => cellText(ri, ci))
   .cellRenderer(() => cellRenderer)
   .render();

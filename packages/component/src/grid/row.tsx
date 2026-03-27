@@ -4,9 +4,9 @@ import { classNames, cssPrefix } from '../helper';
 export interface RowProps {
   className?: string | string[];
   style?: CSSProperties;
-  gutter: number | Array<number>;
-  align: 'start' | 'end' | 'center' | 'stretch';
-  justify: 'start' | 'end' | 'center' | 'space-between' | 'space-around';
+  gutter?: number | Array<number>;
+  align?: 'start' | 'end' | 'center' | 'stretch';
+  justify?: 'start' | 'end' | 'center' | 'space-between' | 'space-around';
   children: ReactNode;
 }
 

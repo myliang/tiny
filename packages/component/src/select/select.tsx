@@ -101,8 +101,6 @@ export function InternalSelect({
   };
   const onInputBlur = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setActive(false);
-    evt.target.value = '';
-    // overlayRef.current?.setShow(false);
   };
 
   let timer: any = null;
@@ -117,7 +115,8 @@ export function InternalSelect({
     }, 200);
   };
 
-  const onClick = () => {
+  const onClick = (evt: React.MouseEvent) => {
+    evt.preventDefault();
     if (searchable) inputRef.current?.focus();
   };
 
@@ -186,7 +185,7 @@ export function InternalSelect({
           )}
           {placeholder &&
             showValues.length === 0 &&
-            inputRef.current?.value === '' && (
+            (inputRef.current?.value || '') === '' && (
               <div className={classNames(`placeholder`)}>{placeholder}</div>
             )}
           {searchable && (

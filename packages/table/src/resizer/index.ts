@@ -39,13 +39,27 @@ export default class Resizer {
     target.append(this._);
   }
 
-  show(cell: AreaCell) {
+  show(cell: AreaCell, mx: number, my: number) {
     this._cell = cell;
     const { _type } = this;
     const { x, y, width, height } = cell;
 
-    this._.css('left', `${_type === 'row' ? x : x + width - 5}px`)
-      .css('top', `${_type === 'row' ? y + height - 5 : y}px`)
+    if (_type === 'row') {
+      const max = y + height;
+      if (max - 10 > my || my > max) {
+        this.hide();
+        return;
+      }
+    } else {
+      const max = x + width;
+      if (max - 10 > mx || mx > max) {
+        this.hide();
+        return;
+      }
+    }
+
+    this._.css('left', `${_type === 'row' ? x : x + width - 3}px`)
+      .css('top', `${_type === 'row' ? y + height - 3 : y}px`)
       .show();
 
     const key = _type === 'row' ? 'width' : 'height';

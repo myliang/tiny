@@ -8,7 +8,7 @@ export type InputNumberProps = Omit<
   InputProps,
   'htmlType' | 'onChange' | 'clearable' | 'value'
 > & {
-  value?: string | string;
+  value?: string | number;
   min?: number;
   max?: number;
   step?: number;

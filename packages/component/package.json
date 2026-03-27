@@ -29,7 +29,6 @@
     "vitest": "^4.0.17"
   },
   "dependencies": {
-    "@tiny/table": "^1.0.0",
     "dayjs": "^1.11.20",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"

@@ -21,8 +21,9 @@ export default function Dropdown({
   const { onSelect, ...menuOther } = menu;
   const onSelector = (
     key: string,
-    evt: React.MouseEvent | React.KeyboardEvent
+    evt?: React.MouseEvent | React.KeyboardEvent
   ) => {
+    evt?.stopPropagation();
     overlayRef.current?.setShow(false);
     if (onSelect) onSelect(key, evt);
   };

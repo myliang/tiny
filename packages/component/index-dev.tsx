@@ -217,23 +217,35 @@ root.render(
     </Card>
     <Divider />
     <Table
-      bordered
+      style={{ width: 1000 }}
+      pagination={{ total: 10, current: 1, rows: 15, align: 'end' }}
       columns={[
         {
           title: 'Name',
           key: 'name',
+          fixed: 'left',
+          width: 160,
         },
         {
           title: 'Salary',
           key: 'salary',
+          type: 'number',
+          width: 100,
         },
         {
           title: 'Address',
           key: 'address',
+          width: 200,
         },
         {
           title: 'Email',
           key: 'email',
+          width: 200,
+        },
+        {
+          title: '日期',
+          key: 'createdAt',
+          type: 'date',
         },
       ]}
       data={[
@@ -243,6 +255,7 @@ root.render(
           salary: 23000,
           address: '32 Park Road, London',
           email: 'jane.doe@example.com',
+          createdAt: '2026-01-02',
         },
         {
           key: '2',
@@ -250,6 +263,7 @@ root.render(
           salary: 25000,
           address: '35 Park Road, London',
           email: 'alisa.ross@example.com',
+          createdAt: '2026-01-02',
         },
         {
           key: '3',
@@ -257,6 +271,7 @@ root.render(
           salary: 22000,
           address: '31 Park Road, London',
           email: 'kevin.sandra@example.com',
+          createdAt: '2026-01-02',
         },
         {
           key: '4',
@@ -264,6 +279,7 @@ root.render(
           salary: 17000,
           address: '42 Park Road, London',
           email: 'ed.hellen@example.com',
+          createdAt: '2026-01-02',
         },
         {
           key: '5',
@@ -271,11 +287,12 @@ root.render(
           salary: 27000,
           address: '62 Park Road, London',
           email: 'william.smith@example.com',
+          createdAt: '2026-03-02',
         },
       ]}
     />
     <Divider />
-    <SuperTable
+    {/* <SuperTable
       columns={[
         {
           title: '名称',
@@ -284,14 +301,18 @@ root.render(
         {
           title: 'Salary',
           key: 'salary',
+          align: 'right',
+          formatter: (column, item) => item.salary.toLocaleString('en-US'),
         },
         {
           title: 'Address',
           key: 'address',
+          width: 200,
         },
         {
           title: 'Email',
           key: 'email',
+          width: 200,
         },
       ]}
       data={[
@@ -332,7 +353,7 @@ root.render(
         },
       ]}
     />
-    <Divider />
+    <Divider /> */}
     <Space>
       <Upload
         action=""

@@ -25,7 +25,7 @@ export default function Col({
   children,
 }: ColProps) {
   const nStyle: CSSProperties = {};
-  const proportion = (v: number) => (v / 24).toFixed(2);
+  const proportion = (v: number) => (v * 100) / 24;
   if (flex) {
     nStyle['flex'] =
       typeof flex === 'string'

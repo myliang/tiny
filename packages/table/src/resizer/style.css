@@ -7,7 +7,7 @@
   display: none;
 }
 .tiny-table-resizer .hover {
-  background-color: rgba(75, 137, 255, 0.25);
+  background-color: rgba(75, 137, 255, 0.8);
 }
 
 .tiny-table-resizer .line {
@@ -22,7 +22,8 @@
 }
 
 .tiny-table-resizer.row .hover {
-  height: 5px;
+  height: 3px;
+  width: 100%;
 }
 
 .tiny-table-resizer.row .line {
@@ -38,7 +39,8 @@
 }
 
 .tiny-table-resizer.col .hover {
-  width: 5px;
+  width: 3px;
+  height: 100%;
 }
 
 .tiny-table-resizer.col .line {

@@ -38,7 +38,10 @@ export type MenuProps = {
   selectable?: boolean;
   openKeys?: string[];
   selectedKey?: string;
-  onSelect?: (key: string, evt: React.MouseEvent | React.KeyboardEvent) => void;
+  onSelect?: (
+    key: string,
+    evt?: React.MouseEvent | React.KeyboardEvent
+  ) => void;
 };
 
 export default function Menu({

@@ -97,7 +97,7 @@ export default function Pagination({
       {!simple && pages > 5 && pages - _current > 3 && (
         <li className="disabled">...</li>
       )}
-      {!simple && (
+      {!simple && pages > 1 && (
         <li
           key="last"
           className={classNames({ active: _current === pages })}
